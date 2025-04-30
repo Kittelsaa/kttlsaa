@@ -1,0 +1,22 @@
+---
+// This component safely renders wiki-style links without causing infinite recursion
+const { content, processed = false } = Astro.props;
+
+// Only process wiki links if not already processed
+function processWikiLinks(text) {
+  if (!text || processed) return text || '';
+  
+  // Replace wiki links with standard markdown links
+  return text.replace(
+    /\[\[(.*?)(?:\|(.*?))?\]\]/g, 
+    (_, target, label = target) => {
+      const slug = target.toLowerCase().replace(/ /g, '-');
+      return `<a href="/notes/${slug}" class="wiki-link">${label}</a>`;
+    }
+  );
+}
+
+const processedContent = processWikiLinks(content);
+---
+
+<div set:html={processedContent} />

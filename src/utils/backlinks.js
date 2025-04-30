@@ -6,9 +6,12 @@
  * Finds all backlinks to a specific note
  * @param {Array} allNotes - All notes in the garden
  * @param {string} currentSlug - The slug of the current note
+ * @param {number} depth - Maximum depth for recursion (default: 1)
  * @returns {Array} - Array of notes that link to the current note
  */
-export function findBacklinks(allNotes, currentSlug) {
+export function findBacklinks(allNotes, currentSlug, depth = 1) {
+  if (depth <= 0) return []; // Prevent infinite recursion
+  
   return allNotes.filter(note => {
     // Check if the note content contains a link to the current note
     const wikiLinkRegex = new RegExp(`\\[\\[(${currentSlug}|${note.data.title})\\]\\]`, 'g');

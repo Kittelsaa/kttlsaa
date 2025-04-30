@@ -33,10 +33,20 @@ export default defineConfig({
       },
     }),
   ],
+  // Add error handling for MDX processing
+  vite: {
+    optimizeDeps: {
+      exclude: ['@resvg/resvg-js'],
+    },
+    build: {
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Suppress certain warnings
+          if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+          warn(warning);
+        }
+      }
+    }
+  }
 });
-
-
-
-
-
 

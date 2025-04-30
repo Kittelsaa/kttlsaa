@@ -4,6 +4,7 @@ import PageWrapper from "../components/layouts/PageWrapper.astro";
 
 // Access the error prop that Astro automatically passes to this page
 const { error } = Astro.props;
+const errorType = Astro.url.searchParams.get('error') || 'unknown';
 ---
 
 <Layout title="500 - Server Error | KTTLSAA">
@@ -11,7 +12,16 @@ const { error } = Astro.props;
     <div class="error-container">
       <h1>500</h1>
       <h2>Server Error</h2>
-      <p>Something went wrong on our end. Please try again later.</p>
+      
+      {errorType === 'recursion-limit-exceeded' ? (
+        <div>
+          <p>We detected a circular reference in the content. This usually happens when notes reference each other in a loop.</p>
+          <p>Try accessing a different note or check your wiki links for circular references.</p>
+        </div>
+      ) : (
+        <p>Something went wrong on our end. Please try again later.</p>
+      )}
+      
       <div class="actions">
         <a href="/" class="button primary">Return Home</a>
         <a href="/garden" class="button secondary">Explore the Garden</a>
@@ -30,81 +40,67 @@ const { error } = Astro.props;
 
 <style>
   .error-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 800px;
+    margin: 4rem auto;
     text-align: center;
-    min-height: 60vh;
-    padding: 2rem;
   }
-
+  
   h1 {
     font-size: 6rem;
     margin: 0;
-    color: var(--color-primary, #333);
-    line-height: 1;
+    color: var(--color-primary);
   }
-
+  
   h2 {
     font-size: 2rem;
-    margin: 0.5rem 0 1.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
   }
-
+  
   p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    max-width: 500px;
   }
-
+  
   .actions {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
-
+  
   .button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.2s ease;
   }
-
+  
   .primary {
-    background-color: var(--color-primary, #333);
+    background-color: var(--color-primary);
     color: white;
   }
-
-  .primary:hover {
-    background-color: var(--color-primary-dark, #222);
-  }
-
+  
   .secondary {
-    border: 2px solid var(--color-primary, #333);
-    color: var(--color-primary, #333);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text);
   }
-
-  .secondary:hover {
-    background-color: var(--color-primary-light, #eee);
-  }
-
+  
   .dev-error {
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-align: left;
-    width: 100%;
-    max-width: 800px;
-    background-color: #f8f8f8;
     padding: 1rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
     border-radius: 4px;
     overflow: auto;
   }
-
+  
   .dev-error pre {
     white-space: pre-wrap;
-    word-break: break-word;
+    font-size: 0.9rem;
   }
 </style>
+

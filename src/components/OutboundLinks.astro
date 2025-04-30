@@ -6,11 +6,14 @@ interface Link {
 }
 
 interface Props {
-  outboundLinks: Link[];
+  links: Link[];
 }
 
 import GrowthIcon from './GrowthIcon.astro';
-const { outboundLinks } = Astro.props;
+const { links } = Astro.props;
+
+// Ensure links is always an array, even if undefined
+const outboundLinks = links || [];
 ---
 
 <div class="outbound-links">

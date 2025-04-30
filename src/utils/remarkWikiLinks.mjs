@@ -1,60 +1,79 @@
+import { visit } from 'unist-util-visit';
+
+// Set to track processed files to prevent infinite recursion
+const processedFiles = new Set();
+
 export function remarkPlugin() {
-  return function transformer(tree) {
-    visit(tree, 'text', function(node) {
+  return (tree, file) => {
+    // Reset the processed files set for each new file
+    if (file.history && file.history.length > 0) {
+      const currentFile = file.history[0];
+      if (processedFiles.has(currentFile)) {
+        // Skip if we've already processed this file
+        return;
+      }
+      processedFiles.add(currentFile);
+    }
+
+    // Process wiki links
+    visit(tree, 'text', (node) => {
+      const regex = /\[\[(.*?)(?:\|(.*?))?\]\]/g;
       const value = node.value;
-      const wikiLinkRegex = /\[\[(.*?)(?:\|(.*?))?\]\]/g;
-      
+      const matches = [];
       let match;
-      let lastIndex = 0;
-      const newNodes = [];
       
-      while ((match = wikiLinkRegex.exec(value)) !== null) {
+      // Find all matches first
+      while ((match = regex.exec(value)) !== null) {
+        matches.push({
+          start: match.index,
+          end: match.index + match[0].length,
+          target: match[1],
+          label: match[2] || match[1]
+        });
+      }
+      
+      // If no matches, return early
+      if (matches.length === 0) return;
+      
+      // Replace matches with links, working backwards to preserve indices
+      const children = [];
+      let lastIndex = 0;
+      
+      for (const match of matches) {
         // Add text before the match
-        if (match.index > lastIndex) {
-          newNodes.push({
+        if (match.start > lastIndex) {
+          children.push({
             type: 'text',
-            value: value.slice(lastIndex, match.index)
+            value: value.slice(lastIndex, match.start)
           });
         }
         
-        const [fullMatch, slug, displayText] = match;
-        const display = displayText || slug;
-        const linkSlug = slug.toLowerCase().replace(/ /g, '-');
-        
-        // Add link node
-        newNodes.push({
+        // Create the link node
+        const slug = match.target.toLowerCase().replace(/ /g, '-');
+        children.push({
           type: 'link',
-          url: `/notes/${linkSlug}`,
-          data: {
-            hProperties: {
-              className: ['wiki-link']
-            }
-          },
-          children: [{
-            type: 'text',
-            value: display
-          }]
+          url: `/notes/${slug}`,
+          children: [{ type: 'text', value: match.label }],
+          data: { hProperties: { className: 'wiki-link' } }
         });
         
-        lastIndex = match.index + fullMatch.length;
+        lastIndex = match.end;
       }
       
-      // Add remaining text
+      // Add any remaining text
       if (lastIndex < value.length) {
-        newNodes.push({
+        children.push({
           type: 'text',
           value: value.slice(lastIndex)
         });
       }
       
-      if (newNodes.length > 0) {
-        node.type = 'paragraph';
-        node.children = newNodes;
-        delete node.value;
-      }
+      // Replace the current node with the new children
+      node.type = 'paragraph';
+      node.children = children;
+      delete node.value;
     });
   };
 }
 
-// Import the visit function at the top of the file
-import { visit } from 'unist-util-visit';
+
