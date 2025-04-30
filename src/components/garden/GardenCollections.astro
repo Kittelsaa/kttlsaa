@@ -3,6 +3,9 @@ import FunTitle from '../FunTitle.astro';
 import FunSubtitle from '../FunSubtitle.astro';
 
 const { topics, counts } = Astro.props;
+
+// Filter out "COMMUNITY" and "SOCIETY" from the topics list
+const filteredTopics = topics.filter(topic => topic !== "COMMUNITY" && topic !== "SOCIETY");
 ---
 
 <div class="collections-container">
@@ -12,22 +15,22 @@ const { topics, counts } = Astro.props;
     <!-- First row with 2 columns -->
     <div class="fixed-collections">
       <div class="collection-item fixed-item">
-        <FunSubtitle level={3} class="item-title">BOOKSHELF</FunSubtitle>
+        <h3 class="item-title">BOOKSHELF</h3>
         <p class="item-desc">A list of the books I'm reading, sometimes with additional notes.</p>
       </div>
       
       <div class="collection-item fixed-item">
-        <FunSubtitle level={3} class="item-title">MAP OF INQUIRY</FunSubtitle>
+        <h3 class="item-title">MAP OF INQUIRY</h3>
         <p class="item-desc">A map of the subjects I find interesting and want to learn more about.</p>
       </div>
     </div>
     
     <!-- Topics grid with 3 columns -->
     <div class="topics-grid">
-      {topics.map(topic => (
+      {filteredTopics.map(topic => (
         <div class="collection-item topic-item" data-topic={topic}>
-          <FunSubtitle level={3} class="item-title">{topic}</FunSubtitle>
-          <p class="item-desc">{counts[topic]} items</p>
+          <h3 class="item-title">{topic}</h3>
+          <p class="item-desc">{counts[topic]} {counts[topic] === 1 ? 'item' : 'items'}</p>
         </div>
       ))}
     </div>
@@ -38,7 +41,7 @@ const { topics, counts } = Astro.props;
   .collections-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   
   .section-title {
@@ -46,49 +49,72 @@ const { topics, counts } = Astro.props;
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: normal;
-    text-transform: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   
   .collections-table {
     border: 1px solid #C0C0C0;
-    border-radius: 0px;
     overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto;
   }
   
   .fixed-collections {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    border-bottom: 1px solid #C0C0C0;
   }
   
   .topics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
   }
   
   .collection-item {
-    padding: 0.5rem;
-    border: 1px solid #C0C0C0;
+    padding: 1.5rem;
     position: relative;
-    margin-top: -1px;
-    margin-left: -1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   
-  .fixed-item {
-    padding: 1rem 0.5rem;
+  /* Add borders to specific cells */
+  .fixed-collections .collection-item:first-child {
+    border-right: 1px solid #C0C0C0;
+  }
+  
+  /* First row of topics */
+  .topics-grid .collection-item:nth-child(1),
+  .topics-grid .collection-item:nth-child(2) {
+    border-right: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+  }
+  
+  .topics-grid .collection-item:nth-child(3) {
+    border-bottom: 1px solid #C0C0C0;
+  }
+  
+  /* Second row of topics */
+  .topics-grid .collection-item:nth-child(4) {
+    border-right: 1px solid #C0C0C0;
   }
   
   .item-title {
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
   }
   
   .item-desc {
-    margin: 0.25rem 0 0;
-    font-size: 0.75rem;
-    color: #777;
-    line-height: 1.2;
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
   }
   
   .topic-item {
@@ -104,24 +130,23 @@ const { topics, counts } = Astro.props;
     background-color: #f0f0f0;
   }
   
-  /* Fix for when total items count is not divisible by 3 */
-  .topic-item:last-child:nth-child(3n-1) {
-    grid-column: 3;
-  }
-  
-  .topic-item:last-child:nth-child(3n-2) {
-    grid-column: 2 / span 2;
-  }
-  
   @media (max-width: 768px) {
     .fixed-collections,
     .topics-grid {
       grid-template-columns: 1fr;
     }
     
-    .topic-item:last-child:nth-child(3n-1),
-    .topic-item:last-child:nth-child(3n-2) {
-      grid-column: auto;
+    .fixed-collections .collection-item:first-child {
+      border-right: none;
+      border-bottom: 1px solid #C0C0C0;
+    }
+    
+    .topics-grid .collection-item {
+      border-right: none !important;
+    }
+    
+    .topics-grid .collection-item:not(:last-child) {
+      border-bottom: 1px solid #C0C0C0;
     }
   }
 </style>
@@ -153,6 +178,14 @@ const { topics, counts } = Astro.props;
     });
   });
 </script>
+
+
+
+
+
+
+
+
 
 
 
