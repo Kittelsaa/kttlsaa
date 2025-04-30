@@ -1,0 +1,84 @@
+---
+// FontLoader.astro - Component to ensure fonts are loaded on all pages
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style is:global>
+  /* Super high specificity selectors to force the font */
+  html body h1, 
+  html body h2, 
+  html body h3, 
+  html body h4, 
+  html body h5, 
+  html body h6,
+  html body .title, 
+  html body .heading, 
+  html body [class*="title"], 
+  html body [class*="heading"],
+  html body header h1, 
+  html body header h2, 
+  html body header h3,
+  html body main h1, 
+  html body main h2, 
+  html body main h3,
+  html body article h1, 
+  html body article h2, 
+  html body article h3,
+  html body section h1, 
+  html body section h2, 
+  html body section h3,
+  html body div h1, 
+  html body div h2, 
+  html body div h3 {
+    font-family: 'Averia Serif Libre', serif !important;
+  }
+  
+  /* Add !important to all heading elements */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Averia Serif Libre', serif !important;
+  }
+</style>
+
+<script>
+  // Function to apply fonts
+  function applyFonts() {
+    // Target all heading elements with maximum specificity
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .title, .heading, [class*="title"], [class*="heading"]');
+    headings.forEach(heading => {
+      heading.style.setProperty('font-family', "'Averia Serif Libre', serif", 'important');
+    });
+    console.log('Font applied to', headings.length, 'elements');
+  }
+
+  // Apply immediately
+  applyFonts();
+  
+  // Apply after fonts are loaded
+  document.fonts.ready.then(() => {
+    if (document.fonts.check('1em "Averia Serif Libre"')) {
+      console.log('Averia Serif Libre is loaded and available');
+      applyFonts();
+    } else {
+      console.error('Averia Serif Libre is NOT available');
+    }
+  });
+  
+  // Apply after DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    applyFonts();
+  });
+  
+  // Apply after everything is loaded
+  window.addEventListener('load', () => {
+    applyFonts();
+    
+    // Apply one more time after a slight delay to catch any late-rendered elements
+    setTimeout(applyFonts, 500);
+  });
+  
+  // Apply periodically to catch any dynamically added elements
+  setInterval(applyFonts, 2000);
+</script>

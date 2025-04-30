@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FontLoader from "../components/FontLoader.astro";
+---
+
+<Layout title="Font Test Page">
+  <FontLoader />
+  <div class="container">
+    <h1>This is Averia Serif Libre (h1)</h1>
+    <h2>This is Averia Serif Libre (h2)</h2>
+    <h3>This is Averia Serif Libre (h3)</h3>
+    <h4>This is Averia Serif Libre (h4)</h4>
+    <h5>This is Averia Serif Libre (h5)</h5>
+    <h6>This is Averia Serif Libre (h6)</h6>
+    
+    <div class="title">This is a div with class "title"</div>
+    <div class="heading">This is a div with class "heading"</div>
+    
+    <p>This is regular paragraph text (should not be Averia)</p>
+    
+    <div class="font-test">
+      <p style="font-family: 'Averia Serif Libre', serif;">
+        This text explicitly uses Averia Serif Libre
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .font-test {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+  // Check if font is loaded
+  document.fonts.ready.then(() => {
+    const fontLoaded = document.fonts.check('1em "Averia Serif Libre"');
+    console.log('Averia Serif Libre loaded:', fontLoaded);
+    
+    // Add a visual indicator
+    const indicator = document.createElement('div');
+    indicator.style.padding = '10px';
+    indicator.style.marginTop = '20px';
+    indicator.style.backgroundColor = fontLoaded ? '#dff0d8' : '#f2dede';
+    indicator.style.color = fontLoaded ? '#3c763d' : '#a94442';
+    indicator.style.borderRadius = '4px';
+    indicator.textContent = fontLoaded 
+      ? '✅ Averia Serif Libre is loaded and available' 
+      : '❌ Averia Serif Libre is NOT available';
+    
+    document.querySelector('.container').appendChild(indicator);
+  });
+</script>

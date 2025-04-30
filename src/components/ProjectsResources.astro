@@ -1,0 +1,132 @@
+---
+---
+
+<div class="projects-resources">
+  <div class="section-group">
+    <h3>Work Showcase</h3>
+    <div class="project-list">
+      <div class="project-item">
+        <h4>Digital Garden Framework</h4>
+        <p class="status">Completed</p>
+        <p>A customizable framework for building personal knowledge bases and digital gardens.</p>
+        <a href="/projects/digital-garden" class="view-link">View Project</a>
+      </div>
+      
+      <div class="project-item">
+        <h4>Knowledge Graph Visualization</h4>
+        <p class="status">Ongoing</p>
+        <p>Interactive visualization tools for exploring connections between ideas and concepts.</p>
+        <a href="/projects/knowledge-graph" class="view-link">View Project</a>
+      </div>
+      
+      <div class="project-item">
+        <h4>Collaborative Learning Platform</h4>
+        <p class="status">Ongoing</p>
+        <p>Building tools for shared knowledge creation and collaborative learning experiences.</p>
+        <a href="/projects/collab-learning" class="view-link">View Project</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section-group">
+    <h3>Research Initiatives</h3>
+    <div class="research-list">
+      <div class="research-item">
+        <h4>Tools for Thought</h4>
+        <p>Exploring how digital tools shape our thinking processes and knowledge creation.</p>
+        <a href="/research/tools-for-thought" class="view-link">Read Research</a>
+      </div>
+      
+      <div class="research-item">
+        <h4>Digital Epistemology</h4>
+        <p>Investigating how we create, validate, and share knowledge in digital environments.</p>
+        <a href="/research/digital-epistemology" class="view-link">Read Research</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section-group">
+    <h3>Resources & Guides</h3>
+    <div class="resources-list">
+      <div class="resource-item">
+        <h4>Building a Digital Garden</h4>
+        <p>A comprehensive guide to creating your own digital garden and knowledge management system.</p>
+        <a href="/resources/digital-garden-guide" class="download-link">View Guide</a>
+      </div>
+      
+      <div class="resource-item">
+        <h4>Knowledge Management Templates</h4>
+        <p>Collection of templates and frameworks for organizing personal knowledge.</p>
+        <a href="/resources/knowledge-templates" class="download-link">Download Resources</a>
+      </div>
+      
+      <div class="resource-item">
+        <h4>Research Methods Toolkit</h4>
+        <p>Methods and approaches for conducting research in digital anthropology and epistemology.</p>
+        <a href="/resources/research-toolkit" class="download-link">Access Toolkit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .projects-resources {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+  
+  .section-group {
+    margin-bottom: var(--space-m);
+  }
+  
+  .project-list, .research-list, .resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+  
+  .project-item, .research-item, .resource-item {
+    background-color: var(--bg-alt);
+    border-radius: 8px;
+    padding: var(--space-s);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .project-item:hover, .research-item:hover, .resource-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h4 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1.1rem;
+  }
+  
+  .status {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background-color: var(--accent-color-light);
+    color: var(--accent-color-dark);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .view-link, .download-link {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .view-link:hover, .download-link:hover {
+    text-decoration: underline;
+  }
+  
+  .view-link::after, .download-link::after {
+    content: " →";
+  }
+</style>

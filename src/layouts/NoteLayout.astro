@@ -1,0 +1,27 @@
+---
+import Layout from "./Layout.astro";
+import { formatDate } from "../utils/dates";
+import RemoteImage from "../components/RemoteImage.astro";
+import VideoEmbed from "../components/VideoEmbed.astro";
+
+// Add other imports as needed
+
+const { frontmatter } = Astro.props;
+const { title, description, updated, startDate, topics, growthStage, video } = frontmatter;
+---
+
+<Layout title={title} description={description}>
+  <!-- Layout content remains the same -->
+  
+  <div class="content">
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  /* Styles remain the same */
+</style>
+
+<script>
+  // Any client-side scripts
+</script>

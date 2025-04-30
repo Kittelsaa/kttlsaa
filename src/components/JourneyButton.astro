@@ -1,0 +1,27 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  text?: string;
+  class?: string;
+  href?: string;
+}
+
+const { 
+  text = "Start the Journey", 
+  class: className = "",
+  href = "/about"
+} = Astro.props;
+---
+
+<div class:list={["journey-button-container", className]}>
+  <Button href={href} variant="primary" icon="arrow">
+    {text}
+  </Button>
+</div>
+
+<style>
+  .journey-button-container {
+    margin: var(--space-16) 0;
+  }
+</style>

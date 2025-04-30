@@ -1,0 +1,131 @@
+---
+import { getCollection } from "astro:content";
+
+// Get all notes
+const notes = await getCollection("notes", ({ data }) => !data.draft);
+
+// Extract all unique topics
+const allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].sort();
+---
+
+<div class="topics-filter">
+  <h2>Filter by Topic</h2>
+  <div class="topics-list">
+    <button class="topic-button active" data-topic="all">All</button>
+    {allTopics.map(topic => (
+      <button class="topic-button" data-topic={topic}>{topic}</button>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Get all topic buttons and note cards
+  const topicButtons = document.querySelectorAll('.topic-button');
+  const noteCards = document.querySelectorAll('.note-card');
+  
+  // Add click event to each topic button
+  topicButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      topicButtons.forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      const selectedTopic = button.getAttribute('data-topic');
+      
+      // Show all notes if "All" is selected
+      if (selectedTopic === 'all') {
+        noteCards.forEach(card => {
+          card.style.display = 'block';
+        });
+        return;
+      }
+      
+      // Filter notes by selected topic
+      noteCards.forEach(card => {
+        const cardTopics = Array.from(card.querySelectorAll('.topic'))
+          .map(topic => topic.getAttribute('data-topic'));
+        
+        if (cardTopics.includes(selectedTopic)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .topics-filter {
+    margin: var(--space-l) 0;
+  }
+  
+  .topics-filter h2 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-s);
+  }
+  
+  .topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  
+  .topic-button {
+    background: var(--color-bg-accent);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+  
+  .topic-button:hover {
+    background: var(--color-bg-accent);
+    color: var(--color-primary);
+  }
+  
+  .topic-button.active {
+    background: var(--color-primary);
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .topics-filter {
+      margin: var(--space-m) 0;
+    }
+    
+    .topics-list {
+      gap: var(--space-2xs);
+    }
+    
+    .topic-button {
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .topics-filter h2 {
+      font-size: 1.1rem;
+    }
+    
+    .topics-list {
+      max-width: 100%;
+      overflow-x: auto;
+      padding-bottom: var(--space-xs);
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    
+    .topic-button {
+      white-space: nowrap;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>

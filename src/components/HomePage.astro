@@ -1,0 +1,177 @@
+---
+import HomeButton from './HomeButton.astro';
+---
+
+<section class="home-section">
+  <div class="container">
+    <div class="content-grid">
+      <div class="left-column">
+        <div class="subsection">
+          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Explore the Garden</h2>
+          <p>This digital garden is a collection of growing notes, essays, and thoughts. Some are seedlings, others are fully grown trees.</p>
+          <div class="cta-buttons">
+            <HomeButton href="/garden" variant="secondary" icon="logo">Browse the Garden</HomeButton>
+          </div>
+        </div>
+        
+        <div class="subsection">
+          <h2 class="section-title">Resources & Guides</h2>
+          <p>Check out these resources and guides:</p>
+          <div class="collections-table">
+            <!-- First row: Main resources (2 columns) -->
+            <div class="first-row">
+              <div class="collection-item">
+                <h3 class="item-title">Digital Gardening Guide</h3>
+                <p class="item-desc">How to start and maintain your own digital garden</p>
+                <a href="/resources/digital-gardening" class="view-link">View Guide</a>
+              </div>
+              
+              <div class="collection-item">
+                <h3 class="item-title">Note-Taking Systems</h3>
+                <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
+                <a href="/resources/note-taking" class="view-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="right-column">
+        <div class="subsection">
+          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Hello, I'm KTTLSAA</h2>
+          <p>I'm a researcher and developer exploring the intersection of epistemology, anthropology, and software development. My work focuses on how we build, share, and interact with knowledge in digital spaces.</p>
+          <p>I believe that personal knowledge systems can transform how we think and learn.</p>
+          <div class="cta-buttons">
+            <HomeButton href="/about" variant="primary" icon="arrow">More About Me</HomeButton>
+          </div>
+        </div>
+        
+        <div class="subsection">
+          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Let's Connect</h2>
+          <p>Reach out to chat, collaborate on projects, or exchange ideas about digital gardens, knowledge systems, and more. At kttlsaa@gmail.com </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+  }
+  
+  .subsection {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .subsection:last-child {
+    border-bottom: none;
+  }
+  
+  .subsection h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .averia-font {
+    font-family: var(--font-fun);
+    font-weight: 400;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .collections-table {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    border: 1px solid #C0C0C0;
+  }
+  
+  .first-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  
+  .collection-item {
+    padding: 1.5rem;
+    border: 1px solid #C0C0C0;
+    background-color: var(--color-surface, #fff);
+    transition: background-color 0.2s ease;
+    position: relative;
+    margin-top: -1px;
+    margin-left: -1px;
+  }
+  
+  .collection-item:hover {
+    background-color: var(--color-surface-hover, #f5f5f5);
+  }
+  
+  .item-title {
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+  }
+  
+  .item-desc {
+    color: var(--text-muted, #666);
+    margin-bottom: 1rem;
+  }
+  
+  .view-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-accent, #FF9B5A);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .view-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .first-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .subscribe-form {
+      max-width: none;
+    }
+    
+    .subscribe-form input,
+    .subscribe-button {
+      width: 100%;
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  // No need for the wheel event handling script since we're using a simpler layout
+</script>

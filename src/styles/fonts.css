@@ -1,0 +1,61 @@
+/* Import the font directly in CSS */
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap');
+
+/* Define font variables */
+:root {
+  --font-heading: 'Averia Serif Libre', serif;
+}
+
+/* Apply to all headings with maximum specificity */
+html body h1, 
+html body h2, 
+html body h3, 
+html body h4, 
+html body h5, 
+html body h6,
+html body .title, 
+html body .heading, 
+html body [class*="title"], 
+html body [class*="heading"] {
+  font-family: var(--font-heading) !important;
+}
+
+/* Target specific components */
+html body header h1, 
+html body header h2, 
+html body header h3,
+html body main h1, 
+html body main h2, 
+html body main h3,
+html body article h1, 
+html body article h2, 
+html body article h3,
+html body section h1, 
+html body section h2, 
+html body section h3,
+html body div h1, 
+html body div h2, 
+html body div h3 {
+  font-family: var(--font-heading) !important;
+}
+
+/* You can define font-face declarations here if you have local font files */
+/* 
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/CustomFont.woff2') format('woff2'),
+       url('/fonts/CustomFont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+
+
+
+
+
+
+
+

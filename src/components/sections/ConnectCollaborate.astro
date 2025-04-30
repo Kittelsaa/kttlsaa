@@ -1,0 +1,206 @@
+---
+// Social media links - replace with your actual profiles
+const socialLinks = [
+  { name: "Twitter", icon: "twitter", url: "https://twitter.com/yourusername" },
+  { name: "GitHub", icon: "github", url: "https://github.com/yourusername" },
+  { name: "LinkedIn", icon: "linkedin", url: "https://linkedin.com/in/yourusername" },
+  { name: "Mastodon", icon: "mastodon", url: "https://mastodon.social/@yourusername" }
+];
+---
+
+<div class="connect-collaborate">
+  <section class="social-links">
+    <h3>Find Me Online</h3>
+    <div class="social-grid">
+      {socialLinks.map(link => (
+        <a href={link.url} class="social-link" target="_blank" rel="noopener noreferrer">
+          <div class="social-icon">
+            <span class="icon-placeholder">{link.icon.charAt(0).toUpperCase()}</span>
+          </div>
+          <span class="social-name">{link.name}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+  
+  <section class="connect-section">
+    <h2>Let's Connect</h2>
+    <p>
+      I'm always open to meaningful conversations, collaborations, and knowledge exchanges. 
+      Whether you have a question, want to discuss ideas, or explore potential projects together.
+    </p>
+    
+    <div class="connection-options">
+      <a href="/collaborate" class="connection-card">
+        <h3>Collaborate on Projects</h3>
+        <p>Join forces on research, development, or creative initiatives</p>
+        <span class="arrow">→</span>
+      </a>
+      
+      <a href="/contact" class="connection-card">
+        <h3>Start a Conversation</h3>
+        <p>Reach out directly to discuss ideas or just say hello</p>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    
+    <form class="connect-form">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit" class="connect-button">CONNECT <span class="arrow">→</span></button>
+    </form>
+  </section>
+</div>
+
+<style>
+  .connect-collaborate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+
+  .social-links, .collaborate, .contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-s);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s);
+    background-color: var(--bg-color-alt);
+    border-radius: var(--radius-m);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s, background-color 0.2s;
+  }
+
+  .social-link:hover {
+    transform: translateY(-2px);
+    background-color: var(--bg-color);
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color-light);
+    border-radius: 50%;
+    color: var(--accent-color);
+  }
+
+  .icon-placeholder {
+    font-weight: bold;
+  }
+
+  .social-name {
+    font-weight: 500;
+  }
+
+  .connection-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .connection-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: var(--bg-color-alt, #f5f5f5);
+    border-radius: var(--radius-m, 8px);
+    text-decoration: none;
+    color: var(--text-color, #333);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  
+  .connection-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .connection-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-family: var(--font-fun, sans-serif);
+  }
+  
+  .connection-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color-muted, #666);
+  }
+  
+  .connection-card .arrow {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .connect-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .connect-form input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 1rem;
+  }
+  
+  .connect-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #FF9B5A;
+    color: black;
+    border: none;
+    border-radius: 0px; /* Changed from 50px to 0px */
+    font-weight: 500;
+    font-family: var(--font-fun, sans-serif);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .connect-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .connection-options {
+      flex-direction: row;
+    }
+    
+    .connection-card {
+      flex: 1;
+    }
+    
+    .connect-form {
+      flex-direction: row;
+    }
+    
+    .connect-form input {
+      flex: 1;
+    }
+  }
+</style>
+
+

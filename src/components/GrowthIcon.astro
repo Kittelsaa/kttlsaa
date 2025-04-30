@@ -1,0 +1,57 @@
+---
+const { growthStage } = Astro.props;
+
+const getIcon = (stage) => {
+  switch (stage) {
+    case 'seedling':
+      return '🌱';
+    case 'budding':
+      return '🌿';
+    case 'evergreen':
+      return '🌳';
+    default:
+      return '🌱';
+  }
+};
+
+const getLabel = (stage) => {
+  switch (stage) {
+    case 'seedling':
+      return 'Seedling - Early stage thoughts';
+    case 'budding':
+      return 'Budding - Developing ideas';
+    case 'evergreen':
+      return 'Evergreen - Mature, well-developed content';
+    default:
+      return 'Seedling - Early stage thoughts';
+  }
+};
+
+const icon = getIcon(growthStage);
+const label = getLabel(growthStage);
+---
+
+<span class={`growth-icon ${growthStage}`} title={label}>
+  {icon}
+</span>
+
+<style>
+  .growth-icon {
+    display: inline-block;
+    font-size: 1.2em;
+    margin-right: 0.25em;
+  }
+  
+  .seedling {
+    color: var(--seedling-color, #76b852);
+  }
+  
+  .budding {
+    color: var(--budding-color, #4caf50);
+  }
+  
+  .evergreen {
+    color: var(--evergreen-color, #2e7d32);
+  }
+</style>
+

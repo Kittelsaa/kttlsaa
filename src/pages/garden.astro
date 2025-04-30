@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import GardenFiltersAndHits from "../components/garden/GardenFiltersAndHits.astro";
+
+const allPosts = await getCollection('notes', ({ data }) => {
+  return !data.draft;
+});
+
+// Sort posts by updated date
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.updated).getTime() - new Date(a.data.updated).getTime()
+);
+---
+
+<Layout title="Digital Garden">
+  <div class="container">
+    <div class="garden-header">
+      <h1>Digital Garden</h1>
+      <p class="garden-intro">
+        A collection of growing notes, essays, and thoughts. Some are seedlings, others are fully
+        grown trees. All are continuously evolving.
+      </p>
+    </div>
+    
+    <GardenFiltersAndHits allPostData={sortedPosts} />
+  </div>
+</Layout>
+
+<style>
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  .garden-header {
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+  }
+  
+  .garden-intro {
+    max-width: 75ch;
+    color: var(--text-muted, #666);
+  }
+</style>
+
+

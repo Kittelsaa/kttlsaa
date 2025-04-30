@@ -1,0 +1,61 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <div class="copyright">
+      &copy; {currentYear} KTTLSAA. All rights reserved.
+    </div>
+    <div class="links">
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-l) 0;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-accent);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-m);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .links {
+    display: flex;
+    gap: var(--space-l);
+  }
+  
+  .links a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  
+  .links a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: var(--space-m);
+      text-align: center;
+    }
+    
+    .links {
+      margin-top: var(--space-m);
+    }
+  }
+</style>

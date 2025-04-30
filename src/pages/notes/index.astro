@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import NoteCard from "../../components/cards/NoteCard.astro";
+import TopicsFilter from "../../components/TopicsFilter.astro";
+import PageWrapper from "../../components/layouts/PageWrapper.astro";
+import MasonryGrid from "../../components/layouts/MasonryGrid.astro";
+
+const notes = await getCollection("notes", ({ data }) => !data.draft);
+const sortedNotes = notes.sort(
+  (a, b) => new Date(b.data.updated).getTime() - new Date(a.data.updated).getTime()
+);
+---
+
+<Layout title="Digital Garden | Notes">
+  <PageWrapper>
+    <h1>Digital Garden</h1>
+    <p class="intro">
+      A collection of growing notes on various topics. Some are seedlings, 
+      others are fully grown trees. All are continuously evolving.
+    </p>
+
+    <TopicsFilter />
+
+    <MasonryGrid>
+      {sortedNotes.map((note) => (
+        <NoteCard note={note} />
+      ))}
+    </MasonryGrid>
+  </PageWrapper>
+</Layout>
+
+<style>
+  h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  .intro {
+    max-width: 65ch;
+    margin-bottom: 2rem;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      padding: 0 var(--space-s);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.75rem;
+      padding: 0 var(--space-xs);
+    }
+    
+    .intro {
+      font-size: 0.9rem;
+      padding: 0 var(--space-xs);
+    }
+  }
+</style>
+

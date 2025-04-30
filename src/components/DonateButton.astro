@@ -1,0 +1,72 @@
+---
+interface Props {
+  text?: string;
+  class?: string;
+  href?: string;
+}
+
+const { 
+  text = "Donate & Support", 
+  class: className = "",
+  href = "/donate"
+} = Astro.props;
+---
+
+<a href={href} class:list={["donate-button", className]}>
+  <span class="button-text">{text}</span>
+  <span class="icon">
+    <svg viewBox="0 0 24 24" width="20" height="20" class="network-icon">
+      <circle cx="5" cy="5" r="2" />
+      <circle cx="19" cy="5" r="2" />
+      <circle cx="5" cy="19" r="2" />
+      <circle cx="19" cy="19" r="2" />
+      <line x1="5" y1="5" x2="19" y2="19" />
+      <line x1="5" y1="19" x2="19" y2="5" />
+    </svg>
+  </span>
+</a>
+
+<style>
+  .donate-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--font-fun);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    min-width: 300px;
+    text-align: center;
+    font-weight: normal;
+    background-color: #FF9B5A;
+    color: black;
+    border: none;
+  }
+  
+  .button-text {
+    line-height: 1.2;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .network-icon {
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .donate-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+
+

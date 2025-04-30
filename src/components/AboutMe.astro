@@ -1,0 +1,140 @@
+---
+import Button from './Button.astro';
+import SubscribeButton from './SubscribeButton.astro';
+---
+
+<div class="about-me">
+  <!-- Contact Section First -->
+  <div class="contact-section">
+    <h3 class="section-title">CONTACT</h3>
+    <p>If you want to talk about any of this, feel free to reach out via <a href="mailto:hello@kttlsaa.com">hello@kttlsaa.com</a></p>
+  </div>
+  
+  <div class="social-section">
+    <h3 class="section-title">SOCIAL</h3>
+    <ul class="social-list">
+      <li><a href="https://twitter.com/kttlsaa">Twitter</a></li>
+      <li><a href="https://github.com/kttlsaa">GitHub</a></li>
+      <li><a href="https://are.na/kttlsaa">are.na</a></li>
+      <li><a href="https://scholar.social/@kttlsaa">Mastodon</a></li>
+    </ul>
+  </div>
+  
+  <!-- About Me Section -->
+  <div class="about-section">
+    <h3 class="section-title">MORE ABOUT ME</h3>
+    <div class="intro">
+      <p>As a designer I make things, and these things are, by definition, artifacts of culture. They use and exist in relation to (sub-)cultural codes, symbols and myths. Because of this, I am interested in cultural studies, sociology, semiotics and aesthetics.</p>
+      
+      <p class="philosophy-paragraph">I want to create products that are meaningful, personal, generous, considerate, ethical and empowering.</p>
+      
+      <p class="philosophy-paragraph">As a designer I am naturally interested in how we can understand and react to complexity in situations, systems and problems. In particular, I like thinking (and talking) about the expression and development of thoughts and ideas through prototyping, modeling and notation systems.</p>
+      
+      <p class="philosophy-paragraph">I want to take part in the discourse of my discipline and try to contribute to a design theory that is rooted in practice.</p>
+      
+      <p class="philosophy-paragraph">I believe in good minimalism over bad complexity — but also in good complexity over good minimalism.</p>
+      
+      <p class="philosophy-paragraph">Even though I consider myself a designer, I have found code to be the best medium to express my ideas.</p>
+      
+      <p>In my day to day work I've been mostly focused on product design and strategy, digital-first branding and the creation and maintenance of design systems. Before coming to Hamburg I studied Interaction Design at <a href="https://www.hfg-gmuend.de/en/" target="_blank" rel="noopener">University of Design Schwäbisch Gmünd</a> in southern Germany.</p>
+    </div>
+  </div>
+  
+  <!-- Add a larger bottom spacer -->
+  <div class="bottom-spacer" aria-hidden="true"></div>
+</div>
+
+<style>
+  .about-me {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    max-width: 65ch;
+    margin: 0 auto;
+    padding-bottom: var(--space-4xl);
+  }
+  
+  .intro p {
+    margin-bottom: var(--space-m);
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-s);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+  
+  .social-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+  }
+  
+  .social-list li {
+    margin-right: var(--space-m);
+  }
+  
+  .philosophy-paragraph {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-text);
+  }
+  
+  .bottom-spacer {
+    height: var(--space-xl);
+  }
+  
+  @media (max-width: 768px) {
+    .about-me {
+      gap: var(--space-m);
+      padding-bottom: var(--space-2xl);
+    }
+    
+    .intro p {
+      font-size: 1rem;
+      margin-bottom: var(--space-s);
+    }
+    
+    .section-title {
+      font-size: 1rem;
+    }
+    
+    .social-list {
+      gap: var(--space-s);
+    }
+    
+    .social-list li {
+      margin-right: var(--space-s);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-me {
+      gap: var(--space-s);
+    }
+    
+    .intro p {
+      font-size: 0.95rem;
+    }
+    
+    .section-title {
+      font-size: 0.9rem;
+    }
+    
+    .social-list {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    
+    .social-list li {
+      margin-right: 0;
+    }
+  }
+</style>

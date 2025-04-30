@@ -1,0 +1,315 @@
+:root {
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f5f5;
+  --color-text: #333333;
+  --color-text-muted: #666666;
+  --color-accent: #FE762D;
+  --color-border: #dedede;
+  
+  /* Spacing */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+  
+  /* Border radius */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  
+  /* Font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Averia Serif Libre', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+  
+  :root {
+    --space-xl: 2.5rem;
+    --space-2xl: 3.5rem;
+    --space-3xl: 5rem;
+    --space-4xl: 6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+  
+  :root {
+    --space-l: 1.75rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 5rem;
+  }
+}
+
+/* Base Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Averia Serif Libre', serif !important;
+  line-height: 1.2;
+}
+
+/* Reset all heading fonts with high specificity */
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6 {
+  font-family: 'Averia Serif Libre', serif !important;
+  font-weight: 400;
+}
+
+/* Ensure the font is applied to specific components too */
+html body .title,
+html body .heading,
+html body [class*="title"],
+html body [class*="heading"],
+html body .header h1,
+html body .header h2,
+html body .header h3,
+html body main h1,
+html body main h2,
+html body main h3 {
+  font-family: 'Averia Serif Libre', serif !important;
+}
+
+/* Paragraph and other text elements */
+p, li, a, span, blockquote, label, input, textarea {
+  font-family: var(--font-body);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Button styles for global consistency */
+a.button,
+.button,
+button.styled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0px; /* Changed from 50px to 0px */
+  text-decoration: none;
+  font-family: var(--font-fun);
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.button-text {
+  line-height: 1.2;
+  font-family: var(--font-fun);
+}
+
+.button:hover, 
+button.styled:hover,
+a.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Update text color for specific elements to orange */
+.accent-text,
+.button .accent-text {
+  color: var(--color-accent);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.support-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Form button styles */
+button[type="submit"] {
+  padding: 0.75rem 1rem;
+  background-color: #FE762D;
+  color: black;
+  border: none;
+  border-radius: 0px; /* Changed from 50px to 0px */
+  cursor: pointer;
+  font-weight: normal;
+  font-family: var(--font-fun);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #FE762D;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] .logo-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+button[type="submit"] .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Wiki-style bi-directional links styling */
+a.wiki-link,
+a[href^="/notes/"],
+a[href*="bi-directional-links"],
+a[href*="non-linear-learning"] {
+  color: black !important; /* Orange color with !important to override any other styles */
+  text-decoration: none;
+  border-bottom: 1px dotted black;
+  transition: all 0.2s ease;
+}
+
+a.wiki-link:hover,
+a[href^="/notes/"]:hover,
+a[href*="bi-directional-links"]:hover,
+a[href*="non-linear-learning"]:hover {
+  color: #ff6b00 !important; /* Darker orange on hover */
+  border-bottom: 1px solid #ff6b00;
+}
+
+/* Global override for all elements that might have border-radius */
+* {
+  border-radius: 0 !important;
+}
+
+/* Specific overrides for common elements */
+button,
+a.button,
+.button,
+input,
+textarea,
+select,
+.card,
+.container,
+.box,
+.panel,
+[class*="btn"],
+[class*="button"] {
+  border-radius: 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

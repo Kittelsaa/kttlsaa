@@ -1,0 +1,109 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  icon?: 'arrow' | 'logo' | 'none';
+  class?: string;
+  as?: 'a' | 'button';
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const { 
+  href = '#', 
+  variant = 'primary', 
+  icon = 'none', 
+  class: className = '',
+  as = 'a',
+  type = 'button'
+} = Astro.props;
+
+const Element = as;
+---
+
+{as === 'a' ? (
+  <a href={href} class:list={['home-button', variant, className]}>
+    <span class="button-text"><slot /></span>
+    {icon === 'arrow' && <span class="icon arrow">→</span>}
+    {icon === 'logo' && <span class="icon"><img src="/images/lg.png" alt="KTTLSAA Logo" class="logo-icon" /></span>}
+  </a>
+) : (
+  <button type={type} class:list={['home-button', variant, className]}>
+    <span class="button-text"><slot /></span>
+    {icon === 'arrow' && <span class="icon arrow">→</span>}
+    {icon === 'logo' && <span class="icon"><img src="/images/lg.png" alt="KTTLSAA Logo" class="logo-icon" /></span>}
+  </button>
+)}
+
+<style>
+  .home-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    border-radius: 0px;
+    text-decoration: none;
+    font-family: var(--font-fun);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    text-align: center;
+    font-weight: normal;
+  }
+  
+  .button-text {
+    line-height: 1.2;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .logo-icon {
+    height: 14px;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  /* Primary button - white with black border */
+  .primary {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Secondary button - orange */
+  .secondary {
+    background-color: #FF9B5A;
+    color: black;
+    border: none;
+  }
+
+  .secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ensure all variants have no border radius */
+  .home-button,
+  .home-button.primary,
+  .home-button.secondary,
+  .home-button.tertiary {
+    border-radius: 0 !important;
+  }
+</style>
+
+

@@ -1,0 +1,62 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  class?: string;
+}
+
+const { 
+  level = 2, 
+  class: className = "" 
+} = Astro.props;
+
+// Dynamically create the heading element based on level
+const HeadingTag = `h${level}`;
+---
+
+<HeadingTag class:list={["fun-title", className]}>
+  <slot />
+</HeadingTag>
+
+<style>
+  .fun-title {
+    font-family: var(--font-fun);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  h1.fun-title {
+    font-size: 2.5rem;
+  }
+
+  h2.fun-title {
+    font-size: 2rem;
+  }
+
+  h3.fun-title {
+    font-size: 1.5rem;
+  }
+
+  h4.fun-title, h5.fun-title, h6.fun-title {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    h1.fun-title {
+      font-size: 2rem;
+    }
+    
+    h2.fun-title {
+      font-size: 1.75rem;
+    }
+    
+    h3.fun-title {
+      font-size: 1.25rem;
+    }
+    
+    h4.fun-title, h5.fun-title, h6.fun-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>

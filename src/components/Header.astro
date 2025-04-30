@@ -1,0 +1,91 @@
+---
+// Navigation items for the header
+const navItems = [
+  { text: 'Garden', url: '/garden' },
+  { text: 'About', url: '/about' }
+];
+---
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <a href="/" class="site-name">
+        <img src="/images/kttlsaalogo.png" alt="KTTLSAA Logo" class="logo-image" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        {navItems.map(item => (
+          <li>
+            <a href={item.url}>{item.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-m);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-image {
+    height: 30px;
+    width: auto;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    font-size: 1rem;
+  }
+  
+  nav a:hover {
+    color: var(--color-accent);
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: var(--space-m);
+    }
+    
+    nav ul {
+      gap: 1.5rem;
+    }
+  }
+</style>
+
+
+
+

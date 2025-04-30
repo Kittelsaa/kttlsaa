@@ -1,0 +1,12 @@
+/* Wiki-style bi-directional links styling */
+a.wiki-link {
+  color: #ff8c00; /* Orange color */
+  text-decoration: none;
+  border-bottom: 1px dotted #ff8c00;
+  transition: all 0.2s ease;
+}
+
+a.wiki-link:hover {
+  color: #ff6b00; /* Darker orange on hover */
+  border-bottom: 1px solid #ff6b00;
+}

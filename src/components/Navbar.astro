@@ -1,0 +1,32 @@
+---
+// Navbar.astro
+---
+
+<header class="navbar">
+  <div class="navbar-container">
+    <a href="/" class="logo">
+      <span class="logo-text">kttlsaa</span>
+    </a>
+    
+    <nav class="nav-links">
+      <a href="/notes" class="nav-link">Garden</a>
+      <a href="/about" class="nav-link">About</a>
+    </nav>
+    
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+  
+  <div class="mobile-menu">
+    <nav class="mobile-nav">
+      <a href="/notes" class="mobile-nav-link">Garden</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+ 

@@ -1,0 +1,166 @@
+---
+import FunTitle from '../FunTitle.astro';
+import FunSubtitle from '../FunSubtitle.astro';
+
+const { topics, counts } = Astro.props;
+---
+
+<div class="collections-container">
+  <h2 class="section-title">ONGOING COLLECTION</h2>
+  
+  <div class="collections-table">
+    <!-- First row with 2 columns -->
+    <div class="fixed-collections">
+      <div class="collection-item fixed-item">
+        <FunSubtitle level={3} class="item-title">BOOKSHELF</FunSubtitle>
+        <p class="item-desc">A list of the books I'm reading, sometimes with additional notes.</p>
+      </div>
+      
+      <div class="collection-item fixed-item">
+        <FunSubtitle level={3} class="item-title">MAP OF INQUIRY</FunSubtitle>
+        <p class="item-desc">A map of the subjects I find interesting and want to learn more about.</p>
+      </div>
+    </div>
+    
+    <!-- Topics grid with 3 columns -->
+    <div class="topics-grid">
+      {topics.map(topic => (
+        <div class="collection-item topic-item" data-topic={topic}>
+          <FunSubtitle level={3} class="item-title">{topic}</FunSubtitle>
+          <p class="item-desc">{counts[topic]} items</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .collections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .section-title {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    text-transform: none;
+  }
+  
+  .collections-table {
+    border: 1px solid #C0C0C0;
+    border-radius: 0px;
+    overflow: hidden;
+  }
+  
+  .fixed-collections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .collection-item {
+    padding: 0.5rem;
+    border: 1px solid #C0C0C0;
+    position: relative;
+    margin-top: -1px;
+    margin-left: -1px;
+  }
+  
+  .fixed-item {
+    padding: 1rem 0.5rem;
+  }
+  
+  .item-title {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .item-desc {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: #777;
+    line-height: 1.2;
+  }
+  
+  .topic-item {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .topic-item:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .topic-item.active {
+    background-color: #f0f0f0;
+  }
+  
+  /* Fix for when total items count is not divisible by 3 */
+  .topic-item:last-child:nth-child(3n-1) {
+    grid-column: 3;
+  }
+  
+  .topic-item:last-child:nth-child(3n-2) {
+    grid-column: 2 / span 2;
+  }
+  
+  @media (max-width: 768px) {
+    .fixed-collections,
+    .topics-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .topic-item:last-child:nth-child(3n-1),
+    .topic-item:last-child:nth-child(3n-2) {
+      grid-column: auto;
+    }
+  }
+</style>
+
+<script>
+  // Add client-side filtering logic for topic items
+  const topicItems = document.querySelectorAll('.topic-item');
+  const noteCards = document.querySelectorAll('.note-card');
+  
+  topicItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Toggle active class on the clicked item
+      item.classList.toggle('active');
+      
+      // Get all active topics
+      const activeTopics = Array.from(document.querySelectorAll('.topic-item.active'))
+        .map(activeItem => activeItem.dataset.topic);
+      
+      // Filter note cards based on active topics
+      noteCards.forEach(card => {
+        const cardTopics = card.dataset.topics?.split(',') || [];
+        
+        if (activeTopics.length === 0 || cardTopics.some(topic => activeTopics.includes(topic))) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+

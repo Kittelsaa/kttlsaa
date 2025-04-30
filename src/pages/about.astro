@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageWrapper from "../components/layouts/PageWrapper.astro";
+import AboutMe from "../components/AboutMe.astro";
+---
+
+<Layout title="Let's Connect - KTTLSAA">
+  <PageWrapper>
+    <div class="about-container">
+      <h1 class="page-title">Let's Connect</h1>
+      <AboutMe />
+    </div>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .about-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-m);
+  }
+  
+  .page-title {
+    margin-bottom: var(--space-xl);
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  
+  @media (max-width: 768px) {
+    .about-container {
+      padding: var(--space-l) var(--space-s);
+      max-width: 100%;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      margin-bottom: var(--space-l);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-container {
+      padding: var(--space-m) var(--space-xs);
+    }
+    
+    .page-title {
+      font-size: 1.75rem;
+      margin-bottom: var(--space-m);
+    }
+  }
+</style>
+
+
+
+

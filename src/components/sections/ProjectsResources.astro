@@ -1,0 +1,280 @@
+---
+import GrowthIcon from '../GrowthIcon.astro';
+import { getCollection } from "astro:content";
+
+// Get featured notes to showcase in the garden exploration section
+const notes = await getCollection('notes', ({ data }) => {
+  return !data.draft && data.featured === true;
+});
+
+// If no featured notes are found, get the most recent ones
+const featuredNotes = notes.length > 0 ? notes : 
+  (await getCollection('notes', ({ data }) => !data.draft))
+    .sort((a, b) => new Date(b.data.updated).getTime() - new Date(a.data.updated).getTime())
+    .slice(0, 3);
+
+// Sample data for projects and resources
+const projects = [
+  {
+    title: "Digital Garden Framework",
+    description: "An open-source framework for building and maintaining digital gardens",
+    status: "Ongoing",
+    link: "/projects/digital-garden"
+  },
+  {
+    title: "Knowledge Graph Visualization",
+    description: "Interactive visualization tools for complex knowledge networks",
+    status: "Completed",
+    link: "/projects/knowledge-graph"
+  },
+  {
+    title: "Collaborative Learning Platform",
+    description: "A platform for group learning and knowledge sharing",
+    status: "Research Phase",
+    link: "/projects/collab-learning"
+  }
+];
+
+const resources = [
+  {
+    title: "Digital Gardening Guide",
+    description: "A comprehensive guide to creating and maintaining a digital garden",
+    type: "Guide",
+    link: "/resources/digital-gardening"
+  },
+  {
+    title: "Knowledge Management Templates",
+    description: "Templates and frameworks for personal knowledge management",
+    type: "Templates",
+    link: "/resources/knowledge-templates"
+  },
+  {
+    title: "Research Methodology Toolkit",
+    description: "Tools and methods for conducting effective research",
+    type: "Toolkit",
+    link: "/resources/research-toolkit"
+  }
+];
+---
+
+<div class="projects-resources">
+  <!-- Garden Exploration Tab -->
+  <section class="garden-exploration">
+    <h3>Explore the Garden</h3>
+    <p class="section-intro">Discover curated notes and essays from my digital garden</p>
+    
+    <div class="featured-notes">
+      {featuredNotes.map(note => (
+        <a href={`/notes/${note.slug}`} class="note-preview">
+          <div class="note-header">
+            <span class="growth-stage">
+              <GrowthIcon growthStage={note.data.growthStage} />
+            </span>
+            <h4>{note.data.title}</h4>
+          </div>
+          <p class="note-description">{note.data.description}</p>
+          {note.data.topics && (
+            <div class="note-topics">
+              {note.data.topics.slice(0, 2).map(topic => (
+                <span class="topic-tag">{topic}</span>
+              ))}
+              {note.data.topics.length > 2 && <span class="more-topics">+{note.data.topics.length - 2}</span>}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+    
+    <div class="explore-more">
+      <a href="/garden" class="explore-link">Explore the full garden →</a>
+    </div>
+  </section>
+  
+  <section class="projects">
+    <h3>Projects</h3>
+    <div class="project-list">
+      {projects.map(project => (
+        <a href={project.link} class="project-card">
+          <div class="card-content">
+            <h4>{project.title}</h4>
+            <p class="description">{project.description}</p>
+            <span class="status">{project.status}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  
+  <section class="resources">
+    <h3>Resources & Guides</h3>
+    <div class="resource-list">
+      {resources.map(resource => (
+        <a href={resource.link} class="resource-card">
+          <div class="card-content">
+            <span class="resource-type">{resource.type}</span>
+            <h4>{resource.title}</h4>
+            <p class="description">{resource.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</div>
+
+<style>
+  .projects-resources {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  section {
+    margin-bottom: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--heading-color, #333);
+  }
+  
+  .section-intro {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted, #666);
+  }
+  
+  /* Garden Exploration Styles */
+  .featured-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .note-preview {
+    padding: 1.25rem;
+    border-radius: 8px;
+    background-color: var(--card-bg, #f9f9f9);
+    border: 1px solid var(--border-color, #eaeaea);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .note-preview:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  
+  .note-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .growth-stage {
+    margin-right: 0.5rem;
+  }
+  
+  .note-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-color, #333);
+  }
+  
+  .note-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .topic-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--tag-bg, #eef2ff);
+    color: var(--tag-color, #4f46e5);
+    border-radius: 4px;
+  }
+  
+  .more-topics {
+    font-size: 0.75rem;
+    color: var(--text-muted, #666);
+  }
+  
+  .explore-more {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .explore-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color, #4f46e5);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .explore-link:hover {
+    background-color: var(--primary-dark, #3c3799);
+  }
+  
+  /* Project and Resource Cards */
+  .project-list, .resource-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .project-card, .resource-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+    background-color: var(--card-bg, #f9f9f9);
+    border: 1px solid var(--border-color, #eaeaea);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .project-card:hover, .resource-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  
+  .card-content h4 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-color, #333);
+  }
+  
+  .status, .resource-type {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .status {
+    background-color: var(--status-bg, #e6f7ff);
+    color: var(--status-color, #0072b1);
+  }
+  
+  .resource-type {
+    background-color: var(--type-bg, #f0f9ff);
+    color: var(--type-color, #0369a1);
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .featured-notes, .project-list, .resource-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
