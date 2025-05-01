@@ -3,25 +3,121 @@ import Layout from "./Layout.astro";
 import { formatDate } from "../utils/dates";
 import RemoteImage from "../components/RemoteImage.astro";
 import VideoEmbed from "../components/VideoEmbed.astro";
+import GrowthIcon from "../components/GrowthIcon.astro";
+import Backlinks from "../components/Backlinks.astro";
+import "../styles/note-page.css";
 
-// Add other imports as needed
-
-const { frontmatter } = Astro.props;
+const { frontmatter, backlinks = [] } = Astro.props;
 const { title, description, updated, startDate, topics, growthStage, video } = frontmatter;
+
+// Format dates for display
+const plantedDate = startDate ? `Planted over ${formatDate(startDate)}` : '';
+const tendedDate = updated ? `Last tended over ${formatDate(updated)}` : '';
 ---
 
 <Layout title={title} description={description}>
-  <!-- Layout content remains the same -->
-  
-  <div class="content">
-    <slot />
-  </div>
+  <article class="note-container">
+    <header class="note-header">
+      <div class="note-nav">
+        <a href="/notes" class="back-link">ESSAYS</a>
+        <div class="growth-badge">
+          <GrowthIcon growthStage={growthStage} showEmoji={true} />
+          <span class="growth-stage-text">{growthStage?.toUpperCase()}</span>
+        </div>
+      </div>
+      
+      <h1 class="note-title">{title}</h1>
+      
+      {description && <p class="note-description">{description}</p>}
+      
+      <div class="note-meta">
+        <div class="note-topics">
+          {topics && topics.length > 0 && topics.map((topic: string) => (
+            <span class="topic-tag">{topic}</span>
+          ))}
+        </div>
+        
+        <div class="note-dates">
+          {plantedDate && <div class="date-info">{plantedDate}</div>}
+          {tendedDate && <div class="date-info">{tendedDate}</div>}
+        </div>
+      </div>
+    </header>
+    
+    <div class="note-content">
+      <slot />
+    </div>
+    
+    <footer class="note-footer">
+      {backlinks && backlinks.length > 0 && (
+        <div class="backlinks-section">
+          <Backlinks backlinks={backlinks} />
+        </div>
+      )}
+    </footer>
+  </article>
 </Layout>
 
-<style>
-  /* Styles remain the same */
+<style is:global>
+  /* Additional inline styles with high specificity */
+  body .note-container {
+    background-color: transparent !important;
+  }
+  
+  /* Remove the big first letter styling */
+  body .note-content p:first-of-type::first-letter {
+    font-size: inherit !important;
+    float: none !important;
+    line-height: inherit !important;
+    margin-right: 0 !important;
+    font-weight: normal !important;
+    color: inherit !important;
+  }
+  
+  /* Change topic tags to orange */
+  body .topic-tag {
+    color: #ff8c00 !important;
+  }
+  
+  /* Change back-link to neutral gray */
+  body .back-link {
+    color: #6b7280 !important; /* Neutral gray */
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  body .back-link:hover {
+    color: #4b5563 !important; /* Darker gray on hover */
+  }
+  
+  body .note-content a:hover {
+    color: #ff8c00 !important;
+    border-bottom-color: #ff8c00 !important;
+  }
+  
+  body .note-content a.wiki-link,
+  body .note-content a[href^="/notes/"],
+  body .note-content a[href*="bi-directional-links"],
+  body .note-content a[href*="non-linear-learning"] {
+    color: #000 !important;
+    border-bottom: 1px dotted #000 !important;
+  }
+  
+  body .note-content a.wiki-link:hover,
+  body .note-content a[href^="/notes/"]:hover,
+  body .note-content a[href*="bi-directional-links"]:hover,
+  body .note-content a[href*="non-linear-learning"]:hover {
+    color: #ff8c00 !important;
+    border-bottom: 1px solid #ff8c00 !important;
+  }
+  
+  body .note-content mark,
+  body .note-content .highlight {
+    background-color: transparent !important;
+    color: #ff8c00 !important;
+  }
 </style>
 
-<script>
-  // Any client-side scripts
-</script>
+
+
+

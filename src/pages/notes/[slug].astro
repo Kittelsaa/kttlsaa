@@ -1,29 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import NoteLayout from '../../layouts/NoteLayout.astro';
 import PageWrapper from '../../components/layouts/PageWrapper.astro';
 import GrowthIcon from '../../components/GrowthIcon.astro';
 import Backlinks from '../../components/Backlinks.astro';
 import OutboundLinks from '../../components/OutboundLinks.astro';
-import { findBacklinks, getOutboundLinks, detectCircularReferences } from '../../utils/noteUtils.js';
-
-// Add a recursion guard
-const MAX_RENDER_DEPTH = 3;
-const renderDepth = Astro.locals.renderDepth || 0;
-
-// If we're too deep in recursion, show a simplified version
-if (renderDepth > MAX_RENDER_DEPTH) {
-  return Astro.redirect('/500?error=recursion-limit-exceeded');
-}
-
-// Set the render depth for child components
-Astro.locals.renderDepth = renderDepth + 1;
+import { findBacklinks, getOutboundLinks } from '../../utils/noteUtils.js';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
   
   return notes.map(note => {
-    // Ensure slug is never undefined
     if (!note.slug) {
       console.warn(`Note with title "${note.data.title}" has no slug`);
       return null;
@@ -33,7 +21,7 @@ export async function getStaticPaths() {
       params: { slug: note.slug },
       props: { note }
     };
-  }).filter(Boolean); // Remove any null entries
+  }).filter(Boolean);
 }
 
 const { slug } = Astro.params;
@@ -53,147 +41,33 @@ try {
   return Astro.redirect('/500?error=rendering-failed');
 }
 
-// Get backlinks and outbound links with a depth limit to prevent infinite recursion
-const backlinks = await findBacklinks(note.slug, 1);
-const outboundLinks = await getOutboundLinks(note, 1);
-
-// Create a set of processed links to prevent circular references
-const processedLinks = new Set([note.slug]);
+// Get backlinks and outbound links
+const backlinks = await findBacklinks(note.slug, 1) || [];
+const outboundLinks = await getOutboundLinks(note, 1) || [];
 ---
 
-<Layout title={note.data.title} description={note.data.description}>
-  <PageWrapper>
-    <article class="note">
-      <header>
-        <div class="note-meta">
-          <div class="growth-stage">
-            <GrowthIcon growthStage={note.data.growthStage} />
-            <span>{note.data.growthStage}</span>
-          </div>
-          <div class="dates">
-            <span>Started: {new Date(note.data.startDate).toLocaleDateString()}</span>
-            <span>Updated: {new Date(note.data.updated).toLocaleDateString()}</span>
-          </div>
-          {note.data.topics && (
-            <div class="topics">
-              {note.data.topics.map(topic => (
-                <a href={`/notes/topics/${topic}`} class="topic">{topic}</a>
-              ))}
-            </div>
-          )}
-        </div>
-        <h1>{note.data.title}</h1>
-        {note.data.description && <p class="description">{note.data.description}</p>}
-        
-        {note.data.video && (
-          <div class="video-container">
-            <iframe 
-              src={note.data.video.url} 
-              title={note.data.video.title}
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        )}
-      </header>
-      
-      <div class="note-content">
-        <Content />
-      </div>
-      
-      <footer>
-        <div class="note-connections">
-          <OutboundLinks links={outboundLinks} />
-          
-          {backlinks.length > 0 && (
-            <Backlinks backlinks={backlinks} />
-          )}
-        </div>
-      </footer>
-    </article>
-  </PageWrapper>
-</Layout>
+<NoteLayout frontmatter={note.data} backlinks={backlinks}>
+  <div class="note-main-content">
+    <Content />
+  </div>
+  
+  <div class="note-connections">
+    {outboundLinks.length > 0 && (
+      <OutboundLinks links={outboundLinks} />
+    )}
+  </div>
+</NoteLayout>
 
 <style>
-  .note {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .note-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-  }
-  
-  .growth-stage {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .dates {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .topics {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .topic {
-    padding: 0.2rem 0.5rem;
-    background-color: var(--color-bg-secondary);
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--color-text);
-  }
-  
-  .description {
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    margin-bottom: 2rem;
-  }
-  
-  .note-content {
-    line-height: 1.6;
+  .note-main-content {
+    margin-bottom: var(--space-xl);
   }
   
   .note-connections {
-    margin-top: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-  
-  .video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-    margin: 2rem 0;
-  }
-  
-  .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  @media (max-width: 768px) {
-    .note-connections {
-      grid-template-columns: 1fr;
-    }
+    margin-top: var(--space-xl);
+    padding-top: var(--space-m);
+    border-top: 1px solid var(--color-border);
   }
 </style>
-
-
-
 
 

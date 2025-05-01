@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import GardenFiltersAndHits from "../components/garden/GardenFiltersAndHits.astro";
+import GardenNoteCard from "../components/cards/GardenNoteCard.astro";
+import GardenCollections from "../components/garden/GardenCollections.astro";
 
 const allPosts = await getCollection('notes', ({ data }) => {
   return !data.draft;
@@ -9,45 +10,348 @@ const allPosts = await getCollection('notes', ({ data }) => {
 
 // Sort posts by updated date
 const sortedPosts = allPosts.sort(
-  (a, b) => new Date(b.data.updated).getTime() - new Date(a.data.updated).getTime()
+  (a, b) => new Date(b.data.updated || b.data.startDate || 0).getTime() - 
+            new Date(a.data.updated || a.data.startDate || 0).getTime()
 );
+
+// Get unique topics
+const allTopics = [...new Set(allPosts.flatMap(post => post.data.topics || []))].sort();
+
+// Get unique growth stages
+const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].sort();
+
+// Count posts per topic
+const topicCounts = {};
+allTopics.forEach(topic => {
+  topicCounts[topic] = allPosts.filter(post => 
+    post.data.topics && post.data.topics.includes(topic)
+  ).length;
+});
 ---
 
 <Layout title="Digital Garden">
   <div class="container">
-    <div class="garden-header">
-      <h1>Digital Garden</h1>
-      <p class="garden-intro">
-        A collection of growing notes, essays, and thoughts. Some are seedlings, others are fully
-        grown trees. All are continuously evolving.
+    <!-- Garden Introduction Section -->
+    <div class="garden-intro">
+      <h1 class="garden-title">Digital Garden</h1>
+      <p class="garden-description">
+        A collection of growing notes, essays, and thoughts. Some are seedlings, others are fully 
+        grown trees. All are continuously evolving. Read more about <a href="/notes/digital-gardens" class="garden-link">digital gardens here🍀</a>.
       </p>
     </div>
-    
-    <GardenFiltersAndHits allPostData={sortedPosts} />
+
+    <div class="garden-layout">
+      <div class="collections-column">
+        <div class="section-header">
+          <h2 class="section-title">ONGOING COLLECTIONS</h2>
+        </div>
+        <GardenCollections topics={allTopics} counts={topicCounts} />
+      </div>
+      
+      <div class="notes-column">
+        <div class="section-header">
+          <h2 class="section-title">NOTES</h2>
+          <div class="filter-controls">
+            <div class="filter-dropdown">
+              <select id="date-filter" aria-label="Filter by date">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+              <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="filter-dropdown">
+              <select id="growth-filter" aria-label="Filter by growth stage">
+                <option value="all">All Stages</option>
+                {allGrowthStages.map(stage => (
+                  <option value={stage.toLowerCase()}>{stage}</option>
+                ))}
+              </select>
+              <span class="dropdown-arrow">▼</span>
+            </div>
+          </div>
+        </div>
+        <div class="notes-list">
+          {sortedPosts.map(post => (
+            <GardenNoteCard note={post} />
+          ))}
+        </div>
+      </div>
+    </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 1.5rem 3.5rem 1.5rem;
   }
   
-  .garden-header {
-    margin-bottom: 2rem;
-  }
-  
-  h1 {
-    margin-bottom: 0.5rem;
-    font-weight: normal;
-  }
-  
+  /* Garden Introduction Styles */
   .garden-intro {
-    max-width: 75ch;
-    color: var(--text-muted, #666);
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1.2rem;
+  }
+  
+  .garden-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 1rem;
+  }
+  
+  .garden-description {
+    font-size: 1.125rem;
+    color: #6b7280;
+    max-width: 800px;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+  
+  .growth-stages-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .legend-icon {
+    font-size: 1.25rem;
+  }
+  
+  .legend-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .garden-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.2rem;
+  }
+  
+  .section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #7B7B7A;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-sans, 'Inter', sans-serif);
+  }
+  
+  .filter-controls {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .filter-dropdown {
+    position: relative;
+  }
+  
+  .filter-dropdown select {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid #e5e7eb;
+    padding: 0.35rem 2rem 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: var(--font-sans, 'Inter', sans-serif);
+  }
+  
+  .filter-dropdown select:focus {
+    outline: none;
+    border-color: #6b7280;
+  }
+  
+  .dropdown-arrow {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6b7280;
+    font-size: 0.6rem;
+  }
+  
+  .notes-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 3rem;
+  }
+  
+  .garden-link {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px dotted #000000;
+    transition: all 0.2s ease;
+  }
+  
+  .garden-link:hover {
+    color: #ff8c00;
+    border-bottom: 1px solid #ff8c00;
+  }
+  
+  @media (max-width: 1024px) {
+    .garden-layout {
+      gap: 2rem;
+    }
+    
+    .notes-list {
+      gap: 0 2rem;
+    }
+    
+    .growth-stages-legend {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .garden-layout {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 2rem 1rem;
+    }
+    
+    .garden-title {
+      font-size: 2rem;
+    }
+    
+    .garden-description {
+      font-size: 1rem;
+    }
+    
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .notes-list {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
+
+<script>
+  // Client-side filtering and sorting logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const topicFilters = document.querySelectorAll('.topic-filter');
+    const noteCards = document.querySelectorAll('.garden-note-card');
+    const dateFilter = document.getElementById('date-filter');
+    const growthFilter = document.getElementById('growth-filter');
+    
+    // Add "All" filter state for topics
+    let currentTopicFilter = 'all';
+    
+    // Add event listeners to dropdown filters
+    if (dateFilter) {
+      dateFilter.addEventListener('change', () => {
+        sortNotes(dateFilter.value);
+      });
+    }
+    
+    if (growthFilter) {
+      growthFilter.addEventListener('change', () => {
+        filterByGrowthStage(growthFilter.value);
+      });
+    }
+    
+    // Add click event to each topic filter
+    topicFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const selectedTopic = filter.getAttribute('data-topic');
+        
+        // Toggle active state if clicking the same filter again
+        if (currentTopicFilter === selectedTopic) {
+          currentTopicFilter = 'all';
+          topicFilters.forEach(f => f.classList.remove('active'));
+        } else {
+          // Remove active class from all filters
+          topicFilters.forEach(f => f.classList.remove('active'));
+          
+          // Add active class to clicked filter
+          filter.classList.add('active');
+          currentTopicFilter = selectedTopic;
+        }
+        
+        // Filter notes by topic
+        filterByTopic(currentTopicFilter);
+      });
+    });
+    
+    // Function to sort notes by date
+    function sortNotes(sortOrder) {
+      const notesContainer = document.querySelector('.notes-list');
+      const notesArray = Array.from(noteCards);
+      
+      notesArray.sort((a, b) => {
+        const dateA = new Date(a.dataset.date || 0).getTime();
+        const dateB = new Date(b.dataset.date || 0).getTime();
+        
+        return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+      });
+      
+      // Remove all notes and re-append in sorted order
+      notesArray.forEach(note => {
+        notesContainer.appendChild(note);
+      });
+    }
+    
+    // Function to filter by growth stage
+    function filterByGrowthStage(growthStage) {
+      noteCards.forEach(card => {
+        const cardGrowthStage = card.dataset.growthStage?.toLowerCase();
+        
+        if (growthStage === 'all' || cardGrowthStage === growthStage) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // Function to filter by topic
+    function filterByTopic(topic) {
+      noteCards.forEach(card => {
+        const cardTopics = card.dataset.topics?.split(',') || [];
+        
+        if (topic === 'all' || cardTopics.includes(topic)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // Initialize sorting
+    if (dateFilter) {
+      sortNotes(dateFilter.value);
+    }
+  });
+</script>
+
+
 
 

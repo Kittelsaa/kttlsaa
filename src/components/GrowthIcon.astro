@@ -1,57 +1,36 @@
 ---
-const { growthStage } = Astro.props;
+const { growthStage, showEmoji = true } = Astro.props;
 
-const getIcon = (stage) => {
-  switch (stage) {
-    case 'seedling':
-      return '🌱';
-    case 'budding':
-      return '🌿';
-    case 'evergreen':
-      return '🌳';
-    default:
-      return '🌱';
-  }
+// Define colors for each growth stage
+const colors = {
+  seedling: "#10b981", // Green
+  budding: "#3b82f6",  // Blue
+  evergreen: "#8b5cf6" // Purple
 };
 
-const getLabel = (stage) => {
-  switch (stage) {
-    case 'seedling':
-      return 'Seedling - Early stage thoughts';
-    case 'budding':
-      return 'Budding - Developing ideas';
-    case 'evergreen':
-      return 'Evergreen - Mature, well-developed content';
-    default:
-      return 'Seedling - Early stage thoughts';
-  }
+// Define emojis for each growth stage
+const emojis = {
+  seedling: "🌱", // Seedling
+  budding: "🪴",  // Potted plant
+  evergreen: "🌳" // Tree
 };
 
-const icon = getIcon(growthStage);
-const label = getLabel(growthStage);
+const color = colors[growthStage?.toLowerCase()] || colors.seedling;
+const emoji = emojis[growthStage?.toLowerCase()] || emojis.seedling;
 ---
 
-<span class={`growth-icon ${growthStage}`} title={label}>
-  {icon}
-</span>
+{showEmoji ? (
+  <span class="growth-icon" style={`color: ${color};`}>{emoji}</span>
+) : (
+  <span class="growth-icon" style={`color: ${color};`}>●</span>
+)}
 
 <style>
   .growth-icon {
     display: inline-block;
-    font-size: 1.2em;
-    margin-right: 0.25em;
-  }
-  
-  .seedling {
-    color: var(--seedling-color, #76b852);
-  }
-  
-  .budding {
-    color: var(--budding-color, #4caf50);
-  }
-  
-  .evergreen {
-    color: var(--evergreen-color, #2e7d32);
+    font-size: 1em;
+    line-height: 1;
   }
 </style>
+
 

@@ -1,36 +1,56 @@
 ---
-import FunTitle from '../FunTitle.astro';
-import FunSubtitle from '../FunSubtitle.astro';
+import { getCollection } from "astro:content";
 
-const { topics, counts } = Astro.props;
+// Get all topics and counts if not provided as props
+const { topics = [], counts = {} } = Astro.props;
 
-// Filter out "COMMUNITY" and "SOCIETY" from the topics list
-const filteredTopics = topics.filter(topic => topic !== "COMMUNITY" && topic !== "SOCIETY");
+// If no topics provided, get them from the collection
+let allTopics = topics;
+let topicCounts = counts;
+
+if (topics.length === 0) {
+  const notes = await getCollection("notes");
+  allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].sort();
+  
+  // Count notes per topic
+  allTopics.forEach(topic => {
+    topicCounts[topic] = notes.filter(note => 
+      note.data.topics && note.data.topics.includes(topic)
+    ).length;
+  });
+}
+
+// Use the specific topics from the garden
+const displayTopics = [
+  { name: "AI", count: topicCounts["AI"] || 1 },
+  { name: "Digital Anthropology", count: topicCounts["Digital Anthropology"] || 3 },
+  { name: "Tech", count: topicCounts["Tech"] || 2 }
+];
 ---
 
-<div class="collections-container">
-  <h2 class="section-title">ONGOING COLLECTION</h2>
-  
-  <div class="collections-table">
-    <!-- First row with 2 columns -->
-    <div class="fixed-collections">
-      <div class="collection-item fixed-item">
+<div class="garden-collections">
+  <div class="collections-container">
+    <!-- First row: Main collections (2 columns) -->
+    <div class="row main-row">
+      <div class="cell">
         <h3 class="item-title">BOOKSHELF</h3>
         <p class="item-desc">A list of the books I'm reading, sometimes with additional notes.</p>
       </div>
       
-      <div class="collection-item fixed-item">
+      <div class="cell">
         <h3 class="item-title">MAP OF INQUIRY</h3>
         <p class="item-desc">A map of the subjects I find interesting and want to learn more about.</p>
       </div>
     </div>
     
-    <!-- Topics grid with 3 columns -->
-    <div class="topics-grid">
-      {filteredTopics.map(topic => (
-        <div class="collection-item topic-item" data-topic={topic}>
-          <h3 class="item-title">{topic}</h3>
-          <p class="item-desc">{counts[topic]} {counts[topic] === 1 ? 'item' : 'items'}</p>
+    <!-- Second row: Topics (3 columns) -->
+    <div class="row topics-row">
+      {displayTopics.map((topic) => (
+        <div class="cell topic-filter" data-topic={topic.name}>
+          <div class="topic-link">
+            <h3 class="item-title">{topic.name}</h3>
+            <p class="item-desc">{topic.count} {topic.count === 1 ? 'Item' : 'Items'}</p>
+          </div>
         </div>
       ))}
     </div>
@@ -38,161 +58,141 @@ const filteredTopics = topics.filter(topic => topic !== "COMMUNITY" && topic !==
 </div>
 
 <style>
+  .garden-collections {
+    margin-bottom: 3rem;
+    padding-top:0px;
+  }
+  
   .collections-container {
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    background-color: #ffffff;
+  }
+  
+  .row {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    width: 100%;
   }
   
-  .section-title {
-    color: #666;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .main-row .cell {
+    width: 50%;
   }
   
-  .collections-table {
-    border: 1px solid #C0C0C0;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: auto auto;
+  .topics-row .cell {
+    width: 33.333%;
   }
   
-  .fixed-collections {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-bottom: 1px solid #C0C0C0;
-  }
-  
-  .topics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
-  }
-  
-  .collection-item {
+  .cell {
     padding: 1.5rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  
-  /* Add borders to specific cells */
-  .fixed-collections .collection-item:first-child {
-    border-right: 1px solid #C0C0C0;
-  }
-  
-  /* First row of topics */
-  .topics-grid .collection-item:nth-child(1),
-  .topics-grid .collection-item:nth-child(2) {
-    border-right: 1px solid #C0C0C0;
-    border-bottom: 1px solid #C0C0C0;
-  }
-  
-  .topics-grid .collection-item:nth-child(3) {
-    border-bottom: 1px solid #C0C0C0;
-  }
-  
-  /* Second row of topics */
-  .topics-grid .collection-item:nth-child(4) {
-    border-right: 1px solid #C0C0C0;
-  }
-  
-  .item-title {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-  }
-  
-  .item-desc {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.4;
-  }
-  
-  .topic-item {
-    cursor: pointer;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
     transition: background-color 0.2s ease;
   }
   
-  .topic-item:hover {
-    background-color: #f8f8f8;
+  .main-row .cell:last-child,
+  .topics-row .cell:last-child {
+    border-right: none;
   }
   
-  .topic-item.active {
-    background-color: #f0f0f0;
+  .topics-row .cell {
+    border-bottom: none;
   }
   
-  @media (max-width: 768px) {
-    .fixed-collections,
-    .topics-grid {
-      grid-template-columns: 1fr;
+  .topic-link {
+    display: block;
+    height: 100%;
+  }
+  
+  .topic-filter {
+    cursor: pointer;
+  }
+  
+  .topic-filter:hover {
+    background-color: #f9fafb;
+  }
+  
+  .topic-filter.active {
+    background-color: #f3f4f6;
+    border-bottom: 2px solid var(--color-accent, #ff8c00);
+  }
+  
+  .item-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+    font-family: var(--font-heading, 'Averia Serif Libre', serif);
+  }
+  
+  .item-desc {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .row {
+      flex-direction: column;
     }
     
-    .fixed-collections .collection-item:first-child {
+    .cell {
+      width: 100% !important;
       border-right: none;
-      border-bottom: 1px solid #C0C0C0;
     }
     
-    .topics-grid .collection-item {
-      border-right: none !important;
-    }
-    
-    .topics-grid .collection-item:not(:last-child) {
-      border-bottom: 1px solid #C0C0C0;
+    .topics-row .cell:not(:last-child) {
+      border-bottom: 1px solid #e5e7eb;
     }
   }
 </style>
 
 <script>
-  // Add client-side filtering logic for topic items
-  const topicItems = document.querySelectorAll('.topic-item');
-  const noteCards = document.querySelectorAll('.note-card');
-  
-  topicItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // Toggle active class on the clicked item
-      item.classList.toggle('active');
-      
-      // Get all active topics
-      const activeTopics = Array.from(document.querySelectorAll('.topic-item.active'))
-        .map(activeItem => activeItem.dataset.topic);
-      
-      // Filter note cards based on active topics
-      noteCards.forEach(card => {
-        const cardTopics = card.dataset.topics?.split(',') || [];
+  // Client-side filtering logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const topicFilters = document.querySelectorAll('.topic-filter');
+    const noteCards = document.querySelectorAll('.note-card');
+    
+    // Add "All" filter state
+    let currentFilter = 'all';
+    
+    // Add click event to each topic filter
+    topicFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const selectedTopic = filter.getAttribute('data-topic');
         
-        if (activeTopics.length === 0 || cardTopics.some(topic => activeTopics.includes(topic))) {
+        // Toggle active state if clicking the same filter again
+        if (currentFilter === selectedTopic) {
+          currentFilter = 'all';
+          topicFilters.forEach(f => f.classList.remove('active'));
+        } else {
+          // Remove active class from all filters
+          topicFilters.forEach(f => f.classList.remove('active'));
+          
+          // Add active class to clicked filter
+          filter.classList.add('active');
+          currentFilter = selectedTopic;
+        }
+        
+        // Filter notes
+        filterNotes(currentFilter);
+      });
+    });
+    
+    // Function to filter notes by topic
+    function filterNotes(topic) {
+      noteCards.forEach(card => {
+        // Get topics from the card's data attribute
+        const cardTopics = card.getAttribute('data-topics')?.split(',') || [];
+        
+        if (topic === 'all' || cardTopics.includes(topic)) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
         }
       });
-    });
+    }
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

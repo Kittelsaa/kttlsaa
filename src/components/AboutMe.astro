@@ -1,13 +1,12 @@
 ---
 import Button from './Button.astro';
-import SubscribeButton from './SubscribeButton.astro';
 ---
 
 <div class="about-me">
   <!-- Contact Section First -->
   <div class="contact-section">
-    <h3 class="section-title">CONTACT</h3>
-    <p>If you want to talk about any of this, feel free to reach out via <a href="mailto:hello@kttlsaa.com">hello@kttlsaa.com</a></p>
+    <h3 class="section-title">Contact</h3>
+    <p>If you want to talk about any of this, feel free to reach out via <a href="mailto:kttlsaa@gmail.com">kttlsaa@gmail.com</a></p>
   </div>
   
   <div class="social-section">
@@ -15,33 +14,19 @@ import SubscribeButton from './SubscribeButton.astro';
     <ul class="social-list">
       <li><a href="https://twitter.com/kttlsaa">Twitter</a></li>
       <li><a href="https://github.com/kttlsaa">GitHub</a></li>
+      <li><a href="https://pinterest.com/kttlsaa">Pinterest</a></li>
       <li><a href="https://are.na/kttlsaa">are.na</a></li>
-      <li><a href="https://scholar.social/@kttlsaa">Mastodon</a></li>
     </ul>
   </div>
   
-  <!-- About Me Section -->
-  <div class="about-section">
+  <div class="philosophy-section">
     <h3 class="section-title">MORE ABOUT ME</h3>
-    <div class="intro">
-      <p>As a designer I make things, and these things are, by definition, artifacts of culture. They use and exist in relation to (sub-)cultural codes, symbols and myths. Because of this, I am interested in cultural studies, sociology, semiotics and aesthetics.</p>
-      
-      <p class="philosophy-paragraph">I want to create products that are meaningful, personal, generous, considerate, ethical and empowering.</p>
-      
-      <p class="philosophy-paragraph">As a designer I am naturally interested in how we can understand and react to complexity in situations, systems and problems. In particular, I like thinking (and talking) about the expression and development of thoughts and ideas through prototyping, modeling and notation systems.</p>
-      
-      <p class="philosophy-paragraph">I want to take part in the discourse of my discipline and try to contribute to a design theory that is rooted in practice.</p>
-      
-      <p class="philosophy-paragraph">I believe in good minimalism over bad complexity — but also in good complexity over good minimalism.</p>
-      
-      <p class="philosophy-paragraph">Even though I consider myself a designer, I have found code to be the best medium to express my ideas.</p>
-      
-      <p>In my day to day work I've been mostly focused on product design and strategy, digital-first branding and the creation and maintenance of design systems. Before coming to Hamburg I studied Interaction Design at <a href="https://www.hfg-gmuend.de/en/" target="_blank" rel="noopener">University of Design Schwäbisch Gmünd</a> in southern Germany.</p>
-    </div>
+    <p>As a designer I make things, and these things are, by definition, artifacts of culture. They use and exist in relation to (sub-)cultural codes, symbols and myths. Because of this, I am interested in cultural studies, sociology, semiotics and aesthetics.</p>
+    <p class="philosophy-paragraph">I want to create products that are meaningful, personal, generous, considerate, ethical and empowering.</p>
+    <p>As a designer I am naturally interested in how we can understand and react to complexity in situations, systems and problems. In particular, I like thinking (and talking) about the expression and development of thought and ideas through prototyping, modeling and notation systems.</p>
+    <p>I want to take part in the discourse of my discipline and try to contribute to a design theory that is rooted in practice.</p>
+    <p>I believe in good minimalism over bad complexity — but also in embracing necessary complexity over harmful reductionism.</p>
   </div>
-  
-  <!-- Add a larger bottom spacer -->
-  <div class="bottom-spacer" aria-hidden="true"></div>
 </div>
 
 <style>
@@ -49,15 +34,9 @@ import SubscribeButton from './SubscribeButton.astro';
     display: flex;
     flex-direction: column;
     gap: var(--space-l);
-    max-width: 65ch;
-    margin: 0 auto;
+    max-width: 100%; /* Use full width */
+    margin: 0;
     padding-bottom: var(--space-4xl);
-  }
-  
-  .intro p {
-    margin-bottom: var(--space-m);
-    line-height: 1.7;
-    font-size: 1.05rem;
   }
   
   .section-title {
@@ -65,8 +44,9 @@ import SubscribeButton from './SubscribeButton.astro';
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-s);
-    color: var(--color-text-muted);
+    color: #6b7280;
     font-weight: 600;
+    text-align: left;
   }
   
   .social-list {
@@ -81,14 +61,34 @@ import SubscribeButton from './SubscribeButton.astro';
     margin-right: var(--space-m);
   }
   
+  .social-list a {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    transition: all 0.2s ease;
+  }
+  
+  .social-list a:hover {
+    color: #ff8c00;
+    border-bottom-color: #ff8c00;
+  }
+  
   .philosophy-paragraph {
     font-weight: 500;
     font-style: italic;
-    color: var(--color-text);
+    color: #ff8c00;
+    max-width: 100%; /* Use full width */
   }
   
-  .bottom-spacer {
-    height: var(--space-xl);
+  p {
+    margin-bottom: var(--space-m);
+    line-height: 1.8; /* Increased for better readability */
+    font-size: 1.05rem;
+    max-width: 100%; /* Use full width */
+  }
+  
+  .philosophy-section {
+    margin-top: var(--space-m);
   }
   
   @media (max-width: 768px) {
@@ -97,7 +97,7 @@ import SubscribeButton from './SubscribeButton.astro';
       padding-bottom: var(--space-2xl);
     }
     
-    .intro p {
+    p {
       font-size: 1rem;
       margin-bottom: var(--space-s);
     }
@@ -120,7 +120,7 @@ import SubscribeButton from './SubscribeButton.astro';
       gap: var(--space-s);
     }
     
-    .intro p {
+    p {
       font-size: 0.95rem;
     }
     
@@ -136,5 +136,19 @@ import SubscribeButton from './SubscribeButton.astro';
     .social-list li {
       margin-right: 0;
     }
+  }
+  /* Add more spacing between sections */
+  .contact-section, .social-section, .philosophy-section {
+    margin-bottom: var(--space-xl, 3rem);
+  }
+  
+  /* Increase spacing between paragraphs */
+  p {
+    margin-bottom: var(--space-m, 1.5rem);
+  }
+  
+  /* Ensure section titles have enough space */
+  .section-title {
+    margin-bottom: var(--space-m, 1.5rem);
   }
 </style>

@@ -2,56 +2,87 @@
 import Layout from "../layouts/Layout.astro";
 import PageWrapper from "../components/layouts/PageWrapper.astro";
 import AboutMe from "../components/AboutMe.astro";
+import "../styles/about.css";
 ---
 
 <Layout title="Let's Connect - KTTLSAA">
   <PageWrapper>
     <div class="about-container">
-      <h1 class="page-title">Let's Connect</h1>
-      <AboutMe />
+      <div class="about-content">
+        <AboutMe />
+      </div>
     </div>
   </PageWrapper>
 </Layout>
 
-<style>
-  .about-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-xl) var(--space-m);
+<style is:global>
+  /* Fix for social links spacing */
+  .social-list {
+    list-style-type: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1.5rem !important;
   }
   
-  .page-title {
-    margin-bottom: var(--space-xl);
-    font-size: 2.5rem;
-    text-align: center;
-    font-weight: 700;
-    color: var(--color-text);
+  .social-list li {
+    margin-right: 1.5rem !important;
   }
   
-  @media (max-width: 768px) {
-    .about-container {
-      padding: var(--space-l) var(--space-s);
-      max-width: 100%;
-    }
-    
-    .page-title {
-      font-size: 2rem;
-      margin-bottom: var(--space-l);
-    }
+  /* Ensure section titles have the right color */
+  .section-title {
+    color: #6b7280 !important;
+    font-size: 1.1rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 0.75rem !important;
+    font-weight: 600 !important;
   }
   
-  @media (max-width: 480px) {
-    .about-container {
-      padding: var(--space-m) var(--space-xs);
-    }
-    
-    .page-title {
-      font-size: 1.75rem;
-      margin-bottom: var(--space-m);
-    }
+  /* Ensure highlighted text is orange */
+  .philosophy-paragraph {
+    color: #000 !important;
+    font-weight: 500 !important;
+    font-style: italic !important;
+  }
+  
+  /* Fix social links that are not in a list */
+  .social-section a {
+    margin-right: 1.5rem !important;
+    display: inline-block !important;
   }
 </style>
+
+<style>
+  /* Increase width for about page specifically */
+  .about-content {
+    max-width: 100%; /* Use full width */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Custom spacing for the about page */
+  .about-container {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* Add more horizontal spacing */
+  @media (min-width: 768px) {
+    .about-container {
+      padding-left: 3rem; /* Increased from 2rem */
+      padding-right: 3rem; /* Increased from 2rem */
+    }
+  }
+  
+  .about-title {
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 2rem; /* Add more space below title */
+  }
+</style>
+
 
 
 

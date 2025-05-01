@@ -10,3 +10,11 @@ a.wiki-link:hover {
   color: #ff6b00; /* Darker orange on hover */
   border-bottom: 1px solid #ff6b00;
 }
+
+/* Highlighted text in notes */
+.highlight, 
+mark {
+  background-color: transparent;
+  color: #ff8c00; /* Orange color for highlighted text */
+  font-weight: 500;
+}

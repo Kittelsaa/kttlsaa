@@ -1,254 +1,48 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageWrapper from "../components/layouts/PageWrapper.astro";
+import "../styles/about.css";
 ---
 
 <Layout title="More About Me - KTTLSAA">
   <PageWrapper>
-    <h1>More About Me</h1>
-    
-    <section class="about-section">
-      <h2>People Who Inspire Me</h2>
-      <div class="inspiration-grid">
-        <div class="inspiration-card">
-          <h3>Andy Matuschak</h3>
-          <p>For his work on tools for thought and evergreen notes</p>
-          <a href="https://andymatuschak.org/" target="_blank" rel="noopener">Visit →</a>
-        </div>
-        <div class="inspiration-card">
-          <h3>Maggie Appleton</h3>
-          <p>For her illustrated essays and digital garden approach</p>
-          <a href="https://maggieappleton.com/" target="_blank" rel="noopener">Visit →</a>
-        </div>
-        <div class="inspiration-card">
-          <h3>Bret Victor</h3>
-          <p>For his pioneering work on interactive computing</p>
-          <a href="http://worrydream.com/" target="_blank" rel="noopener">Visit →</a>
-        </div>
-        <!-- Add more inspiration cards as needed -->
-      </div>
-    </section>
-    
-    <section class="about-section">
-      <h2>Favorite Notes</h2>
-      <div class="notes-grid">
-        <a href="/notes/sample-note-1" class="note-card">
-          <h3>Digital Gardens as Knowledge Ecosystems</h3>
-          <p>Exploring how digital gardens function as living knowledge systems</p>
-          <span class="growth-stage">🌳 Evergreen</span>
-        </a>
-        <a href="/notes/sample-note-2" class="note-card">
-          <h3>The Future of Collaborative Learning</h3>
-          <p>Thoughts on how technology can enhance group learning experiences</p>
-          <span class="growth-stage">🌿 Budding</span>
-        </a>
-        <a href="/notes/sample-note-3" class="note-card">
-          <h3>Tools for Thought: A Historical Perspective</h3>
-          <p>Tracing the evolution of cognitive tools throughout history</p>
-          <span class="growth-stage">🌳 Evergreen</span>
-        </a>
-        <!-- Add more note cards as needed -->
-      </div>
-    </section>
-    
-    <section class="about-section">
-      <h2>Favorite Content</h2>
-      <div class="content-list">
-        <div class="content-category">
-          <h3>Books</h3>
-          <ul>
-            <li>
-              <strong>How to Take Smart Notes</strong> by Sönke Ahrens
-              <p>A practical guide to the Zettelkasten method of note-taking</p>
-            </li>
-            <li>
-              <strong>Thinking in Systems</strong> by Donella Meadows
-              <p>An introduction to systems thinking and complexity</p>
-            </li>
-            <li>
-              <strong>The Design of Everyday Things</strong> by Don Norman
-              <p>A classic on human-centered design principles</p>
-            </li>
-          </ul>
-        </div>
+    <div class="about-container">
+      <header class="about-header">
+        <h1 class="about-title">More About Me</h1>
+      </header>
+      
+      <div class="about-content">
+        <section class="about-section">
+          <h2>Inspirations</h2>
+          <p>These are the people, ideas, and works that have shaped my thinking and approach.</p>
+          
+          <div class="about-grid">
+            <div class="about-card">
+              <h3>Digital Gardens</h3>
+              <p>The concept of digital gardens as living documents that grow over time has deeply influenced how I approach knowledge sharing.</p>
+            </div>
+            
+            <!-- Add more inspiration cards as needed -->
+          </div>
+        </section>
         
-        <div class="content-category">
-          <h3>Articles</h3>
-          <ul>
-            <li>
-              <a href="#" target="_blank" rel="noopener">A City is Not a Tree</a> by Christopher Alexander
-              <p>On the organic structure of human environments</p>
-            </li>
-            <li>
-              <a href="#" target="_blank" rel="noopener">As We May Think</a> by Vannevar Bush
-              <p>The seminal article that predicted many aspects of information technology</p>
-            </li>
-            <li>
-              <a href="#" target="_blank" rel="noopener">The Garden and the Stream</a> by Mike Caulfield
-              <p>A technopastoral on the web as topology vs. the web as stream</p>
-            </li>
-          </ul>
-        </div>
+        <section class="about-section">
+          <h2>Notes & Thoughts</h2>
+          <p>A collection of my evolving thoughts on various topics.</p>
+          
+          <div class="about-grid">
+            <div class="about-card">
+              <h3>Learning in Public</h3>
+              <p>Sharing my learning journey openly has been transformative for my personal and professional growth.</p>
+            </div>
+            
+            <!-- Add more note cards as needed -->
+          </div>
+        </section>
         
-        <div class="content-category">
-          <h3>Videos</h3>
-          <ul>
-            <li>
-              <a href="#" target="_blank" rel="noopener">Inventing on Principle</a> by Bret Victor
-              <p>A talk about having a guiding principle for your work</p>
-            </li>
-            <li>
-              <a href="#" target="_blank" rel="noopener">Media for Thinking the Unthinkable</a> by Bret Victor
-              <p>On creating new representations to understand complex systems</p>
-            </li>
-            <li>
-              <a href="#" target="_blank" rel="noopener">The Future of Programming</a> by Bret Victor
-              <p>A retrospective look at the history and future of programming</p>
-            </li>
-          </ul>
-        </div>
+        <!-- Add more sections as needed -->
       </div>
-    </section>
+    </div>
   </PageWrapper>
 </Layout>
 
-<style>
-  h1 {
-    margin-bottom: var(--space-l);
-    font-size: 2.5rem;
-  }
-  
-  .about-section {
-    margin-bottom: var(--space-xl);
-  }
-  
-  .about-section h2 {
-    margin-bottom: var(--space-m);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--border-color);
-    font-size: 1.8rem;
-  }
-  
-  .inspiration-grid, .notes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--space-m);
-  }
-  
-  .inspiration-card, .note-card {
-    padding: var(--space-m);
-    background-color: var(--bg-color-alt);
-    border-radius: var(--radius-m);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .inspiration-card:hover, .note-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .note-card {
-    display: block;
-    color: var(--text-color);
-    text-decoration: none;
-  }
-  
-  .note-card h3, .inspiration-card h3 {
-    margin-top: 0;
-    margin-bottom: var(--space-xs);
-    font-size: 1.4rem;
-  }
-  
-  .note-card p, .inspiration-card p {
-    margin-bottom: var(--space-s);
-    color: var(--text-color-muted);
-  }
-  
-  .growth-stage {
-    font-size: 0.9em;
-    color: var(--accent-color);
-  }
-  
-  .content-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-l);
-  }
-  
-  .content-category h3 {
-    margin-bottom: var(--space-s);
-    font-size: 1.4rem;
-  }
-  
-  .content-category ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
-  }
-  
-  .content-category li {
-    padding: var(--space-m);
-    background-color: var(--bg-color-alt);
-    border-radius: var(--radius-m);
-  }
-  
-  .content-category li p {
-    margin-top: var(--space-xs);
-    margin-bottom: 0;
-    color: var(--text-color-muted);
-    font-size: 0.9em;
-  }
-  
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-      margin-bottom: var(--space-m);
-    }
-    
-    .about-section {
-      margin-bottom: var(--space-l);
-    }
-    
-    .about-section h2 {
-      font-size: 1.6rem;
-      margin-bottom: var(--space-s);
-    }
-    
-    .inspiration-grid, .notes-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-s);
-    }
-    
-    .note-card h3, .inspiration-card h3, .content-category h3 {
-      font-size: 1.3rem;
-    }
-    
-    .inspiration-card, .note-card, .content-category li {
-      padding: var(--space-s);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.75rem;
-    }
-    
-    .about-section h2 {
-      font-size: 1.4rem;
-    }
-    
-    .note-card h3, .inspiration-card h3, .content-category h3 {
-      font-size: 1.2rem;
-    }
-    
-    .content-list {
-      gap: var(--space-m);
-    }
-    
-    .content-category ul {
-      gap: var(--space-s);
-    }
-  }
-</style>

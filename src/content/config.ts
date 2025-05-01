@@ -6,7 +6,7 @@ const notes = defineCollection({
     description: z.string().optional(),
     startDate: z.string(),
     updated: z.string(),
-    type: z.literal('note'),
+    type: z.enum(['note', 'essay']).optional().default('note'),
     topics: z.array(z.string()).optional(),
     growthStage: z.enum(['seedling', 'budding', 'evergreen']),
     aliases: z.array(z.string()).optional(),
@@ -38,5 +38,6 @@ const notes = defineCollection({
 export const collections = {
   notes
 };
+
 
 

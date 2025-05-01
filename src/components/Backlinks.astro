@@ -13,18 +13,18 @@ import GrowthIcon from './GrowthIcon.astro';
 const { backlinks } = Astro.props;
 ---
 
-<div class="backlinks">
-  <h3>Referenced by</h3>
+<div class="backlinks-container">
+  <h3 class="backlinks-title">Connected Notes</h3>
   
   {backlinks.length === 0 ? (
     <p class="no-backlinks">No other notes link to this one yet.</p>
   ) : (
-    <ul>
+    <ul class="backlinks-list">
       {backlinks.map(link => (
-        <li>
+        <li class="backlink-item">
           <a href={`/notes/${link.slug}`} class="backlink">
             <span class="growth-stage">
-              <GrowthIcon growthStage={link.growthStage} />
+              <GrowthIcon growthStage={link.growthStage} showEmoji={true} />
             </span>
             <span class="title">{link.title}</span>
           </a>
@@ -35,40 +35,39 @@ const { backlinks } = Astro.props;
 </div>
 
 <style>
-  .backlinks {
-    margin-top: var(--space-l);
-    padding: var(--space-m);
-    background-color: var(--color-bg-alt);
-    border-radius: var(--radius-m);
+  .backlinks-container {
+    padding: var(--space-m, 1rem) 0;
   }
   
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-s);
-    color: var(--color-text);
+  .backlinks-title {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: var(--space-s, 0.75rem);
+    font-weight: 600;
+    color: #1f2937;
   }
   
-  ul {
+  .backlinks-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  li {
-    margin-bottom: var(--space-xs);
+  .backlink-item {
+    margin-bottom: var(--space-xs, 0.5rem);
   }
   
   .backlink {
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--space-2xs, 0.25rem);
     text-decoration: none;
-    color: var(--color-text);
-    transition: color 0.2s ease;
+    color: #2563eb;
+    padding: var(--space-2xs, 0.25rem) 0;
   }
   
   .backlink:hover {
-    color: var(--color-accent);
+    text-decoration: underline;
   }
   
   .growth-stage {
@@ -76,10 +75,18 @@ const { backlinks } = Astro.props;
     align-items: center;
   }
   
+  .title {
+    font-size: 1rem;
+  }
+  
   .no-backlinks {
-    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    color: #6b7280;
     font-style: italic;
   }
 </style>
+
+
+
 
 
