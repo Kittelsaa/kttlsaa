@@ -4,10 +4,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
 <style is:global>
-  /* Super high specificity selectors to force the font */
+  /* Super high specificity selectors to force the fonts */
+  /* Headings get Averia */
   html body h1, 
   html body h2, 
   html body h3, 
@@ -36,6 +37,23 @@
     font-family: 'Averia Serif Libre', serif !important;
   }
   
+  /* All other text gets Inter */
+  html body p,
+  html body a,
+  html body span,
+  html body div,
+  html body li,
+  html body input,
+  html body textarea,
+  html body button,
+  html body label,
+  html body blockquote,
+  html body table,
+  html body pre,
+  html body code {
+    font-family: 'Inter', sans-serif !important;
+  }
+  
   /* Add !important to all heading elements */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Averia Serif Libre', serif !important;
@@ -50,7 +68,14 @@
     headings.forEach(heading => {
       heading.style.setProperty('font-family', "'Averia Serif Libre', serif", 'important');
     });
-    console.log('Font applied to', headings.length, 'elements');
+    
+    // Target all body text elements
+    const bodyText = document.querySelectorAll('p, a, span, div, li, input, textarea, button, label, blockquote, table, pre, code');
+    bodyText.forEach(text => {
+      text.style.setProperty('font-family', "'Inter', sans-serif", 'important');
+    });
+    
+    console.log('Fonts applied to elements');
   }
 
   // Apply immediately
@@ -58,12 +83,7 @@
   
   // Apply after fonts are loaded
   document.fonts.ready.then(() => {
-    if (document.fonts.check('1em "Averia Serif Libre"')) {
-      console.log('Averia Serif Libre is loaded and available');
-      applyFonts();
-    } else {
-      console.error('Averia Serif Libre is NOT available');
-    }
+    applyFonts();
   });
   
   // Apply after DOM is fully loaded
@@ -82,3 +102,5 @@
   // Apply periodically to catch any dynamically added elements
   setInterval(applyFonts, 2000);
 </script>
+
+

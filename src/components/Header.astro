@@ -10,10 +10,17 @@ const navItems = [
   <div class="container">
     <div class="logo">
       <a href="/" class="site-name">
-        <img src="/images/kttlsaalogo.png" alt="KTTLSAA Logo" class="logo-image" />
+        <img src="/images/kttlsaalg.png" alt="KTTLSAA Logo" class="logo-image" />
       </a>
     </div>
-    <nav>
+    
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <nav class="desktop-nav">
       <ul>
         {navItems.map(item => (
           <li>
@@ -23,7 +30,31 @@ const navItems = [
       </ul>
     </nav>
   </div>
+  
+  <div class="mobile-nav">
+    <ul>
+      {navItems.map(item => (
+        <li>
+          <a href={item.url}>{item.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </header>
+
+<script>
+  // Toggle mobile menu
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+  });
+</script>
 
 <style>
   header {
@@ -38,7 +69,7 @@ const navItems = [
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--space-m);
+    padding: 0 var(--space-m, 1.5rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +85,7 @@ const navItems = [
     width: auto;
   }
   
-  nav ul {
+  .desktop-nav ul {
     display: flex;
     list-style: none;
     gap: 2rem;
@@ -62,29 +93,117 @@ const navItems = [
     padding: 0;
   }
   
-  nav a {
+  .desktop-nav a {
     text-decoration: none;
-    color: var(--color-text);
+    color: var(--color-text, #1f2937);
     font-weight: 500;
     transition: color 0.2s ease;
     font-size: 1rem;
   }
   
-  nav a:hover {
-    color: var(--color-accent);
+  .desktop-nav a:hover {
+    color: var(--color-accent, #ff8c00);
+  }
+  
+  /* Mobile menu toggle button */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    z-index: 101;
+  }
+  
+  .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #1f2937;
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  /* Mobile navigation */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    padding: 5rem 2rem 2rem;
+    z-index: 99;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .mobile-nav.active {
+    transform: translateY(0);
+    display: block;
+  }
+  
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .mobile-nav a {
+    text-decoration: none;
+    color: var(--color-text, #1f2937);
+    font-weight: 500;
+    font-size: 1.5rem;
+    display: block;
+    padding: 0.5rem 0;
+  }
+  
+  .mobile-nav a:hover {
+    color: var(--color-accent, #ff8c00);
+  }
+  
+  /* Prevent scrolling when menu is open */
+  body.menu-open {
+    overflow: hidden;
   }
   
   @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      gap: var(--space-m);
+    .desktop-nav {
+      display: none;
     }
     
-    nav ul {
-      gap: 1.5rem;
+    .mobile-menu-toggle {
+      display: block;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .mobile-nav {
+      display: none !important;
     }
   }
 </style>
+
 
 
 

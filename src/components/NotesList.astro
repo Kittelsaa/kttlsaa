@@ -7,13 +7,18 @@ const { notes, showDate = true } = Astro.props;
 
 <div class="notes-list-container">
   {notes.map((note) => (
-    <article class="note-item">
-      {showDate && note.data.startDate && (
-        <time class="note-date">{formatDate(note.data.startDate)}</time>
-      )}
-      {!note.data.startDate && note.data.growthStage && (
-        <div class="note-status">{note.data.growthStage.toUpperCase()}</div>
-      )}
+    <article class="note-item" data-type={note.data.type || 'note'}>
+      <div class="note-meta">
+        {showDate && note.data.startDate && (
+          <time class="note-date">{formatDate(note.data.startDate)}</time>
+        )}
+        {note.data.growthStage && (
+          <div class="note-status">{note.data.growthStage.toUpperCase()}</div>
+        )}
+        {note.data.type && (
+          <div class="note-type">{note.data.type.toUpperCase()}</div>
+        )}
+      </div>
       <h3 class="note-title">
         <a href={`/notes/${note.slug}`}>{note.data.title}</a>
       </h3>
@@ -93,7 +98,21 @@ const { notes, showDate = true } = Astro.props;
       font-size: 1rem;
     }
   }
+
+  /* Add styles for note type */
+  .note-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 1rem;
+  }
+  
+  .note-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
 </style>
-
-
 

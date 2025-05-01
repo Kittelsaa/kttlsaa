@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const notes = defineCollection({
   schema: z.object({
@@ -6,11 +7,16 @@ const notes = defineCollection({
     description: z.string().optional(),
     startDate: z.string(),
     updated: z.string(),
-    type: z.enum(['note', 'essay']).optional().default('note'),
+    type: z.string()
+      .transform(val => val.toLowerCase())
+      .pipe(z.enum(['note', 'essay', 'concept', 'reference']))
+      .optional()
+      .default('note'),
     topics: z.array(z.string()).optional(),
     growthStage: z.enum(['seedling', 'budding', 'evergreen']),
     aliases: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
+    draft: z.boolean().optional().default(false),
     image: z.object({
       url: z.string(),
       alt: z.string(),
@@ -32,12 +38,21 @@ const notes = defineCollection({
       growthStage: z.enum(['seedling', 'budding', 'evergreen']),
       description: z.string(),
     })).optional(),
+  }),
+  // Add the loader configuration to specify where the notes are located
+  loader: glob({
+    pattern: 'notes/**/*.{md,mdx}',
+    base: './src/content'
   })
 });
 
 export const collections = {
   notes
 };
+
+
+
+
 
 
 

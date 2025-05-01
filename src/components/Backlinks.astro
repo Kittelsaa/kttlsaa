@@ -3,30 +3,37 @@ interface Backlink {
   title: string;
   slug: string;
   growthStage: 'seedling' | 'budding' | 'evergreen';
+  description?: string;
 }
 
 interface Props {
   backlinks: Backlink[];
 }
 
-import GrowthIcon from './GrowthIcon.astro';
 const { backlinks } = Astro.props;
+
+// Define emojis for each growth stage
+const growthEmojis = {
+  seedling: "🌱",
+  budding: "🪴",
+  evergreen: "🌳"
+};
 ---
 
-<div class="backlinks-container">
-  <h3 class="backlinks-title">Connected Notes</h3>
+<div class="connected-notes">
+  <h3>Connected Notes</h3>
   
   {backlinks.length === 0 ? (
-    <p class="no-backlinks">No other notes link to this one yet.</p>
+    <p class="no-links">No other notes link to this one yet.</p>
   ) : (
-    <ul class="backlinks-list">
+    <ul class="connected-list">
       {backlinks.map(link => (
-        <li class="backlink-item">
-          <a href={`/notes/${link.slug}`} class="backlink">
-            <span class="growth-stage">
-              <GrowthIcon growthStage={link.growthStage} showEmoji={true} />
+        <li class="connected-item">
+          <a href={`/notes/${link.slug}`} class="connected-link">
+            <span class="growth-icon">
+              {growthEmojis[link.growthStage] || "🌱"}
             </span>
-            <span class="title">{link.title}</span>
+            <span class="link-title">{link.title}</span>
           </a>
         </li>
       ))}
@@ -35,58 +42,66 @@ const { backlinks } = Astro.props;
 </div>
 
 <style>
-  .backlinks-container {
-    padding: var(--space-m, 1rem) 0;
+  .connected-notes {
+    margin-top: 2.5rem;
   }
   
-  .backlinks-title {
-    font-size: 1.25rem;
-    margin-top: 0;
-    margin-bottom: var(--space-s, 0.75rem);
+  h3 {
+    font-size: 1.5rem;
     font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: "Times New Roman", Times, serif;
     color: #1f2937;
   }
   
-  .backlinks-list {
+  .connected-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .backlink-item {
-    margin-bottom: var(--space-xs, 0.5rem);
+  .connected-item {
+    padding: 0.75rem 0;
+    position: relative;
   }
   
-  .backlink {
+  .connected-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e5e7eb;
+  }
+  
+  .connected-link {
     display: flex;
     align-items: center;
-    gap: var(--space-2xs, 0.25rem);
+    gap: 0.5rem;
     text-decoration: none;
-    color: #2563eb;
-    padding: var(--space-2xs, 0.25rem) 0;
+    color: #000000;
+    transition: color 0.2s ease;
   }
   
-  .backlink:hover {
-    text-decoration: underline;
+  .connected-link:hover {
+    color: #ff8c00;
   }
   
-  .growth-stage {
-    display: flex;
-    align-items: center;
+  .growth-icon {
+    font-size: 1.25rem;
+    line-height: 1;
   }
   
-  .title {
-    font-size: 1rem;
+  .link-title {
+    font-size: 1.125rem;
+    font-weight: 500;
   }
   
-  .no-backlinks {
-    font-size: 0.9rem;
+  .no-links {
     color: #6b7280;
     font-style: italic;
+    font-size: 0.875rem;
   }
 </style>
-
-
-
-
 

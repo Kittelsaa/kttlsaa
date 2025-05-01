@@ -1,25 +1,24 @@
 ---
-import GrowthIcon from '../GrowthIcon.astro';
+import { formatDate } from "../../utils/dates";
+
 const { note } = Astro.props;
 
-// Format date to match the design (M/YYYY)
-const formattedDate = new Date(note.data.updated).toLocaleDateString('en-US', {
-  month: 'numeric',
-  year: 'numeric'
-}).replace(/\//g, '/');
+// Format the date
+const formattedDate = formatDate(note.data.updated || note.data.startDate);
 
-// Determine note type - default to "Note" if not specified
-const noteType = note.data.type || "Note";
+// Ensure we have a valid slug
+const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
 ---
 
-<div class="note-card" data-date={note.data.updated} data-growth-stage={note.data.growthStage} data-topics={note.data.topics?.join(',')}>
-  <a href={`/notes/${note.slug}`} class="note-link">
+<div class="note-card" 
+  data-date={note.data.updated} 
+  data-growth-stage={note.data.growthStage} 
+  data-topics={note.data.topics?.join(',')}>
+  <a href={`/notes/${noteSlug}`} class="note-link">
     <h3 class="title">{note.data.title}</h3>
     <div class="meta">
-      {note.data.topics && note.data.topics.map((topic, index) => (
-        <span class="topic-tag">→ {topic}</span>
-      ))}
-      <span class="date">{formattedDate}</span>
+      <div class="growth-stage">{note.data.growthStage}</div>
+      <div class="date">{formattedDate}</div>
     </div>
   </a>
 </div>
@@ -86,6 +85,7 @@ const noteType = note.data.type || "Note";
     }
   }
 </style>
+
 
 
 

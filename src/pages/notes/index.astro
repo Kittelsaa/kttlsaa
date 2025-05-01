@@ -19,6 +19,9 @@ const allTopics = [...new Set(allNotes.flatMap(note => note.data.topics || []))]
 
 // Get unique growth stages
 const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))].sort();
+
+// Get unique note types
+const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))].sort();
 ---
 
 <Layout title="Digital Garden Notes">
@@ -32,6 +35,15 @@ const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
             <option value="alphabetical">Alphabetical</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <select id="type-filter" class="filter-select">
+            <option value="all">All Types</option>
+            {allNoteTypes.map(type => (
+              <option value={type.toLowerCase()}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+            ))}
           </select>
         </div>
         
@@ -158,18 +170,21 @@ const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))
   const sortFilter = document.getElementById('sort-filter');
   const growthFilter = document.getElementById('growth-filter');
   const topicFilter = document.getElementById('topic-filter');
+  const typeFilter = document.getElementById('type-filter');
   const notesList = document.getElementById('notes-list');
   
   // Add event listeners to filters
   sortFilter.addEventListener('change', updateNotes);
   growthFilter.addEventListener('change', updateNotes);
   topicFilter.addEventListener('change', updateNotes);
+  typeFilter.addEventListener('change', updateNotes);
   
   function updateNotes() {
     // Get current filter values
     const sortValue = sortFilter.value;
     const growthValue = growthFilter.value.toLowerCase();
     const topicValue = topicFilter.value.toLowerCase();
+    const typeValue = typeFilter.value.toLowerCase();
     
     // Get all note items
     const noteItems = document.querySelectorAll('.note-item');
@@ -192,6 +207,14 @@ const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))
         // This is a simplified version that might need adjustment
         const noteTitle = note.querySelector('.note-title')?.textContent?.toLowerCase() || '';
         if (!noteTitle.includes(topicValue)) {
+          showNote = false;
+        }
+      }
+      
+      // Check type filter
+      if (typeValue !== 'all' && showNote) {
+        const noteType = note.dataset.type?.toLowerCase() || 'note';
+        if (noteType !== typeValue) {
           showNote = false;
         }
       }
@@ -226,6 +249,9 @@ const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))
     }
   }
 </script>
+
+
+
 
 
 

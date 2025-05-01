@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 2rem 1.5rem;
   color: #333;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", sans-serif;
   background-color: #f9f9f7;
 }
 
@@ -24,7 +24,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.05em;
 }
 
@@ -39,7 +39,7 @@
   gap: 0.5rem;
   color: #4b5563;
   font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", sans-serif;
   text-transform: uppercase;
 }
 
@@ -52,12 +52,12 @@
   font-family: "Times New Roman", Times, serif;
 }
 
-.note-description {
-  font-size: 1.25rem;
+.garden-description {
+  font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
   color: #6b7280;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", sans-serif;
 }
 
 .note-meta {
@@ -82,7 +82,7 @@
   border: 1px solid #e5e7eb;
   color: #b91c1c;
   font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", sans-serif;
   cursor: default; /* Indicates it's not clickable */
   text-decoration: none;
   border-radius: 0; /* No border radius */
@@ -96,7 +96,7 @@
   text-align: right;
   color: #6b7280;
   font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .note-content {
@@ -111,7 +111,7 @@
   margin-bottom: 1rem;
   color: #1f2937;
   font-weight: 600;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Averia Serif Libre", serif;
 }
 
 .note-content h3 {
@@ -120,7 +120,7 @@
   margin-bottom: 0.75rem;
   color: #1f2937;
   font-weight: 600;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Averia Serif Libre", serif;
 }
 
 .note-content p {
@@ -228,5 +228,9 @@
     font-size: 2.5rem;
   }
 }
+
+
+
+
 
 

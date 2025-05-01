@@ -1,24 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
 import NoteLayout from '../../layouts/NoteLayout.astro';
-import PageWrapper from '../../components/layouts/PageWrapper.astro';
-import GrowthIcon from '../../components/GrowthIcon.astro';
-import Backlinks from '../../components/Backlinks.astro';
 import OutboundLinks from '../../components/OutboundLinks.astro';
-import { findBacklinks, getOutboundLinks } from '../../utils/noteUtils.js';
+import { findBacklinks, getOutboundLinks } from '../../utils/noteUtils';
+import { render } from 'astro:content';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
   
   return notes.map(note => {
-    if (!note.slug) {
+    // Use the file path as the slug if not explicitly defined
+    const slug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
+    
+    if (!slug) {
       console.warn(`Note with title "${note.data.title}" has no slug`);
       return null;
     }
     
     return {
-      params: { slug: note.slug },
+      params: { slug },
       props: { note }
     };
   }).filter(Boolean);
@@ -34,7 +34,8 @@ const { note } = Astro.props;
 // Use a try-catch block to handle potential MDX rendering errors
 let Content;
 try {
-  const rendered = await note.render();
+  // Use the new render function from astro:content
+  const rendered = await render(note);
   Content = rendered.Content;
 } catch (error) {
   console.error(`Error rendering note ${slug}:`, error);
@@ -69,5 +70,7 @@ const outboundLinks = await getOutboundLinks(note, 1) || [];
     border-top: 1px solid var(--color-border);
   }
 </style>
+
+
 
 

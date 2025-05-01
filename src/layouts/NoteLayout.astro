@@ -8,18 +8,21 @@ import Backlinks from "../components/Backlinks.astro";
 import "../styles/note-page.css";
 
 const { frontmatter, backlinks = [] } = Astro.props;
-const { title, description, updated, startDate, topics, growthStage, video } = frontmatter;
+const { title, description, updated, startDate, topics, growthStage, video, type = "note" } = frontmatter;
 
 // Format dates for display
 const plantedDate = startDate ? `Planted over ${formatDate(startDate)}` : '';
 const tendedDate = updated ? `Last tended over ${formatDate(updated)}` : '';
+
+// Capitalize the first letter of the type
+const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note";
 ---
 
 <Layout title={title} description={description}>
   <article class="note-container">
     <header class="note-header">
       <div class="note-nav">
-        <a href="/notes" class="back-link">ESSAYS</a>
+        <h2 class="back-link">{displayType.toUpperCase()}</h2>
         <div class="growth-badge">
           <GrowthIcon growthStage={growthStage} showEmoji={true} />
           <span class="growth-stage-text">{growthStage?.toUpperCase()}</span>
@@ -84,6 +87,7 @@ const tendedDate = updated ? `Last tended over ${formatDate(updated)}` : '';
     color: #6b7280 !important; /* Neutral gray */
     text-transform: uppercase;
     font-weight: 600;
+    padding: 0px;
   }
   
   body .back-link:hover {
@@ -117,6 +121,10 @@ const tendedDate = updated ? `Last tended over ${formatDate(updated)}` : '';
     color: #ff8c00 !important;
   }
 </style>
+
+
+
+
 
 
 

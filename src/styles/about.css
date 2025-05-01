@@ -3,7 +3,7 @@
   max-width: 1200px; /* Increased from 1000px */
   margin: 0 auto;
   padding: var(--space-l, 1.5rem) var(--space-m, 2rem);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", sans-serif;
 }
 
 .about-header {
@@ -14,7 +14,7 @@
 .about-title {
   font-size: 2rem;
   margin-bottom: var(--space-s, 1rem);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Averia Serif Libre", serif;
   font-weight: 700;
   color: #1f2937;
   line-height: 1.2;
@@ -103,6 +103,7 @@
   line-height: 1.8; /* Increased from 1.7 */
   color: #333;
   max-width: 100%; /* Use full width */
+  font-family: var(--font-body);
 }
 
 .about-section {
@@ -114,7 +115,7 @@
   margin-bottom: var(--space-m, 1.5rem);
   padding-bottom: var(--space-xs, 0.75rem);
   border-bottom: 1px solid var(--color-border, #e5e7eb);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Averia Serif Libre", serif;
   font-weight: 600;
   color: #1f2937;
 }
@@ -123,7 +124,7 @@
   font-size: 1.4rem;
   margin-top: var(--space-l, 2rem);
   margin-bottom: var(--space-s, 1rem);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Averia Serif Libre", serif;
   font-weight: 600;
   color: #1f2937;
 }
@@ -285,6 +286,9 @@
     font-size: 1.2rem;
   }
 }
+
+
+
 
 
 

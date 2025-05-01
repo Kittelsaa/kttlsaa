@@ -12,6 +12,7 @@
     "@astrojs/mdx": "^4.2.5",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.2.5",
+    "@astrojs/sitemap": "^3.3.1",
     "astro": "^5.7.5",
     "astro-icon": "^1.1.5",
     "date-fns": "^4.1.0",
@@ -21,4 +22,3 @@
     "unist-util-visit": "^5.0.0"
   }
 }
-

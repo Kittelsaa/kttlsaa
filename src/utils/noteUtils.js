@@ -3,18 +3,23 @@ import { getCollection } from 'astro:content';
 // Function to get a note by slug
 export async function getNote(slug) {
   const notes = await getCollection('notes');
-  return notes.find(note => note.slug === slug);
+  return notes.find(note => {
+    // Check if the note has a slug property or use the filename
+    const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
+    return noteSlug === slug;
+  });
 }
 
-// Export the findBacklinks function
+// Find backlinks to a specific note
 export async function findBacklinks(currentSlug, maxDepth = 1) {
-  if (maxDepth <= 0) return []; // Prevent infinite recursion
-  
-  const backlinks = [];
   const allNotes = await getCollection('notes');
+  const backlinks = [];
   
   for (const note of allNotes) {
-    if (note.slug === currentSlug) continue; // Skip the current note
+    // Get the note's slug or derive it from the filename
+    const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
+    
+    if (noteSlug === currentSlug) continue; // Skip the current note
     
     // Check if this note links to the current note
     const content = note.body;
@@ -38,7 +43,12 @@ export async function findBacklinks(currentSlug, maxDepth = 1) {
     }
     
     if (hasLink) {
-      backlinks.push(note);
+      backlinks.push({
+        title: note.data.title,
+        slug: noteSlug,
+        growthStage: note.data.growthStage || 'seedling',
+        description: note.data.description || ''
+      });
     }
   }
   
@@ -123,4 +133,7 @@ async function getOutboundSlugsFromNote(note) {
   
   return [...slugs];
 }
+
+
+
 

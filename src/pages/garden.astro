@@ -4,9 +4,26 @@ import Layout from "../layouts/Layout.astro";
 import GardenNoteCard from "../components/cards/GardenNoteCard.astro";
 import GardenCollections from "../components/garden/GardenCollections.astro";
 
-const allPosts = await getCollection('notes', ({ data }) => {
-  return !data.draft;
-});
+// Add error handling for collection retrieval
+let allPosts = [];
+try {
+  allPosts = await getCollection('notes', ({ data }) => {
+    return !data.draft;
+  });
+  
+  // Log the first few posts to debug
+  if (allPosts.length > 0) {
+    console.log("First post:", {
+      title: allPosts[0].data.title,
+      slug: allPosts[0].slug,
+      id: allPosts[0].id
+    });
+  } else {
+    console.log("No posts found");
+  }
+} catch (error) {
+  console.error("Error fetching notes collection:", error);
+}
 
 // Sort posts by updated date
 const sortedPosts = allPosts.sort(
@@ -14,19 +31,19 @@ const sortedPosts = allPosts.sort(
             new Date(a.data.updated || a.data.startDate || 0).getTime()
 );
 
-// Get unique topics
+// Get all unique topics
 const allTopics = [...new Set(allPosts.flatMap(post => post.data.topics || []))].sort();
 
-// Get unique growth stages
-const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].sort();
-
-// Count posts per topic
+// Count notes per topic
 const topicCounts = {};
 allTopics.forEach(topic => {
   topicCounts[topic] = allPosts.filter(post => 
     post.data.topics && post.data.topics.includes(topic)
   ).length;
 });
+
+// Get all unique growth stages
+const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].sort();
 ---
 
 <Layout title="Digital Garden">
@@ -71,9 +88,11 @@ allTopics.forEach(topic => {
           </div>
         </div>
         <div class="notes-list">
-          {sortedPosts.map(post => (
-            <GardenNoteCard note={post} />
-          ))}
+          {sortedPosts.map(post => {
+            // Debug log for each post
+            console.log(`Post: ${post.data.title}, Slug: ${post.slug}, ID: ${post.id}`);
+            return <GardenNoteCard note={post} />;
+          })}
         </div>
       </div>
     </div>
@@ -103,10 +122,10 @@ allTopics.forEach(topic => {
   }
   
   .garden-description {
-    font-size: 1.125rem;
+    font-size: 0.95rem;
     color: #6b7280;
     max-width: 800px;
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0 0 1.5rem;
   }
   
@@ -351,6 +370,9 @@ allTopics.forEach(topic => {
     }
   });
 </script>
+
+
+
 
 
 
