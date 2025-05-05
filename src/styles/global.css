@@ -153,9 +153,9 @@ button.styled {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 2rem;
-  border-radius: 0px; /* Changed from 50px to 0px */
+  border-radius: 0px;
   text-decoration: none;
-  font-family: var(--font-fun);
+  font-family: 'Averia Serif Libre', serif !important;
   font-size: 1.1rem;
   transition: all 0.3s ease;
   min-width: 200px;
@@ -169,7 +169,7 @@ button.styled {
 
 .button-text {
   line-height: 1.2;
-  font-family: var(--font-fun);
+  font-family: 'Averia Serif Libre', serif !important;
 }
 
 .button:hover, 
@@ -294,6 +294,96 @@ select,
 [class*="button"] {
   border-radius: 0 !important;
 }
+
+/* Ensure no drop cap on mobile devices */
+@media (max-width: 768px) {
+  html body .note-content p:first-of-type::first-letter,
+  html body article p:first-of-type::first-letter,
+  html body .content p:first-of-type::first-letter,
+  html body main p:first-of-type::first-letter {
+    font-size: inherit !important;
+    float: none !important;
+    line-height: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: normal !important;
+    color: inherit !important;
+  }
+}
+
+/* Responsive styles for hashtags and special content */
+@media (max-width: 768px) {
+  /* Hashtag styling for mobile */
+  [class^="#"], 
+  [id^="#"],
+  .hashtag,
+  [class*="hashtag"],
+  a[href^="#"] {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin: 0.2rem 0.2rem 0.2rem 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+  
+  /* Ensure all content fits within viewport */
+  .note-content * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Improve image display on mobile */
+  .note-content img,
+  .note-content video,
+  .note-content iframe {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1rem auto !important;
+    display: block;
+  }
+  
+  /* Handle embedded content */
+  .note-content iframe,
+  .note-content embed,
+  .note-content object {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Fix for all images in notes content */
+@media (max-width: 768px) {
+  .note-content img,
+  .note-content .remote-image img,
+  .note-content figure img,
+  article img,
+  main img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1rem auto !important;
+    display: block;
+    box-sizing: border-box;
+  }
+  
+  .note-content figure,
+  .note-content .remote-image,
+  article figure,
+  main figure {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 1rem 0 !important;
+    padding: 0 !important;
+  }
+}
+
+
+
+
 
 
 

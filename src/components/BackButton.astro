@@ -1,0 +1,62 @@
+---
+// BackButton.astro - A component that provides a "go back" functionality
+---
+
+<button id="back-button" class="back-button" aria-label="Go back">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M12 19l-7-7 7-7"/>
+  </svg>
+  <span>Back</span>
+</button>
+
+<script>
+  // Get the back button element
+  const backButton = document.getElementById('back-button');
+  
+  if (backButton) {
+    backButton.addEventListener('click', () => {
+      // Check if there's history to go back to
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // Fallback to garden page if no history
+        window.location.href = '/garden';
+      }
+    });
+    
+    // Hide the back button on the garden page
+    if (window.location.pathname === '/garden' || window.location.pathname === '/garden/') {
+      backButton.style.display = 'none';
+    }
+  }
+</script>
+
+<style>
+  .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .back-button:hover {
+    color: #ff8c00;
+  }
+  
+  .back-button svg {
+    transition: transform 0.2s ease;
+  }
+  
+  .back-button:hover svg {
+    transform: translateX(-3px);
+  }
+</style>

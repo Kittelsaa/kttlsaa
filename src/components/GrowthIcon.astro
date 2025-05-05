@@ -1,36 +1,66 @@
 ---
-const { growthStage, showEmoji = true } = Astro.props;
+const { growthStage, showEmoji = false } = Astro.props;
 
-// Define colors for each growth stage
-const colors = {
-  seedling: "#10b981", // Green
-  budding: "#3b82f6",  // Blue
-  evergreen: "#8b5cf6" // Purple
+// Map growth stages to emojis
+const growthEmojis = {
+  'seedling': '🌱',
+  'budding': '🌿',
+  'evergreen': '🌳'
 };
 
-// Define emojis for each growth stage
-const emojis = {
-  seedling: "🌱", // Seedling
-  budding: "🪴",  // Potted plant
-  evergreen: "🌳" // Tree
-};
-
-const color = colors[growthStage?.toLowerCase()] || colors.seedling;
-const emoji = emojis[growthStage?.toLowerCase()] || emojis.seedling;
+// Get the appropriate emoji
+const emoji = growthEmojis[growthStage?.toLowerCase()] || '🌱';
 ---
 
 {showEmoji ? (
-  <span class="growth-icon" style={`color: ${color};`}>{emoji}</span>
+  <span class="growth-emoji" title={growthStage}>{emoji}</span>
 ) : (
-  <span class="growth-icon" style={`color: ${color};`}>●</span>
+  <span class="growth-icon" data-stage={growthStage?.toLowerCase()}>
+    <span class="sr-only">{growthStage}</span>
+  </span>
 )}
 
 <style>
-  .growth-icon {
-    display: inline-block;
-    font-size: 1em;
+  .growth-emoji {
+    font-size: 0.875rem;
     line-height: 1;
   }
+  
+  .growth-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .growth-icon[data-stage="seedling"] {
+    background-color: #84cc16;
+  }
+  
+  .growth-icon[data-stage="budding"] {
+    background-color: #22c55e;
+  }
+  
+  .growth-icon[data-stage="evergreen"] {
+    background-color: #059669;
+  }
+  
+  .growth-icon[data-stage="blooming"] {
+    background-color: #d946ef;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 </style>
+
 
 

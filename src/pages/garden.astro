@@ -52,12 +52,14 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     <div class="garden-intro">
       <h1 class="garden-title">Digital Garden</h1>
       <p class="garden-description">
-        A collection of growing notes, essays, and thoughts. Some are seedlings, others are fully 
-        grown trees. All are continuously evolving. Read more about <a href="/notes/digital-gardens" class="garden-link">digital gardens here🍀</a>.
+        A collection of growing notes, explorations and essays. This is not a blog, it is where thoughts 
+        are cultivated, connected and continuously redefined. You can read more about 
+        <a href="/notes/digital-gardens" class="garden-link">digital gardens here🍀</a>.
       </p>
     </div>
 
     <div class="garden-layout">
+      <!-- Collections Column -->
       <div class="collections-column">
         <div class="section-header">
           <h2 class="section-title">ONGOING COLLECTIONS</h2>
@@ -65,6 +67,7 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
         <GardenCollections topics={allTopics} counts={topicCounts} />
       </div>
       
+      <!-- Notes Column -->
       <div class="notes-column">
         <div class="section-header">
           <h2 class="section-title">NOTES</h2>
@@ -87,12 +90,11 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
             </div>
           </div>
         </div>
+        
         <div class="notes-list">
-          {sortedPosts.map(post => {
-            // Debug log for each post
-            console.log(`Post: ${post.data.title}, Slug: ${post.slug}, ID: ${post.id}`);
-            return <GardenNoteCard note={post} />;
-          })}
+          {sortedPosts.map(post => (
+            <GardenNoteCard note={post} />
+          ))}
         </div>
       </div>
     </div>
@@ -100,17 +102,19 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
 </Layout>
 
 <style>
+  /* Container */
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 3.5rem 1.5rem;
+    padding: 3rem 1.5rem;
+    overflow-x: hidden; /* Prevent horizontal overflow */
   }
   
-  /* Garden Introduction Styles */
+  /* Garden Introduction */
   .garden-intro {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 1.2rem;
+    padding-bottom: 1.5rem;
   }
   
   .garden-title {
@@ -118,55 +122,50 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-size: 2.5rem;
     font-weight: 700;
     color: #1f2937;
-    margin: 0 0 1rem;
+    margin: 0 0 1.25rem;
   }
   
   .garden-description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #6b7280;
     max-width: 800px;
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0 0 1.5rem;
   }
   
-  .growth-stages-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+  .garden-link {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px dotted #000000;
+    transition: all 0.2s ease;
   }
   
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .garden-link:hover {
+    color: #ff8c00;
+    border-bottom: 1px solid #ff8c00;
   }
   
-  .legend-icon {
-    font-size: 1.25rem;
-  }
-  
-  .legend-text {
-    font-size: 0.875rem;
-    color: #6b7280;
-  }
-  
+  /* Layout */
   .garden-layout {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+    gap: 2rem;
+    align-items: start;
+    width: 100%;
   }
   
+  /* Section Headers */
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .section-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #7B7B7A;
     margin: 0;
@@ -175,9 +174,11 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-family: var(--font-sans, 'Inter', sans-serif);
   }
   
+  /* Filter Controls */
   .filter-controls {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
   
   .filter-dropdown {
@@ -188,12 +189,14 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     appearance: none;
     background-color: transparent;
     border: 1px solid #e5e7eb;
-    padding: 0.35rem 2rem 0.35rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+    font-size: 0.8rem;
     color: #6b7280;
-    border-radius: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-family: var(--font-sans, 'Inter', sans-serif);
+    min-width: 120px;
+    max-width: 100%;
   }
   
   .filter-dropdown select:focus {
@@ -211,44 +214,49 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-size: 0.6rem;
   }
   
+  /* Notes List */
   .notes-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
   }
   
-  .garden-link {
-    color: #000000;
-    text-decoration: none;
-    border-bottom: 1px dotted #000000;
-    transition: all 0.2s ease;
+  /* Collections Column */
+  .collections-column {
+    width: 100%;
+    min-width: 0; /* Allow shrinking below content size */
   }
   
-  .garden-link:hover {
-    color: #ff8c00;
-    border-bottom: 1px solid #ff8c00;
+  /* Notes Column */
+  .notes-column {
+    width: 100%;
+    min-width: 0; /* Allow shrinking below content size */
   }
   
+  /* Responsive Styles */
   @media (max-width: 1024px) {
     .garden-layout {
       gap: 2rem;
     }
     
     .notes-list {
-      gap: 0 2rem;
-    }
-    
-    .growth-stages-legend {
-      flex-direction: column;
-      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
     }
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .garden-layout {
       grid-template-columns: 1fr;
     }
     
+    .notes-list {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (max-width: 768px) {
     .container {
       padding: 2rem 1rem;
     }
@@ -269,6 +277,28 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     
     .notes-list {
       grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 1.5rem 1rem;
+    }
+    
+    .garden-title {
+      font-size: 1.75rem;
+    }
+    
+    .filter-controls {
+      width: 100%;
+    }
+    
+    .filter-dropdown {
+      flex: 1;
+    }
+    
+    .filter-dropdown select {
+      width: 100%;
     }
   }
 </style>
@@ -370,6 +400,11 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     }
   });
 </script>
+
+
+
+
+
 
 
 

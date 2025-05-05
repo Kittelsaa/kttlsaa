@@ -128,6 +128,9 @@ const displayTopics = [
     font-size: 0.875rem;
     color: #6b7280;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   
   @media (max-width: 767px) {
@@ -142,6 +145,33 @@ const displayTopics = [
     
     .topics-row .cell:not(:last-child) {
       border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .item-title {
+      font-size: 1rem;
+    }
+    
+    .item-desc {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    
+    .main-row .cell {
+      padding: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cell {
+      padding: 1rem;
+    }
+    
+    .item-title {
+      font-size: 0.95rem;
+    }
+    
+    .item-desc {
+      font-size: 0.8rem;
     }
   }
 </style>
@@ -193,6 +223,8 @@ const displayTopics = [
     }
   });
 </script>
+
+
 
 
 

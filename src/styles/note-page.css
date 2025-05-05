@@ -235,6 +235,73 @@ html body .note-footer {
   }
 }
 
+/* Remove the first-letter styling for mobile */
+@media (max-width: 768px) {
+  html body .note-content p:first-of-type::first-letter {
+    font-size: inherit;
+    float: none;
+    line-height: inherit;
+    margin-right: 0;
+    font-weight: normal;
+    color: inherit;
+  }
+}
 
+/* Improve responsive handling for all content types */
+@media (max-width: 768px) {
+  html body .note-content {
+    width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+  }
+  
+  html body .note-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+  
+  html body .note-content pre,
+  html body .note-content code,
+  html body .note-content blockquote {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  html body .note-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Handle hashtags and inline elements */
+  html body .note-content span[class^="tag-"],
+  html body .note-content a[class^="tag-"],
+  html body .note-content .hashtag,
+  html body .note-content [class*="hashtag"] {
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html body .note-container {
+    padding: 1rem 0.75rem;
+  }
+  
+  html body .note-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Ensure hashtags and special elements wrap properly */
+  html body .note-content p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
 
 
