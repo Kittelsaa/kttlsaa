@@ -42,7 +42,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
       <div class="note-meta-container">
         <div class="note-topics">
           {topics && topics.length > 0 && topics.map((topic: string) => (
-            <a href={`/notes/topics/${topic.toLowerCase()}`} class="topic-tag">{topic}</a>
+            <p class="topic-tag">{topic}</p>
           ))}
         </div>
         
@@ -82,7 +82,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
   
   body .note-meta-right {
@@ -114,7 +114,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   
   /* Title and description */
   body .note-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     line-height: 1.2;
     margin: 0 0 1rem;
     color: #1f2937;
@@ -132,9 +132,9 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   /* Meta container for topics and dates */
   body .note-meta-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 2.5rem;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #e5e7eb;
   }
@@ -160,13 +160,12 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   
   body .topic-tag:hover {
     background-color: #ff8c00;
-    color: white !important;
+    color: rgb(142, 141, 141) !important;
   }
   
   /* Dates */
   body .note-dates {
-    text-align: right;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: #6b7280;
   }
   
@@ -179,6 +178,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
     font-size: 1.125rem;
     line-height: 1.7;
     color: #1f2937;
+    margin-top: 2rem;
   }
   
   /* Links styling */
@@ -221,43 +221,70 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   /* Responsive adjustments */
   @media (max-width: 768px) {
     body .note-container {
-      padding: 1.5rem 1rem;
+      padding: 1.5rem 1rem 3rem;
+    }
+    
+    body .note-top-bar {
+      margin-bottom: 1.5rem;
     }
     
     body .note-title {
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    body .note-description {
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
     }
     
     body .note-meta-container {
-      flex-direction: column;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
       gap: 1rem;
     }
     
     body .note-dates {
-      text-align: left;
-      margin-top: 0.5rem;
+      font-size: 0.8125rem;
+    }
+    
+    body .date-info {
+      margin-bottom: 0.125rem;
+    }
+    
+    body .note-content {
+      font-size: 1rem;
+      margin-top: 1.5rem;
     }
   }
   
   @media (max-width: 480px) {
     body .note-container {
-      padding: 1rem 0.75rem;
+      padding: 1.25rem 0.875rem 2.5rem;
+    }
+    
+    body .note-top-bar {
+      margin-bottom: 1.25rem;
     }
     
     body .note-title {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
+    }
+    
+    body .note-meta-container {
+      padding-bottom: 1rem;
+    }
+    
+    body .topic-tag {
+      padding: 0.2rem 0.6rem;
+      font-size: 0.7rem;
     }
     
     body .note-content {
-      font-size: 1rem;
+      font-size: 0.9375rem;
     }
   }
 </style>
-
-
-
-
-
 
 
 

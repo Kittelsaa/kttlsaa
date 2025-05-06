@@ -32,15 +32,15 @@ const displayTopics = [
   <div class="collections-container">
     <!-- First row: Main collections (2 columns) -->
     <div class="row main-row">
-      <div class="cell">
-        <h3 class="item-title">BOOKSHELF</h3>
-        <p class="item-desc">A list of the books I'm reading, sometimes with additional notes.</p>
-      </div>
+      <a href="/stream" class="cell">
+        <h3 class="item-title">STREAM</h3>
+        <p class="item-desc">A list that highlights the books, media, posts & people who have influenced me.</p>
+      </a>
       
-      <div class="cell">
-        <h3 class="item-title">MAP OF INQUIRY</h3>
-        <p class="item-desc">A map of the subjects I find interesting and want to learn more about.</p>
-      </div>
+      <a href="/now" class="cell">
+        <h3 class="item-title">NOW</h3>
+        <p class="item-desc">Subjects I find interesting and want to learn more about.</p>
+      </a>
     </div>
     
     <!-- Second row: Topics (3 columns) -->
@@ -76,6 +76,8 @@ const displayTopics = [
   
   .main-row .cell {
     width: 50%;
+    text-decoration: none;
+    color: inherit;
   }
   
   .topics-row .cell {
@@ -87,6 +89,10 @@ const displayTopics = [
     border-right: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
     transition: background-color 0.2s ease;
+  }
+  
+  .main-row .cell:hover {
+    background-color: #f9fafb;
   }
   
   .main-row .cell:last-child,
@@ -223,6 +229,7 @@ const displayTopics = [
     }
   });
 </script>
+
 
 
 

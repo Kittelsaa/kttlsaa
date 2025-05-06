@@ -1,0 +1,356 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageWrapper from "../components/layouts/PageWrapper.astro";
+import "../styles/about.css";
+
+// Stream items data structure for easy updates
+const streamItems = [
+  {
+    title: "A Litany for Survival The Life and Work of Audre Lorde",
+    author: "Ada Gay Griffin",
+    image: "../../public/images/stream/kit3.png",
+    link: "https://en.wikipedia.org/wiki/Audre_Lorde"
+  },
+  {
+    title: "The Four Agreements: A Practical Guide to Personal Freedom",
+    author: "Miguel Ruiz",
+    image: "https://images-na.ssl-images-amazon.com/images/P/1878424319.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/3221/t/The-Four-Agreements-A-Practical-Guide-to-Personal-Freedom#"
+  },
+  {
+    title: "Gary Younge",
+    image: "../../public/images/stream/kitt7.png",
+    link: "https://en.wikipedia.org/wiki/Gary_Younge"
+  },
+  {
+    title: "We Real Cool: Black Men and Masculinity",
+    author: "bell hooks",
+    image: "https://images-na.ssl-images-amazon.com/images/P/0415969271.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/22994/t/We-Real-Cool-Black-Men-and-Masculinity#"
+  },
+  {
+    title: "Nina Simone",
+    image: "../../public/images/stream/kitt12.png",
+    link: "https://en.wikipedia.org/wiki/Nina_Simone"
+  },
+  {
+    title: "The Demon-Haunted World : Science as a Candle in the Dark",
+    author: "Carl Sagan",
+    image: "https://images-na.ssl-images-amazon.com/images/P/0345409469.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/5977/t/The-Demon-Haunted-World-Science-as-a-Candle-in-the-Dark#"
+  },
+  {
+    title: "Invisible Women: Data Bias in a World Designed for Men",
+    author: "Caroline Criado Perez",
+    image: "https://images-na.ssl-images-amazon.com/images/P/1419729071.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/22617600/t/Invisible-Women-Data-Bias-in-a-World-Designed-for-Men#"
+  },
+  {
+    title: "Two Bits: The Cultural Significance of Free Software",
+    author: "Christopher M. Kelty",
+    image: "https://images-na.ssl-images-amazon.com/images/P/0822342642.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/5642301#"
+  },
+  {
+    title: "John Cassavetes",
+    image: "../../public/images/stream/kitt11.png",
+    link: "https://en.wikipedia.org/wiki/John_Cassavetes"
+  },
+  {
+    title: "Porco Rosso",
+    author: "Hayao Miyazaki",
+    image: "../../public/images/stream/kit5.png",
+    link: "https://en.wikipedia.org/wiki/Porco_Rosso"
+  },
+  {
+    title: "What happened to “African socialism”?",
+    author: "Chris Talbot",
+    image: "../../public/images/stream/ktt1.png",
+    link: "https://www.wsws.org/en/articles/2005/05/exch-m19.html"
+  },
+  {
+    title: "How Europe Underdeveloped Africa",
+    author: "Walter Rodney",
+    image: "https://pics.cdn.librarything.com/picsizes/12/90/12908718-b-h1270-w900-pv25_5971373478414345412f5945_v5.jpg",
+    link: "https://www.librarything.com/work/173407/t/How-Europe-Underdeveloped-Africa"
+  },
+  {
+    title: "Octavia E. Butler",
+    image: "../../public/images/stream/ktt3.png",
+    link: "https://en.wikipedia.org/wiki/Octavia_E._Butler"
+  },
+  {
+    title: "Anthony Bourdain",
+    image: "../../public/images/stream/kitt5.png",
+    link: "https://en.wikipedia.org/wiki/Anthony_Bourdain"
+  },
+  {
+    title: "Thomas Sankara",
+    image: "../../public/images/stream/kitt8.png",
+    link: "https://en.wikipedia.org/wiki/Thomas_Sankara"
+  },
+  {
+    title: "Angela Davis & Charlene Mitchell",
+    image: "../../public/images/stream/kitt6.png",
+    link: "https://en.wikipedia.org/wiki/Angela_Davis"
+  },
+  {
+    title: "Kirikou Et La Sorcière",
+    author: "Michel Ocelot",
+    image: "../../public/images/stream/kit4.png",
+    link: "https://en.wikipedia.org/wiki/Kirikou_and_the_Sorceress"
+  },
+  {
+    title: "Kelela",
+    image: "../../public/images/stream/ktt2.png",
+    link: "https://en.wikipedia.org/wiki/Kelela"
+  },
+  {
+    title: "Capitalist Realism: Is There No Alternative?",
+    author: "Mark Fisher",
+    image: "https://pics.cdn.librarything.com/picsizes/13/80/13803405-b-h1270-w900-pv25_596f326630674345412f5945_v5.jpg",
+    link: "https://www.librarything.com/work/9062918/t/Capitalist-Realism-Is-There-No-Alternative"
+  },
+  {
+    title: "Sinners",
+    author: " Ryan Coogler",
+    image: "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/2201x1467+870+0/resize/1100/quality/50/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa3%2F4c%2F291bb6394084922ad189da3a287f%2Frev-1-grc-fp-023-high-res-jpeg.jpeg",
+    link: "https://en.wikipedia.org/wiki/Sinners_(2025_film)"
+  }
+];
+---
+
+<Layout title="Stream - KTTLSAA">
+  <PageWrapper>
+    <div class="stream-container">
+      <div class="stream-intro">
+        <h1 class="stream-title">Stream</h1>
+        <p class="stream-description">
+          The stuff I geek out about; a list of books, different media & the people whose work I admire🪐
+        </p>
+      </div>
+
+      <div class="stream-grid">
+        {streamItems.map((item) => (
+          <a href={item.link} class="stream-item" target="_blank" rel="noopener noreferrer">
+            <div class="item-image-container">
+              <img src={item.image} alt={item.title} class="item-image" />
+            </div>
+            
+            <div class="item-content">
+              <h2 class="item-title">{item.title}</h2>
+              
+              <div class="item-meta">
+                <p>{item.author}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .stream-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    overflow-x: hidden;
+  }
+  
+  /* Stream Introduction - Styled like Garden intro */
+  .stream-intro {
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+  }
+  
+  .stream-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 1.25rem;
+  }
+  
+  .stream-description {
+    font-size: 1rem;
+    color: #6b7280;
+    max-width: 800px;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+  
+  .stream-link {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px dotted #000000;
+    transition: all 0.2s ease;
+  }
+  
+  .stream-link:hover {
+    color: #ff8c00;
+    border-bottom: 1px solid #ff8c00;
+  }
+
+  .stream-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .stream-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+  }
+  
+  .stream-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .item-image-container {
+    width: 100%;
+    padding-top: 100%; /* Square aspect ratio */
+    position: relative;
+    overflow: hidden;
+    background-color: #f3f4f6;
+  }
+
+  .item-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .stream-item:hover .item-image {
+    transform: scale(1.05);
+  }
+
+  .item-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .item-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    color: #1f2937;
+    line-height: 1.3;
+  }
+  
+  .stream-item:hover .item-title {
+    color: #000;
+  }
+
+  .item-meta {
+    margin-top: auto;
+  }
+
+  .item-meta p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .stream-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .item-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .stream-container {
+      padding: 2rem 1rem;
+    }
+    
+    .stream-title {
+      font-size: 2rem;
+    }
+    
+    .stream-description {
+      font-size: 1rem;
+    }
+    
+    .stream-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    
+    .item-content {
+      padding: 1rem;
+    }
+    
+    .item-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .item-meta p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stream-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .item-image-container {
+      padding-top: 100%; /* Square on mobile */
+    }
+    
+    .item-content {
+      padding: 0.75rem;
+    }
+    
+    .item-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+    
+    .item-meta p {
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .stream-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .item-image-container {
+      padding-top: 66.67%; /* 3:2 aspect ratio on very small screens */
+    }
+  }
+</style>
+
+
+
+
+
