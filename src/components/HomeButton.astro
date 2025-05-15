@@ -21,13 +21,13 @@ const Element = as;
 ---
 
 {as === 'a' ? (
-  <a href={href} class:list={['home-button', variant, className]}>
+  <a href={href} class:list={['home-button', variant, className]} style="font-family: 'Averia Serif Libre', serif !important;">
     <span class="button-text"><slot /></span>
     {icon === 'arrow' && <span class="icon arrow">→</span>}
     {icon === 'logo' && <span class="icon"><img src="/images/lg.png" alt="KTTLSAA Logo" class="logo-icon" /></span>}
   </a>
 ) : (
-  <button type={type} class:list={['home-button', variant, className]}>
+  <button type={type} class:list={['home-button', variant, className]} style="font-family: 'Averia Serif Libre', serif !important;">
     <span class="button-text"><slot /></span>
     {icon === 'arrow' && <span class="icon arrow">→</span>}
     {icon === 'logo' && <span class="icon"><img src="/images/lg.png" alt="KTTLSAA Logo" class="logo-icon" /></span>}
@@ -35,16 +35,18 @@ const Element = as;
 )}
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap');
+  
   .home-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 2rem;
+    padding: 0.75rem 1.7rem;
     border-radius: 0px;
     text-decoration: none;
     font-family: 'Averia Serif Libre', serif !important;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
     min-width: 200px;
     text-align: center;
@@ -54,13 +56,14 @@ const Element = as;
   .button-text {
     line-height: 1.2;
     font-family: 'Averia Serif Libre', serif !important;
+    font-weight: 400;
   }
 
   .icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.2rem;
+    margin-left: 0.1rem;
   }
 
   .arrow {
@@ -82,7 +85,9 @@ const Element = as;
   }
 
   .primary:hover {
-    transform: translateY(-2px);
+    background-color: #FF9B5A;
+    color: black;
+    border-color: #FF9B5A;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -94,18 +99,31 @@ const Element = as;
   }
 
   .secondary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+</style>
 
-  /* Ensure all variants have no border radius */
+<style is:global>
+  /* Force Averia font on all home buttons */
   .home-button,
-  .home-button.primary,
-  .home-button.secondary,
-  .home-button.tertiary {
-    border-radius: 0 !important;
+  .home-button span,
+  .home-button .button-text {
+    font-family: 'Averia Serif Libre', serif !important;
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

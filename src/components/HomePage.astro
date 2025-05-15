@@ -10,7 +10,9 @@ import HomeButton from './HomeButton.astro';
           <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Explore the Garden</h2>
           <p>A living ecosystem of ideas, explorations and essays, from emerging seedlings of thought to fully grown trees. Every visit reveals something new.</p>
           <div class="cta-buttons">
-            <HomeButton href="/garden" variant="secondary" icon="logo">Browse the Garden</HomeButton>
+            <HomeButton href="/garden" variant="secondary" icon="logo">
+              <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
+            </HomeButton>
           </div>
         </div>
         
@@ -43,15 +45,14 @@ import HomeButton from './HomeButton.astro';
             the human side of the digital world; how we build software, how we use it and
             what it does to the way we learn and share knowledge.
           </p>
+          <p>Reach out to chat, collaborate on projects or exchange ideas around tech, anthropology and more.</p>
           <div class="cta-buttons">
-            <HomeButton href="/about" variant="primary" icon="arrow">More About Me</HomeButton>
+            <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
+              <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
+            </HomeButton>
           </div>
         </div>
         
-        <div class="subsection">
-          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Let's Connect</h2>
-          <p>Reach out to chat, collaborate on projects or exchange ideas about knowledge systems, Artifitial Intelligence and more at kttlsaa@gmail.com </p>
-        </div>
       </div>
     </div>
   </div>
@@ -171,5 +172,23 @@ import HomeButton from './HomeButton.astro';
       width: 100%;
       max-width: none;
     }
+  }
+
+  /* Add this to ensure Averia font is applied to all buttons */
+  :global(.home-button),
+  :global(.home-button .button-text) {
+    font-family: 'Averia Serif Libre', serif !important;
+  }
+  
+  /* Ensure the font is loaded */
+  @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+</style>
+
+<style is:global>
+  /* Direct override for button text */
+  .home-button span,
+  .button-text,
+  .home-button .button-text {
+    font-family: 'Averia Serif Libre', serif !important;
   }
 </style>
