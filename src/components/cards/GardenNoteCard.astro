@@ -39,9 +39,12 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
 
 <style>
   .garden-note-card {
-    margin-bottom: 2rem;
+    margin-bottom: 1.7rem;
     width: 100%;
     overflow: hidden; /* Prevent content overflow */
+    border: 1px solid #e5e7eb;
+    padding: 1.25rem;
+    box-sizing: border-box;
   }
   
   .note-link {
@@ -71,10 +74,8 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.875rem;
     color: #6b7280;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 1rem;
+    padding-bottom: 0.8rem;
     flex-wrap: wrap; /* Allow wrapping on small screens */
     gap: 0.5rem;
   }
@@ -82,32 +83,61 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
   .growth-stage {
     color: #6b7280;
     font-style: italic;
+    font-size: 0.8rem;
     text-transform: capitalize;
   }
   
   .date {
     color: #6b7280;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
   
   @media (max-width: 768px) {
     .garden-note-card {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem;
+      padding: 1rem;
+      margin-right: 0;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .title {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .meta {
+      gap: 0.75rem;
+    }
+    
+    .date {
+      font-size: 0.8rem;
     }
   }
   
   @media (max-width: 480px) {
+    .garden-note-card {
+      padding: 0.85rem;
+      margin-right: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
     .title {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
     }
     
     .meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    
+    .date {
+      font-size: 0.75rem;
     }
   }
 </style>

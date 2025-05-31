@@ -72,7 +72,6 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .note-container {
     max-width: 720px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
     background-color: transparent !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -88,7 +87,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .note-meta-right {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
   }
   
   /* Note type badge */
@@ -104,7 +103,7 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .growth-badge {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.1rem;
     font-size: 0.75rem;
     font-weight: 600;
     color: #6b7280;
@@ -132,7 +131,9 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   /* Meta container for topics and dates */
   body .note-meta-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 1.25rem;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;

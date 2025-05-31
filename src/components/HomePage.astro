@@ -4,55 +4,71 @@ import HomeButton from './HomeButton.astro';
 
 <section class="home-section">
   <div class="container">
-    <div class="content-grid">
-      <div class="left-column">
-        <div class="subsection">
-          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Explore the Garden</h2>
-          <p>A living ecosystem of ideas, explorations and essays, from emerging seedlings of thought to fully grown trees. Every visit reveals something new.</p>
-          <div class="cta-buttons">
-            <HomeButton href="/garden" variant="secondary" icon="logo">
-              <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
-            </HomeButton>
-          </div>
+    <!-- First Row: Garden and About -->
+    <div class="content-grid first-rw">
+      <!-- Left Column: Explore Garden -->
+      <div class="subsection">
+        <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Explore the Garden</h2>
+        <p>A living ecosystem of ideas, explorations & essays, from emerging seedlings of thought to fully grown trees. Every visit reveals something new.</p>
+        <div class="cta-buttons">
+          <HomeButton href="/garden" variant="secondary" icon="logo">
+            <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
+          </HomeButton>
         </div>
-        
-        <div class="subsection">
-          <h2 class="section-title">Resources & Guides</h2>
-          <div class="collections-table">
-            <!-- First row: Main resources (2 columns) -->
-            <div class="first-row">
-              <div class="collection-item">
-                <h3 class="item-title">Digital Gardening Guide</h3>
-                <p class="item-desc">How to start and maintain your own digital garden</p>
-                <a href="/resources/digital-gardening" class="view-link">View Guide</a>
-              </div>
-              
-              <div class="collection-item">
-                <h3 class="item-title">Note-Taking Systems</h3>
-                <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
-                <a href="/resources/note-taking" class="view-link">View Guide</a>
-              </div>
+      </div>
+      
+      <!-- Right Column: About Me -->
+      <div class="subsection">
+        <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Hello, I'm Kittelsaa</h2>
+        <p>
+          I'm a Software Engineer and a Digital Anthropologist. Think of it as exploring 
+          the human side of the digital world; how we build software, how we use it and
+          what it does to the way we learn and share knowledge.
+        </p>
+        <p>Reach out to chat, collaborate on projects or exchange ideas around tech, anthropology & more.</p>
+        <div class="cta-buttons">
+          <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
+            <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
+          </HomeButton>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Second Row: Subscribe and Resources -->
+    <div class="content-grid second-rw">
+      <!-- Left Column: Resources & Guides -->
+      <div class="subsection">
+        <h2 class="section-title">Resources & More</h2>
+        <div class="collections-table">
+          <!-- First row: Main resources (2 columns) -->
+          <div class="first-row">
+            <div class="collection-item">
+              <h3 class="item-title">Digital Gardening Guide</h3>
+              <p class="item-desc">How to start and maintain your own digital garden</p>
+              <a href="/resources/digital-gardening" class="view-link">View Guide</a>
+            </div>
+            <div class="collection-item">
+              <h3 class="item-title">Note-Taking Systems</h3>
+              <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
+              <a href="/resources/note-taking" class="view-link">View Guide</a>
+            </div>
+            <div class="collection-item">
+              <h3 class="item-title">Note-Taking Systems</h3>
+              <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
+              <a href="/resources/note-taking" class="view-link">View Guide</a>
             </div>
           </div>
         </div>
       </div>
-      
-      <div class="right-column">
-        <div class="subsection">
-          <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Hello, I'm KiTTeLSAA</h2>
-          <p>
-            I'm a Software Engineer and a Digital Anthropologist. Think of it as exploring 
-            the human side of the digital world; how we build software, how we use it and
-            what it does to the way we learn and share knowledge.
-          </p>
-          <p>Reach out to chat, collaborate on projects or exchange ideas around tech, anthropology and more.</p>
-          <div class="cta-buttons">
-            <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
-              <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
-            </HomeButton>
-          </div>
+
+      <!-- Right Column: Subscribe Section -->
+      <div class="subsection">
+        <h2 class="section-title">Stay Updated</h2>
+        <p>Want to hear when I publish new work?</p>
+        <div class="subscribe-form">
+          <input type="email" placeholder="Your email address" aria-label="Email address">
+          <button class="subscribe-button">SUBSCRIBE</button>
         </div>
-        
       </div>
     </div>
   </div>
@@ -68,22 +84,55 @@ import HomeButton from './HomeButton.astro';
 
   .content-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 4rem;
+    grid-template-columns: 30% 1fr; 
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .first-rw {
+    margin-bottom: 0rem;
+  }
+  .second-rw {
+    margin-top: 0rem;
+    gap: 3rem;
+    grid-template-columns: 60% 1fr; 
   }
   
   .subsection {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border);
   }
   
-  .subsection:last-child {
-    border-bottom: none;
+  .subscribe-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
   }
   
-  .subsection h2 {
-    margin-bottom: 0.5rem;
+  .subscribe-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border, #ddd);
+    width: 100%;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .subscribe-button {
+    background-color: #FF9B5A;
+    color: black;
+    border: none;
+    border-radius: 0;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Averia Serif Libre', serif;
+    min-width: 150px;
   }
   
   .averia-font {
@@ -153,24 +202,24 @@ import HomeButton from './HomeButton.astro';
     text-decoration: underline;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .content-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
+      margin-bottom: 2rem;
     }
     
-    .first-row {
-      grid-template-columns: 1fr;
+    .second-row {
+      margin-top: 1rem;
     }
     
     .subscribe-form {
-      max-width: none;
+      flex-direction: column;
     }
     
     .subscribe-form input,
     .subscribe-button {
       width: 100%;
-      max-width: none;
     }
   }
 

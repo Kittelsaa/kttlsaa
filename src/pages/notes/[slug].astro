@@ -1,8 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import NoteLayout from '../../layouts/NoteLayout.astro';
-import OutboundLinks from '../../components/OutboundLinks.astro';
-import { findBacklinks, getOutboundLinks } from '../../utils/noteUtils';
+import { findBacklinks } from '../../utils/noteUtils';
 import { render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -42,9 +41,8 @@ try {
   return Astro.redirect('/500?error=rendering-failed');
 }
 
-// Get backlinks and outbound links
+// Get backlinks only, remove outbound links
 const backlinks = await findBacklinks(note.slug, 1) || [];
-const outboundLinks = await getOutboundLinks(note, 1) || [];
 ---
 
 <NoteLayout frontmatter={note.data} backlinks={backlinks}>
@@ -53,9 +51,7 @@ const outboundLinks = await getOutboundLinks(note, 1) || [];
   </div>
   
   <div class="note-connections">
-    {outboundLinks.length > 0 && (
-      <OutboundLinks links={outboundLinks} />
-    )}
+    <!-- OutboundLinks component removed -->
   </div>
 </NoteLayout>
 
