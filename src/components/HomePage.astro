@@ -4,69 +4,64 @@ import HomeButton from './HomeButton.astro';
 
 <section class="home-section">
   <div class="container">
-    <!-- First Row: Garden and About -->
-    <div class="content-grid first-rw">
-      <!-- Left Column: Explore Garden -->
-      <div class="subsection">
-        <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Explore the Garden</h2>
-        <p>A living ecosystem of ideas, explorations & essays, from emerging seedlings of thought to fully grown trees. Every visit reveals something new.</p>
-        <div class="cta-buttons">
-          <HomeButton href="/garden" variant="secondary" icon="logo">
-            <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
-          </HomeButton>
-        </div>
-      </div>
-      
-      <!-- Right Column: About Me -->
-      <div class="subsection">
-        <h2 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="section-title">Hello, I'm Kittelsaa</h2>
-        <p>
-          I'm a Software Engineer and a Digital Anthropologist. Think of it as exploring 
-          the human side of the digital world; how we build software, how we use it and
-          what it does to the way we learn and share knowledge.
-        </p>
-        <p>Reach out to chat, collaborate on projects or exchange ideas around tech, anthropology & more.</p>
-        <div class="cta-buttons">
-          <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
-            <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
-          </HomeButton>
-        </div>
+    <!-- Intro Section -->
+    <div class="intro-section">
+      <h1 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="main-title">Hello, I'm Kittelsaa</h1>
+      <p class="intro-text">
+        A Software Engineer exploring the human side of the digital world.
+        My digital garden is a living ecosystem of ideas, explorations & essays, from emerging seedlings of thought 
+        to fully grown trees. Every visit reveals something new.
+      </p>
+      <div class="cta-buttons">
+        <HomeButton href="/garden" variant="secondary" icon="logo">
+          <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
+        </HomeButton>
+        <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
+          <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
+        </HomeButton>
       </div>
     </div>
     
-    <!-- Second Row: Subscribe and Resources -->
-    <div class="content-grid second-rw">
-      <!-- Left Column: Resources & Guides -->
-      <div class="subsection">
-        <h2 class="section-title">Resources & More</h2>
+    <!-- Resources and Subscribe Row -->
+    <div class="content-grid">
+      <!-- Left Column: Resources & Guides (60%) -->
+      <div class="subsection resources-section">
+        <h2 class="section-title">Resources & Guides</h2>
         <div class="collections-table">
-          <!-- First row: Main resources (2 columns) -->
-          <div class="first-row">
+          <div class="resources-grid">
             <div class="collection-item">
               <h3 class="item-title">Digital Gardening Guide</h3>
               <p class="item-desc">How to start and maintain your own digital garden</p>
               <a href="/resources/digital-gardening" class="view-link">View Guide</a>
             </div>
+            
             <div class="collection-item">
               <h3 class="item-title">Note-Taking Systems</h3>
               <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
               <a href="/resources/note-taking" class="view-link">View Guide</a>
             </div>
+            
             <div class="collection-item">
-              <h3 class="item-title">Note-Taking Systems</h3>
-              <p class="item-desc">A comparison of different approaches to personal knowledge management</p>
-              <a href="/resources/note-taking" class="view-link">View Guide</a>
+              <h3 class="item-title">Research Methods</h3>
+              <p class="item-desc">Frameworks for conducting effective digital anthropology research</p>
+              <a href="/resources/research-methods" class="view-link">View Guide</a>
+            </div>
+            
+            <div class="collection-item">
+              <h3 class="item-title">Software Development</h3>
+              <p class="item-desc">Guides on human-centered software development practices</p>
+              <a href="/resources/software-dev" class="view-link">View Guide</a>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Right Column: Subscribe Section -->
-      <div class="subsection">
+      
+      <!-- Right Column: Subscribe Section (40%) -->
+      <div class="subsection subscribe-section">
         <h2 class="section-title">Stay Updated</h2>
-        <p>Want to hear when I publish new work?</p>
+        <p>Want to hear when I publish new content?</p>
         <div class="subscribe-form">
-          <input type="email" placeholder="Your email address" aria-label="Email address">
+          <input type="email" placeholder="Your email, please" aria-label="Email address">
           <button class="subscribe-button">SUBSCRIBE</button>
         </div>
       </div>
@@ -79,39 +74,124 @@ import HomeButton from './HomeButton.astro';
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 3rem 0;
   }
 
+  /* Intro Section */
+  .intro-section {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .main-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .intro-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--color-text-muted, #666);
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  /* Content Grid */
   .content-grid {
     display: grid;
-    grid-template-columns: 30% 1fr; 
+    grid-template-columns: 60% 1fr;
     gap: 3rem;
     margin-bottom: 3rem;
   }
-  .first-rw {
-    margin-bottom: 0rem;
-  }
-  .second-rw {
-    margin-top: 0rem;
-    gap: 3rem;
-    grid-template-columns: 60% 1fr; 
+  
+  /* Resources Section */
+  .resources-section {
+    margin-bottom: 2rem;
   }
   
-  .subsection {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-family: 'Averia Serif Libre', serif;
+  }
+  
+  .collections-table {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+  }
+  
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+  
+  .collection-item {
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    transition: all 0.2s ease;
+    margin: -1px 0 0 -1px;
+  }
+  
+  .collection-item:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .item-title {
+    margin-bottom: 0.75rem;
+    font-weight: normal;
+    font-family: 'Averia Serif Libre', serif;
+  }
+  
+  .item-desc {
+    color: var(--color-text-muted, #666);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .view-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-accent, #FF9B5A);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .view-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Subscribe Section */
+  .subscribe-section {
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
   }
   
   .subscribe-form {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0rem 0rem 0rem;
+    border-radius: 0;
   }
   
   .subscribe-form input {
+    font-size: 0.9rem;
+    width: 100%;
     flex: 1;
     padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border, #ddd);
     width: 100%;
     border: none;
     border-bottom: 3px solid transparent;
@@ -132,94 +212,102 @@ import HomeButton from './HomeButton.astro';
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Averia Serif Libre', serif;
-    min-width: 150px;
-  }
-  
-  .averia-font {
-    font-family: var(--font-fun);
-    font-weight: 400;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  
-  .cta-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-  
-  .collections-table {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    border: 1px solid #C0C0C0;
-  }
-  
-  .first-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 100%;
   }
   
-  .collection-item {
-    padding: 1.5rem;
-    border: 1px solid #C0C0C0;
-    background-color: var(--color-surface, #fff);
-    transition: background-color 0.2s ease;
-    position: relative;
-    margin-top: -1px;
-    margin-left: -1px;
+  .subscribe-button:hover {
+    background-color: #FF9B5A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .collection-item:hover {
-    background-color: var(--color-surface-hover, #f5f5f5);
+  /* Responsive Styles */
+  @media (max-width: 1024px) {
+    .main-title {
+      font-size: 2.5rem;
+    }
+    
+    .intro-text {
+      font-size: 1.1rem;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+    }
   }
   
-  .item-title {
-    margin-bottom: 0.5rem;
-    font-weight: normal;
-  }
-  
-  .item-desc {
-    color: var(--text-muted, #666);
-    margin-bottom: 1rem;
-  }
-  
-  .view-link {
-    display: inline-flex;
-    align-items: center;
-    color: var(--color-accent, #FF9B5A);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .view-link:hover {
-    text-decoration: underline;
-  }
-  
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
+    .container {
+      padding: 2rem 0;
+    }
+    
+    .intro-section {
+      margin-bottom: 3rem;
+    }
+    
+    .main-title {
+      font-size: 2.25rem;
+    }
+    
+    .intro-text {
+      font-size: 1rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
     .content-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
-      margin-bottom: 2rem;
     }
     
-    .second-row {
-      margin-top: 1rem;
+    .resources-grid {
+      grid-template-columns: 1fr;
     }
     
-    .subscribe-form {
-      flex-direction: column;
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      width: 80%;
+      padding: 0rem 0;
+    }
+
+    .intro-section {
+      margin-top: 4rem;
+    }
+
+    .content-grid {
+      margin-bottom: 5rem;
+      gap: 0rem;
     }
     
-    .subscribe-form input,
-    .subscribe-button {
-      width: 100%;
+    .main-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .intro-text {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .collection-item {
+      padding: 1.25rem;
+    }
+    
+    .item-title {
+      font-size: 1.1rem;
+    }
+    
+    .item-desc {
+      font-size: 0.9rem;
     }
   }
 
