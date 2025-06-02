@@ -8,7 +8,7 @@ const streamItems = [
   {
     title: "A Litany for Survival The Life and Work of Audre Lorde",
     author: "Ada Gay Griffin",
-    image: "/images/stream/kit3.png",
+    image: "/images/stream/audrel.png",
     link: "https://en.wikipedia.org/wiki/Audre_Lorde"
   },
   {
@@ -19,25 +19,30 @@ const streamItems = [
   },
   {
     title: "Gary Younge",
-    image: "/images/stream/kitt7.png",
+    image: "/images/stream/gary.png",
     link: "https://en.wikipedia.org/wiki/Gary_Younge"
   },
   {
-    title: "We Real Cool: Black Men and Masculinity",
-    author: "bell hooks",
-    image: "https://images-na.ssl-images-amazon.com/images/P/0415969271.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
-    link: "https://www.librarything.com/work/22994/t/We-Real-Cool-Black-Men-and-Masculinity#"
+    title: "Kirikou Et La Sorcière",
+    author: "Michel Ocelot",
+    image: "/images/stream/kirikou.png",
+    link: "https://en.wikipedia.org/wiki/Kirikou_and_the_Sorceress"
   },
   {
     title: "Nina Simone",
-    image: "/images/stream/kitt12.png",
+    image: "/images/stream/ninasi.png",
     link: "https://en.wikipedia.org/wiki/Nina_Simone"
   },
   {
-    title: "The Demon-Haunted World : Science as a Candle in the Dark",
-    author: "Carl Sagan",
-    image: "https://images-na.ssl-images-amazon.com/images/P/0345409469.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
-    link: "https://www.librarything.com/work/5977/t/The-Demon-Haunted-World-Science-as-a-Candle-in-the-Dark#"
+    title: "David Lynch",
+    image: "https://imgs.search.brave.com/yq39pOBBvIAq4GTOzXwUysGzwyM_FOT3FGvOG04yIaU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNjkx/MjIzMDkwL3Bob3Rv/L2Nhbm5lcy1mcmFu/Y2UtZGlyZWN0b3It/ZGF2aWQtbHluY2gt/YXR0ZW5kcy10aGUt/dHdpbi1wZWFrcy1z/Y3JlZW5pbmctZHVy/aW5nLXRoZS03MHRo/LWFubnVhbC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9cEZo/bGFvaE85RGgxdkxM/MDJWVUdiYjN0MmZJ/TlNEbGxIYWFNZnNq/dkQwaz0",
+    link: "https://en.wikipedia.org/wiki/David_Lynch"
+  },
+  {
+    title: "The Future of Information. Ideas, Connections, and the Gods of Electronic Literature",
+    author: "Theodor Holm Nelson",
+    image: "http://www.thetednelson.com/future_book.png",
+    link: "https://archive.org/details/futureofinformat00theo/page/n7/mode/2up"
   },
   {
     title: "Invisible Women: Data Bias in a World Designed for Men",
@@ -52,20 +57,15 @@ const streamItems = [
     link: "https://www.librarything.com/work/5642301#"
   },
   {
-    title: "John Cassavetes",
-    image: "/images/stream/kitt11.png",
-    link: "https://en.wikipedia.org/wiki/John_Cassavetes"
-  },
-  {
     title: "Porco Rosso",
     author: "Hayao Miyazaki",
-    image: "/images/stream/kit5.png",
+    image: "/images/stream/porco.png",
     link: "https://en.wikipedia.org/wiki/Porco_Rosso"
   },
   {
     title: "What happened to “African socialism”?",
     author: "Chris Talbot",
-    image: "/images/stream/ktt1.png",
+    image: "/images/stream/africansc.png",
     link: "https://www.wsws.org/en/articles/2005/05/exch-m19.html"
   },
   {
@@ -75,53 +75,69 @@ const streamItems = [
     link: "https://www.librarything.com/work/173407/t/How-Europe-Underdeveloped-Africa"
   },
   {
-    title: "Octavia E. Butler",
-    image: "/images/stream/ktt3.png",
-    link: "https://en.wikipedia.org/wiki/Octavia_E._Butler"
-  },
-  {
-    title: "Anthony Bourdain",
-    image: "/images/stream/kitt5.png",
-    link: "https://en.wikipedia.org/wiki/Anthony_Bourdain"
-  },
-  {
-    title: "Thomas Sankara",
-    image: "/images/stream/kitt8.png",
-    link: "https://en.wikipedia.org/wiki/Thomas_Sankara"
-  },
-  {
     title: "Angela Davis & Charlene Mitchell",
-    image: "/images/stream/kitt6.png",
+    image: "/images/stream/angela-charlene.png",
     link: "https://en.wikipedia.org/wiki/Angela_Davis"
   },
   {
-    title: "Kirikou Et La Sorcière",
-    author: "Michel Ocelot",
-    image: "/images/stream/kit4.png",
-    link: "https://en.wikipedia.org/wiki/Kirikou_and_the_Sorceress"
+    title: "We Real Cool: Black Men and Masculinity",
+    author: "bell hooks",
+    image: "https://images-na.ssl-images-amazon.com/images/P/0415969271.01._SX900_SY1270_SCLZZZZZZZ_.jpg",
+    link: "https://www.librarything.com/work/22994/t/We-Real-Cool-Black-Men-and-Masculinity#"
   },
   {
-    title: "Kelela",
-    image: "/images/stream/ktt2.png",
-    link: "https://en.wikipedia.org/wiki/Kelela"
+    title: "Invisible Users: Youth in the Internet Cafés of Urban Ghana",
+    author:"Jenna Burrell",
+    image: "https://imgs.search.brave.com/DzX4AOAu8u2DgmUMmef_ZKiJ4EsteBUCkC9kwna9Rvw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maXZl/Ym9va3MuY29tL2Fw/cC91cGxvYWRzL2Jv/b2tzL2MvMjIvQkNf/MDI2MjAxNzM2OS5q/cGc",
+    link: "https://www.librarything.com/work/12959036/t/Invisible-Users-Youth-in-the-Internet-Caf%C3%A9s-of-Urban-Ghana-Acting-with-Technology#"
   },
   {
-    title: "Sinners",
-    author: " Ryan Coogler",
-    image: "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/2201x1467+870+0/resize/1100/quality/50/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa3%2F4c%2F291bb6394084922ad189da3a287f%2Frev-1-grc-fp-023-high-res-jpeg.jpeg",
-    link: "https://en.wikipedia.org/wiki/Sinners_(2025_film)"
+    title: "Anthony Bourdain",
+    image: "/images/stream/anthony.png",
+    link: "https://en.wikipedia.org/wiki/Anthony_Bourdain"
   },
   {
-    title: "Capitalist Realism: Is There No Alternative?",
-    author: "Mark Fisher",
-    image: "https://pics.cdn.librarything.com/picsizes/13/80/13803405-b-h1270-w900-pv25_596f326630674345412f5945_v5.jpg",
-    link: "https://www.librarything.com/work/9062918/t/Capitalist-Realism-Is-There-No-Alternative"
+    title: "Octavia E. Butler",
+    image: "/images/stream/octavia.png",
+    link: "https://en.wikipedia.org/wiki/Octavia_E._Butler"
   },
   {
     title: "Margaret O'Mara",
     image: "https://womenalsoknowhistory.com/wp-content/uploads/participants-database/margaretomarazocalocropped.jpg",
     link: "https://en.wikipedia.org/wiki/Margaret_O'Mara"
-  }
+  },
+  {
+    title: "Shea Couleé",
+    image: "https://i.pinimg.com/736x/df/37/44/df37445fa32bd91336c45e547ccc61d9.jpg",
+    link: "https://en.wikipedia.org/wiki/Shea_Coule%C3%A9"
+  },
+  {
+    title: "Kelela",
+    image: "/images/stream/kelela.png",
+    link: "https://en.wikipedia.org/wiki/Kelela"
+  },
+  {
+    title: "John Cassavetes",
+    image: "/images/stream/john.png",
+    link: "https://en.wikipedia.org/wiki/John_Cassavetes"
+  },
+  {
+    title: "Thomas Sankara",
+    image: "/images/stream/thomas.png",
+    link: "https://en.wikipedia.org/wiki/Thomas_Sankara"
+  },
+  {
+    title: "Disability Visibility: First-Person Stories from the Twenty-First Century",
+    author: "Alice Wong",
+    image: "https://images4.penguinrandomhouse.com/cover/9780593216460",
+    link: "https://www.librarything.com/work/24434060/t/Disability-Visibility-First-Person-Stories-from-the-Twenty-First-Century"
+  },
+  {
+    title: "Border and Rule: Global Migration, Capitalism, and the Rise of Racist Nationalism",
+    author:"Harsha Walia",
+    image: "https://imgs.search.brave.com/lHsNTYJBqsV6BPcJa6aDShLWE0FkZGFWe8EDv9YN05w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb3Zl/cnMuc3Rvcnl0ZWwu/Y29tL2pwZy02NDAv/OTc4MTY2NjEwNzYy/My41NzdkZmFmOS1m/OTBkLTQxMDEtYjk0/Yy05YTY3NjhhY2I1/YjU_b3B0aW1pemU9/aGlnaCZxdWFsaXR5/PTcw",
+    link: "https://www.librarything.com/work/26022917/t/Border-and-Rule-Global-Migration-Capitalism-and-the-Rise-of-Racist-Nationalism"
+  },
 ];
 ---
 
@@ -209,7 +225,7 @@ const streamItems = [
     display: flex;
     flex-direction: column;
     background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
+    border: 2px solid #e5e7eb;
     border-radius: 0;
     overflow: hidden;
     text-decoration: none;
@@ -219,8 +235,8 @@ const streamItems = [
   }
   
   .stream-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f3f4f6;
+    border-bottom: 2px solid var(--color-accent, #ff8c00);
   }
 
   .item-image-container {
@@ -240,10 +256,6 @@ const streamItems = [
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;
-  }
-  
-  .stream-item:hover .item-image {
-    transform: scale(1.05);
   }
 
   .item-content {
