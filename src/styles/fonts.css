@@ -57,17 +57,17 @@ html body div h3 {
   font-family: var(--font-heading) !important;
 }
 
-/* You can define font-face declarations here if you have local font files */
-/* 
-@font-face {
-  font-family: 'CustomFont';
-  src: url('/fonts/CustomFont.woff2') format('woff2'),
-       url('/fonts/CustomFont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+/* Custom selection highlight color - FIXED VERSION */
+::selection {
+  background-color: #FE762D;
+  color: #ffffff;
 }
-*/
+
+/* For Firefox */
+::-moz-selection {
+  background-color: #FE762D;
+  color: #ffffff;
+}
 
 
 

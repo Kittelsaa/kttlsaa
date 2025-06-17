@@ -1,0 +1,332 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageWrapper from "../components/layouts/PageWrapper.astro";
+import "../styles/about.css";
+
+const portfolioItems = [
+  {
+    title:
+      "In-house HR project for CSR ltd.",
+    description: "Worked as Software Engineer with a team of amazing developers at CSR ltd. to build an internal HR platform, a back office tool to streamline operations and support staff processes.",
+    image:
+      "https://res.cloudinary.com/djjc0kf4h/image/upload/v1750150364/csr-hr_xckxkg.png",
+    link: "https://www.csrlimited.com/",
+  },
+
+  {
+    title: "Data Integration System for BEBC Canada",
+    description: "Worked with a talented group of developers as the Technical Lead & Project Manager to replace inefficient WordPress form systems with embedded Microsoft Dynamics Marketing Forms. ",
+    image:
+      "https://res.cloudinary.com/djjc0kf4h/image/upload/v1750149996/bebc_epgbcf.png",
+    link: "https://www.blackentrepreneursbc.org/",
+  },
+  {
+    title:
+      "Open source project for an AI web scraper",
+    description: "Built using ollama, brightdata, selenium and other libraries.",
+    image:
+      "https://res.cloudinary.com/djjc0kf4h/image/upload/v1750149994/notes-taking-guide_ehp9iy.png",
+    link: "https://github.com/Kittelsaa/MyWebScraper",
+  },
+  {
+    title: "Open source project to guide anyone to start their own digital garden",
+    description: "Highly customizable project built using Astro, TypeScript, Tailwind, and MDX",
+    image:
+      "https://res.cloudinary.com/djjc0kf4h/image/upload/v1750149994/notes-taking-guide_ehp9iy.png",
+    link: "https://github.com/Kittelsaa/your-digital-garden",
+  },
+  {
+    title: "Open Source: Guide to taking notes effectively",
+    description: "Built using JavaScript, Tailwind, NextJS, TypeScript, and MDX ",
+    image:
+      "https://res.cloudinary.com/djjc0kf4h/image/upload/v1750149994/notes-taking-guide_ehp9iy.png",
+    link: "https://github.com/Kittelsaa/taking-notes",
+  },
+];
+---
+
+<Layout title="Portfolio - KTTLSAA">
+  <PageWrapper>
+    <div class="portfolio-container">
+      <div class="portfolio-intro">
+        <h1 class="portfolio-title">
+          Software Engineering Portfolio: Kittelsaa Nyampundu
+        </h1>
+        <p class="portfolio-description">
+          I'm a Software Engineer with 3+ years of experience dedicated to
+          crafting robust, user-centric, and performance-optimized web
+          experiences. This portfolio showcases my journey at the intersection
+          of technical expertise and impactful team leadership.
+        </p>
+        <p class="portfolio-description">
+          My work focuses on leveraging modern fullstack technologies like
+          Node.js, Python, and React to solve complex challenges and streamline
+          operations. I prioritize driving tangible business value and fostering
+          collaborative environments.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+        {
+          portfolioItems.map((item) => (
+            <a
+              href={item.link}
+              class="portfolio-item"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="item-image-container">
+                <img src={item.image} alt={item.title} class="item-image" />
+              </div>
+              <div class="item-content">
+                <h2 class="item-title">{item.title}</h2>
+                <div class="item-meta">
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </PageWrapper>
+</Layout>
+
+<style>
+  .portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    overflow-x: hidden;
+  }
+
+  /* Portfolio Introduction - Styled like Garden intro */
+  .portfolio-intro {
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+  }
+
+  .portfolio-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 1.25rem;
+  }
+
+  .portfolio-description {
+    font-size: 1rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  .portfolio-link {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px dotted #000000;
+    transition: all 0.2s ease;
+  }
+
+  .portfolio-link:hover {
+    color: #ff8c00;
+    border-bottom: 1px solid #ff8c00;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .portfolio-item {
+    display: flex;
+    flex-direction: row;
+    background-color: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    height: 200px; 
+    max-height: 200px;
+  }
+
+  .portfolio-item:hover {
+    background-color: #f3f4f6;
+    border-bottom: 2px solid var(--color-accent, #ff8c00);
+  }
+
+  .item-image-container {
+    width: 150px; 
+    min-width: 150px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    flex-shrink: 0;
+  }
+
+  .item-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .item-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    min-width: 0; 
+  }
+
+  .item-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    color: #1f2937;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .portfolio-item:hover .item-title {
+    color: #000;
+  }
+
+  .item-meta {
+    margin-top: auto;
+  }
+
+  .item-meta p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 1024px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .portfolio-item {
+      height: 180px;
+      max-height: 180px;
+    }
+
+    .item-image-container {
+      width: 130px;
+      min-width: 130px;
+    }
+
+    .item-content {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-container {
+      padding: 2rem 1rem;
+    }
+
+    .portfolio-title {
+      font-size: 2rem;
+    }
+
+    .portfolio-description {
+      font-size: 1rem;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .portfolio-item {
+      height: 160px;
+      max-height: 160px;
+    }
+
+    .item-image-container {
+      width: 120px;
+      min-width: 120px;
+    }
+
+    .item-content {
+      padding: 0.875rem;
+    }
+
+    .item-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .item-meta p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio-item {
+      height: 140px;
+      max-height: 140px;
+    }
+
+    .item-image-container {
+      width: 100px;
+      min-width: 100px;
+    }
+
+    .item-content {
+      padding: 0.75rem;
+    }
+
+    .item-title {
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .item-meta p {
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .portfolio-item {
+      height: 120px;
+      max-height: 120px;
+    }
+
+    .item-image-container {
+      width: 90px;
+      min-width: 90px;
+    }
+
+    .item-content {
+      padding: 0.6rem;
+    }
+
+    .item-title {
+      font-size: 0.8rem;
+      -webkit-line-clamp: 2;
+    }
+  }
+</style>
