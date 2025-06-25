@@ -59,13 +59,13 @@ html body div h3 {
 
 /* Custom selection highlight color - FIXED VERSION */
 ::selection {
-  background-color: #FE762D;
+  background-color: #ff8b4d;
   color: #ffffff;
 }
 
 /* For Firefox */
 ::-moz-selection {
-  background-color: #FE762D;
+  background-color: #ff8b4d;
   color: #ffffff;
 }
 
