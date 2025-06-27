@@ -4,14 +4,15 @@ import Layout from "../layouts/Layout.astro";
 import GardenNoteCard from "../components/cards/GardenNoteCard.astro";
 import GardenCollections from "../components/garden/GardenCollections.astro";
 
-// Add error handling for collection retrieval
-let allPosts = [];
+// Fetch notes collection with error handling
+// Explicitly type allPosts as an array of objects with at least a 'data' property
+let allPosts: Array<{ data: any; [key: string]: any }> = [];
 try {
   allPosts = await getCollection('notes', ({ data }) => {
     return !data.draft;
   });
   
-  // Log the first few posts to debug
+  // Debug logging
   if (allPosts.length > 0) {
     console.log("First post:", {
       title: allPosts[0].data.title,
@@ -25,25 +26,25 @@ try {
   console.error("Error fetching notes collection:", error);
 }
 
-// Sort posts by updated date
-const sortedPosts = allPosts.sort(
-  (a, b) => new Date(b.data.updated || b.data.startDate || 0).getTime() - 
-            new Date(a.data.updated || a.data.startDate || 0).getTime()
-);
+// Sort posts by updated date (newest first)
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.updated || a.data.startDate || 0).getTime();
+  const dateB = new Date(b.data.updated || b.data.startDate || 0).getTime();
+  return dateB - dateA;
+});
 
-// Get all unique topics
+// Extract unique topics and count them
 const allTopics = [...new Set(allPosts.flatMap(post => post.data.topics || []))].sort();
 
-// Count notes per topic
-const topicCounts = {};
+const topicCounts: Record<string, number> = {};
 allTopics.forEach(topic => {
   topicCounts[topic] = allPosts.filter(post => 
     post.data.topics && post.data.topics.includes(topic)
   ).length;
 });
 
-// Get all unique growth stages
-const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].sort();
+// Extract unique growth stages
+const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].filter(Boolean).sort();
 ---
 
 <Layout title="Digital Garden">
@@ -51,7 +52,7 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     <div class="garden-layout">
       <!-- Collections Column -->
       <div class="collections-column">
-        <!-- Garden Introduction Section moved to top of collections column -->
+        <!-- Garden Introduction -->
         <div class="garden-intro">
           <h1 class="garden-title">My Digital Garden</h1>
           <p class="garden-description">
@@ -59,9 +60,11 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
             <a href="/notes/digital-gardens" class="garden-link">digital gardens here🍀</a>.
           </p>
         </div>
+        
         <div class="section-header">
           <h2 class="section-title">ONGOING COLLECTIONS</h2>
         </div>
+        
         <GardenCollections topics={allTopics} counts={topicCounts} />
       </div>
       
@@ -100,16 +103,16 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
 </Layout>
 
 <style>
-  /* Container */
+  /* Base Container */
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
     box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-x: hidden;
   }
   
-  /* Garden Introduction - updated for new position */
+  /* Garden Introduction */
   .garden-intro {
     margin-bottom: 2.5rem;
     border-bottom: 1px solid #e5e7eb;
@@ -145,13 +148,19 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     border-bottom: 1px solid #ff8c00;
   }
   
-  /* Layout */
+  /* Main Layout Grid */
   .garden-layout {
     display: grid;
     grid-template-columns: minmax(0, 35%) minmax(0, 65%);
     gap: 5rem;
     align-items: start;
     width: 100%;
+  }
+  
+  .collections-column,
+  .notes-column {
+    width: 100%;
+    min-width: 0;
   }
   
   /* Section Headers */
@@ -214,7 +223,7 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-size: 0.6rem;
   }
   
-  /* Notes List */
+  /* Notes Grid */
   .notes-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -222,19 +231,7 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     width: 100%;
   }
   
-  /* Collections Column */
-  .collections-column {
-    width: 100%;
-    min-width: 0; /* Allow shrinking below content size */
-  }
-  
-  /* Notes Column */
-  .notes-column {
-    width: 100%;
-    min-width: 0; /* Allow shrinking below content size */
-  }
-  
-  /* Responsive Styles */
+  /* Responsive Design */
   @media (max-width: 1024px) {
     .garden-layout {
       gap: 2rem;
@@ -325,111 +322,97 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
 </style>
 
 <script>
-  // Client-side filtering and sorting logic
   document.addEventListener('DOMContentLoaded', () => {
     const topicFilters = document.querySelectorAll('.topic-filter');
     const noteCards = document.querySelectorAll('.garden-note-card');
     const dateFilter = document.getElementById('date-filter');
     const growthFilter = document.getElementById('growth-filter');
     
-    // Add "All" filter state for topics
     let currentTopicFilter = 'all';
     
-    // Add event listeners to dropdown filters
+    // Date filter functionality
     if (dateFilter) {
       dateFilter.addEventListener('change', () => {
-        sortNotes(dateFilter.value);
+        sortNotes((dateFilter as HTMLSelectElement).value);
       });
     }
     
+    // Growth stage filter functionality
     if (growthFilter) {
       growthFilter.addEventListener('change', () => {
-        filterByGrowthStage(growthFilter.value);
+        filterByGrowthStage((growthFilter as HTMLSelectElement).value);
       });
     }
     
-    // Add click event to each topic filter
+    // Topic filter functionality
     topicFilters.forEach(filter => {
       filter.addEventListener('click', () => {
-        const selectedTopic = filter.getAttribute('data-topic');
+        const selectedTopic = filter.getAttribute('data-topic') || 'all';
         
-        // Toggle active state if clicking the same filter again
         if (currentTopicFilter === selectedTopic) {
+          // Toggle off if clicking same filter
           currentTopicFilter = 'all';
           topicFilters.forEach(f => f.classList.remove('active'));
         } else {
-          // Remove active class from all filters
+          // Activate new filter
           topicFilters.forEach(f => f.classList.remove('active'));
-          
-          // Add active class to clicked filter
           filter.classList.add('active');
           currentTopicFilter = selectedTopic;
         }
         
-        // Filter notes by topic
         filterByTopic(currentTopicFilter);
       });
     });
     
-    // Function to sort notes by date
-    function sortNotes(sortOrder) {
+    // Sort notes by date
+    function sortNotes(sortOrder: string) {
       const notesContainer = document.querySelector('.notes-list');
+      if (!notesContainer) return;
+      
       const notesArray = Array.from(noteCards);
       
       notesArray.sort((a, b) => {
-        const dateA = new Date(a.dataset.date || 0).getTime();
-        const dateB = new Date(b.dataset.date || 0).getTime();
+        const dateA = new Date((a as HTMLElement).dataset.date || 0).getTime();
+        const dateB = new Date((b as HTMLElement).dataset.date || 0).getTime();
         
         return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
       });
       
-      // Remove all notes and re-append in sorted order
+      // Re-append notes in sorted order
       notesArray.forEach(note => {
         notesContainer.appendChild(note);
       });
     }
     
-    // Function to filter by growth stage
-    function filterByGrowthStage(growthStage) {
+    // Filter notes by growth stage
+    function filterByGrowthStage(growthStage: string) {
       noteCards.forEach(card => {
-        const cardGrowthStage = card.dataset.growthStage?.toLowerCase();
+        const cardGrowthStage = (card as HTMLElement).dataset.growthStage?.toLowerCase();
         
         if (growthStage === 'all' || cardGrowthStage === growthStage) {
-          card.style.display = 'block';
+          (card as HTMLElement).style.display = 'block';
         } else {
-          card.style.display = 'none';
+          (card as HTMLElement).style.display = 'none';
         }
       });
     }
     
-    // Function to filter by topic
-    function filterByTopic(topic) {
+    // Filter notes by topic
+    function filterByTopic(topic: string) {
       noteCards.forEach(card => {
-        const cardTopics = card.dataset.topics?.split(',') || [];
+        const cardTopics = (card as HTMLElement).dataset.topics?.split(',') || [];
         
         if (topic === 'all' || cardTopics.includes(topic)) {
-          card.style.display = 'block';
+          (card as HTMLElement).style.display = 'block';
         } else {
-          card.style.display = 'none';
+          (card as HTMLElement).style.display = 'none';
         }
       });
     }
     
-    // Initialize sorting
+    // Initialize with default sorting
     if (dateFilter) {
-      sortNotes(dateFilter.value);
+      sortNotes((dateFilter as HTMLSelectElement).value);
     }
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-

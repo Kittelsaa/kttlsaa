@@ -2,11 +2,21 @@
 import { formatDate } from "../utils/dates";
 import GrowthIcon from "./GrowthIcon.astro";
 
+type Note = {
+  slug: string;
+  data: {
+    title: string;
+    startDate?: string;
+    growthStage?: string;
+    type?: string;
+  };
+};
+
 const { notes, showDate = true } = Astro.props;
 ---
 
 <div class="notes-list-container">
-  {notes.map((note) => (
+  {notes.map((note: Note) => (
     <article class="note-item" data-type={note.data.type || 'note'}>
       <div class="note-meta">
         {showDate && note.data.startDate && (

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   
   return notes.map(note => {
     // Use the file path as the slug if not explicitly defined
-    const slug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
+    const slug = note.id ? note.id.split('/').pop()?.replace(/\.(md|mdx)$/, '') : undefined;
     
     if (!slug) {
       console.warn(`Note with title "${note.data.title}" has no slug`);
@@ -42,7 +42,7 @@ try {
 }
 
 // Get backlinks only, remove outbound links
-const backlinks = await findBacklinks(note.slug, 1) || [];
+const backlinks = await findBacklinks(note.id, 1) || [];
 ---
 
 <NoteLayout frontmatter={note.data} backlinks={backlinks}>

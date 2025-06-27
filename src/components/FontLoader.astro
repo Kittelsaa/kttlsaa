@@ -66,13 +66,13 @@
     // Target all heading elements with maximum specificity
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .title, .heading, [class*="title"], [class*="heading"]');
     headings.forEach(heading => {
-      heading.style.setProperty('font-family', "'Averia Serif Libre', serif", 'important');
+      (heading as HTMLElement).style.setProperty('font-family', "'Averia Serif Libre', serif", 'important');
     });
     
     // Target all body text elements
     const bodyText = document.querySelectorAll('p, a, span, div, li, input, textarea, button, label, blockquote, table, pre, code');
     bodyText.forEach(text => {
-      text.style.setProperty('font-family', "'Inter', sans-serif", 'important');
+      (text as HTMLElement).style.setProperty('font-family', "'Inter', sans-serif", 'important');
     });
     
     console.log('Fonts applied to elements');

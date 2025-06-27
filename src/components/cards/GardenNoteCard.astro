@@ -9,12 +9,15 @@ const formattedDate = formatDate(note.data.updated || note.data.startDate);
 // Growth stage emojis
 const growthEmojis = {
   "seedling": "🌱",
-  "budding": "🌿",
+  "budding": "🪴",
   "evergreen": "🌳"
-};
+} as const;
+
+type GrowthStage = keyof typeof growthEmojis;
 
 // Get the appropriate emoji
-const growthEmoji = growthEmojis[note.data.growthStage?.toLowerCase()] || "🌱";
+const growthStageKey = (note.data.growthStage?.toLowerCase() ?? "seedling") as GrowthStage;
+const growthEmoji = growthEmojis[growthStageKey] || "🌱";
 
 // Determine note type - default to "Note" if not specified
 const noteType = note.data.type || "Note";

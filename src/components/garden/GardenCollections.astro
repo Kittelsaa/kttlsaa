@@ -13,7 +13,7 @@ if (topics.length === 0) {
   allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].sort();
   
   // Count notes per topic
-  allTopics.forEach(topic => {
+  allTopics.forEach((topic: string) => {
     topicCounts[topic] = notes.filter(note => 
       note.data.topics && note.data.topics.includes(topic)
     ).length;
@@ -179,7 +179,7 @@ const displayTopics = [
     // Add click event to each topic filter
     topicFilters.forEach(filter => {
       filter.addEventListener('click', () => {
-        const selectedTopic = filter.getAttribute('data-topic');
+        const selectedTopic = filter.getAttribute('data-topic') || '';
         
         // Toggle active state if clicking the same filter again
         if (currentFilter === selectedTopic) {
@@ -200,15 +200,15 @@ const displayTopics = [
     });
     
     // Function to filter notes by topic
-    function filterNotes(topic) {
+    function filterNotes(topic: string) {
       noteCards.forEach(card => {
         // Get topics from the card's data attribute
         const cardTopics = card.getAttribute('data-topics')?.split(',') || [];
         
         if (topic === 'all' || cardTopics.includes(topic)) {
-          card.style.display = 'block';
+          (card as HTMLElement).style.display = 'block';
         } else {
-          card.style.display = 'none';
+          (card as HTMLElement).style.display = 'none';
         }
       });
     }

@@ -37,7 +37,7 @@ const allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].so
       // Show all notes if "All" is selected
       if (selectedTopic === 'all') {
         noteCards.forEach(card => {
-          card.style.display = 'block';
+          (card as HTMLElement).style.display = 'block';
         });
         return;
       }
@@ -48,9 +48,9 @@ const allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].so
           .map(topic => topic.getAttribute('data-topic'));
         
         if (cardTopics.includes(selectedTopic)) {
-          card.style.display = 'block';
+          (card as HTMLElement).style.display = 'block';
         } else {
-          card.style.display = 'none';
+          (card as HTMLElement).style.display = 'none';
         }
       });
     });

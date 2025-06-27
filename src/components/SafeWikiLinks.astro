@@ -3,7 +3,7 @@
 const { content, processed = false } = Astro.props;
 
 // Only process wiki links if not already processed
-function processWikiLinks(text) {
+function processWikiLinks(text: string | undefined) {
   if (!text || processed) return text || '';
   
   // Replace wiki links with standard markdown links

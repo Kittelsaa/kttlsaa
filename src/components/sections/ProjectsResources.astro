@@ -65,7 +65,7 @@ const resources = [
     
     <div class="featured-notes">
       {featuredNotes.map(note => (
-        <a href={`/notes/${note.slug}`} class="note-preview">
+        <a href={`/notes/${note.id}`} class="note-preview">
           <div class="note-header">
             <span class="growth-stage">
               <GrowthIcon growthStage={note.data.growthStage} />
