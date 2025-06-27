@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import FontLoader from "../components/FontLoader.astro";
 import "../styles/fonts.css";
 
@@ -9,10 +10,10 @@ export interface Props {
   image?: string;
 }
 
-const { 
-  title, 
-  description = "KTTLSAA - A digital garden of thoughts, notes, and essays", 
-  image = "/images/default-og.jpg" 
+const {
+  title,
+  description = "KTTLSAA - A digital garden of thoughts, notes, and essays",
+  image = "/images/default-og.jpg"
 } = Astro.props;
 ---
 
@@ -49,22 +50,33 @@ const {
     <FontLoader />
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
+    <div class="layout-wrapper">
+      <Header />
+      <main class="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
 
 <style is:global>
-  body {
+  html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     overflow-x: hidden;
+    height: 100%;
   }
   
-  main {
+  .layout-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    flex: 1;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -76,6 +88,3 @@ const {
     font-family: 'Averia Serif Libre', serif !important;
   }
 </style>
-
-
-

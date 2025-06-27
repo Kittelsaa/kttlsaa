@@ -102,7 +102,7 @@ html body .note-dates {
 html body .note-content {
   font-size: 1.125rem;
   line-height: 1.8;
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
 }
 
 html body .note-content h2 {
@@ -139,13 +139,11 @@ html body .note-content p:first-of-type::first-letter {
 html body .note-content a {
   color: #2563eb;
   text-decoration: none;
-  border-bottom: 1px solid #2563eb;
   transition: all 0.2s ease;
 }
 
 html body .note-content a:hover {
-  color: #ff8c00 !important; /* Orange color on hover */
-  border-bottom: 1px solid #ff8c00 !important;
+  color: #ff8c00 !important; 
 }
 
 /* Wiki-style links */
@@ -192,15 +190,14 @@ html body .note-content img {
 }
 
 html body .note-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e5e7eb;
+  margin: 0rem;
+  padding: 0rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   html body .note-container {
-    padding: 1.5rem 1rem;
+    padding: 2rem;
   }
   
   html body .note-title {
@@ -219,7 +216,7 @@ html body .note-footer {
 
 @media (max-width: 480px) {
   html body .note-container {
-    padding: 1rem 0.75rem;
+    padding: 2rem;
   }
   
   html body .note-title {
@@ -288,7 +285,7 @@ html body .note-footer {
 
 @media (max-width: 480px) {
   html body .note-container {
-    padding: 1rem 0.75rem;
+    padding: 1.5rem;
   }
   
   html body .note-content {

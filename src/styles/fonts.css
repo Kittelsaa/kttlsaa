@@ -29,13 +29,13 @@ html body div,
 html body li,
 html body input,
 html body textarea,
-html body button,
 html body label,
 html body blockquote,
 html body table,
 html body pre,
 html body code {
   font-family: var(--font-body) !important;
+  cursor: default !important;
 }
 
 /* Target specific components */
@@ -68,14 +68,3 @@ html body div h3 {
   background-color: #ff8b4d;
   color: #ffffff;
 }
-
-
-
-
-
-
-
-
-
-
-
