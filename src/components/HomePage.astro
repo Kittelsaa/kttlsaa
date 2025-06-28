@@ -32,7 +32,7 @@ import HomeButton from './HomeButton.astro';
             <div class="collection-item">
               <h3 class="item-title">Digital Gardening Guide</h3>
               <p class="item-desc">How to start and maintain your own digital garden for both technical & non-technical people.</p>
-              <a href="/resources/digital-gardening" class="view-link">View Guide</a>
+              <a href="/notes/digital-gardens" class="view-link">View Guide</a>
             </div>
             
             <div class="collection-item">
@@ -97,7 +97,7 @@ import HomeButton from './HomeButton.astro';
   /* Content Grid */
   .content-grid {
     display: grid;
-    grid-template-columns: 65% 1fr;
+    grid-template-columns: 60% 1fr;
     gap: 5rem;
     margin-bottom: 3rem;
   }
@@ -165,6 +165,14 @@ import HomeButton from './HomeButton.astro';
   /* Subscribe Section */
   .subscribe-section {
     margin-bottom: 2rem;
+  }
+  .subscribe-section p{
+    font-size: 1rem;
+    line-height: 1.6;
+    margin:0%;
+    margin-bottom: 0.7rem;
+    padding:0%;
+    color: var(--color-text-muted, #666);
   }
   
   .subscribe-form {
@@ -254,6 +262,11 @@ import HomeButton from './HomeButton.astro';
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
+
+    .subscribe-section {
+      padding-top: 2rem;
+    }
+
   }
   
   @media (max-width: 480px) {
