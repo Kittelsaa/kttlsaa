@@ -57,18 +57,17 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
           <h1 class="garden-title">My Digital Garden</h1>
           <p class="garden-description">
             This is not a blog, it is where thoughts are cultivated, connected & continuously redefined. Read more about 
-            <a href="/notes/digital-gardens" class="garden-link">digital gardens here🍀</a>.
+            <a href="/notes/digital-gardens" class="garden-link">digital gardens here</a>.
           </p>
         </div>
         
         <div class="section-header">
           <h2 class="section-title">ONGOING COLLECTIONS</h2>
         </div>
-        
         <GardenCollections topics={allTopics} counts={topicCounts} />
       </div>
       
-      <!-- Notes Column -->
+      <!-- Other Column -->
       <div class="notes-column">
         <div class="section-header">
           <h2 class="section-title">Entries</h2>

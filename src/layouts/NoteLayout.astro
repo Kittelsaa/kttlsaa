@@ -24,13 +24,13 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
       <div class="note-top-bar">
         <BackButton />
         <div class="note-meta-right">
-          <span class="note-type">{displayType}</span>
           {growthStage && (
             <div class="growth-badge">
               <GrowthIcon growthStage={growthStage} showEmoji={true} />
               <span class="growth-stage-text">{growthStage}</span>
             </div>
           )}
+          <span class="note-type">{displayType}</span>
         </div>
       </div>
       
@@ -87,12 +87,12 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .note-meta-right {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.1rem;
   }
   
   /* Note type badge */
   body .note-type {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #6b7280;
     text-transform: uppercase;
@@ -103,12 +103,16 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .growth-badge {
     display: flex;
     align-items: center;
-    gap: 0.1rem;
-    font-size: 0.75rem;
+    gap: 0rem;
     font-weight: 600;
+    font-size: 0.8rem;
     color: #6b7280;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  body .growth-badge .growth-stage-text {
+    font-size: 0.8rem;
   }
   
   /* Title and description */
@@ -121,8 +125,8 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
     font-family: "Times New Roman", Times, serif;
   }
   
-  body .note-description {
-    font-size: 1.125rem;
+  .note-header .note-description {
+    font-size: 1.1rem;
     line-height: 1.5;
     margin: 0 0 1.5rem;
     color: #6b7280;
@@ -150,23 +154,15 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   body .topic-tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background-color: #f3f4f6;
-    border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 500;
     color: #4b5563 !important;
     text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  
-  body .topic-tag:hover {
-    background-color: #ff8c00;
-    color: rgb(142, 141, 141) !important;
   }
   
   /* Dates */
-  body .note-dates {
-    font-size: 0.875rem;
+  body .note-meta-container .note-dates {
+    font-size: 0.8rem;
     color: #6b7280;
   }
   

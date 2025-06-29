@@ -41,7 +41,7 @@ const Element = as;
     )}
   </a>
 ) : (
-  <button type={type} class:list={['home-button', variant, className]} style="font-family: 'Averia Serif Libre', serif !important;">
+  <button type={type} class:list={['home-button', variant, className]} style="font-family: 'Averia Serif Libre', serif !important; cursor: pointer;">
     <span class="button-text"><slot /></span>
     {icon === 'arrow' && <span class="icon arrow">→</span>}
     {icon === 'logo' && <span class="icon"><img src="/images/lg.png" alt="KTTLSAA Logo" class="logo-icon" /></span>}
@@ -79,6 +79,10 @@ const Element = as;
     text-align: center;
     font-weight: normal;
   }
+
+  button{
+    cursor: pointer;
+  }
   
   .button-text {
     line-height: 1.2;
@@ -90,7 +94,7 @@ const Element = as;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.1rem;
+    margin-left: 0rem;
   }
 
   .arrow {
@@ -106,7 +110,7 @@ const Element = as;
 
   /* Primary button - white with black border */
   .primary {
-    background-color: white;
+    background-color: #FFF8F4;
     color: black;
     border: 1px solid black;
   }

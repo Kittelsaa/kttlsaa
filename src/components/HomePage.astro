@@ -13,11 +13,11 @@ import HomeButton from './HomeButton.astro';
         to fully grown trees. Every visit reveals something new.
       </p>
       <div class="cta-buttons">
-        <HomeButton href="/garden" variant="secondary" icon="logo">
-          <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden</span>
+        <HomeButton href="/garden" variant="secondary" >
+          <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden ☘︎</span>
         </HomeButton>
-        <HomeButton href="/about" variant="primary" icon="logo" class="connect-button">
-          <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect</span>
+        <HomeButton href="/about" variant="primary" class="connect-button">
+          <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect ✶</span>
         </HomeButton>
       </div>
     </div>
@@ -50,7 +50,7 @@ import HomeButton from './HomeButton.astro';
         <p>Want to hear when I publish new content?</p>
         <div class="subscribe-form">
           <input type="email" placeholder="Your email, please" aria-label="Email address">
-          <button class="subscribe-button">SUBSCRIBE</button>
+          <button class="subscribe-button">Subscribe</button>
         </div>
       </div>
     </div>
@@ -115,8 +115,9 @@ import HomeButton from './HomeButton.astro';
   }
   
   .collections-table {
-    border: 1px solid #e0e0e0;
-    background-color: white;
+    border: 1px solid #E8DBCF;
+    background-color: #FFF8F4;
+    overflow: hidden;
   }
   
   .resources-grid {
@@ -127,14 +128,22 @@ import HomeButton from './HomeButton.astro';
   
   .collection-item {
     padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    background-color: white;
+    background-color: #FFF8F4;
     transition: all 0.2s ease;
-    margin: -1px 0 0 -1px;
+    border: 0;
+    border-right: 1px solid #E8DBCF;
+    border-bottom: 1px solid #E8DBCF;
+    position: relative;
   }
   
-  .collection-item:hover {
-    background-color: #f9f9f9;
+  /* Remove right border from last column */
+  .collection-item:nth-child(2n) {
+    border-right: none;
+  }
+  
+  /* Remove bottom border from last row */
+  .collection-item:nth-last-child(-n+2) {
+    border-bottom: none;
   }
   
   .item-title {
@@ -184,18 +193,24 @@ import HomeButton from './HomeButton.astro';
   }
   
   .subscribe-form input {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     width: 100%;
     flex: 1;
-    padding: 0.75rem 1rem;
-    width: 100%;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-bottom: 3px solid transparent;
-    background: transparent;
+    border-radius: 0;
+    background: #f8f8f8;
     text-align: left;
     color: #333;
     outline: none;
     transition: all 0.3s ease;
+    height: auto;
+    box-sizing: border-box;
+  }
+  
+  .subscribe-form input::placeholder {
+    color: #999;
+    opacity: 1;
   }
   
   .subscribe-button {
@@ -210,6 +225,8 @@ import HomeButton from './HomeButton.astro';
     transition: all 0.3s ease;
     font-family: 'Averia Serif Libre', serif;
     width: 100%;
+    height: auto;
+    box-sizing: border-box;
   }
   
   /* Responsive Styles */
@@ -256,6 +273,16 @@ import HomeButton from './HomeButton.astro';
     
     .resources-grid {
       grid-template-columns: 1fr;
+    }
+    
+    /* Mobile: Reset borders for single column layout */
+    .collection-item {
+      border-right: none !important;
+      border-bottom: 1px solid #E8DBCF !important;
+    }
+    
+    .collection-item:last-child {
+      border-bottom: none !important;
     }
     
     .section-title {

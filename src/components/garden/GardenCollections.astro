@@ -32,12 +32,12 @@ const displayTopics = [
   <div class="collections-container">
     <!-- First row: Main collections (2 columns) -->
     <div class="row main-row">
-      <a href="/stream" class="cell">
+      <a href="/stream" class="cell main-cell">
         <h3 class="item-title">STREAM</h3>
-        <p class="item-desc">A list that highlights the media or people who have influenced me.</p>
+        <p class="item-desc">List of the media or people who have influenced me.</p>
       </a>
       
-      <a href="/now" class="cell">
+      <a href="/now" class="cell main-cell last-main">
         <h3 class="item-title">NOW</h3>
         <p class="item-desc">Subjects I find interesting & want to learn more about.</p>
       </a>
@@ -45,8 +45,8 @@ const displayTopics = [
     
     <!-- Second row: Topics (3 columns) -->
     <div class="row topics-row">
-      {displayTopics.map((topic) => (
-        <div class="cell topic-filter" data-topic={topic.name}>
+      {displayTopics.map((topic, index) => (
+        <div class={`cell topic-filter ${index === displayTopics.length - 1 ? 'last-topic' : ''}`} data-topic={topic.name}>
           <div class="topic-link">
             <h3 class="item-title">{topic.name}</h3>
             <p class="item-desc">{topic.count} {topic.count === 1 ? 'Entry' : 'Entries'}</p>
@@ -66,9 +66,9 @@ const displayTopics = [
   }
   
   .collections-container {
-    border: 1px solid #e5e5e7;
+    border: 1px solid #E8DBCF;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #FFF8F4;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -79,42 +79,53 @@ const displayTopics = [
     flex-wrap: wrap;
   }
   
-  .main-row .cell {
-    width: 50%;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .topics-row .cell {
-    width: 33.333%;
-  }
-
-  .topic-filter {
-    cursor: pointer;
-  }
-  
-  .topic-filter:hover {
-    background-color: #f9fafb;
-  }
-  
-  .topic-filter.active {
-    background-color: #f3f4f6;
-    border-bottom: 1px solid var(--color-accent, #ff8c00);
-  }
-  
   .cell {
     padding: 1rem;
-    border-right: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
     transition: background-color 0.2s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    border-bottom: 1px solid #E8DBCF;
+    border-right: 1px solid #E8DBCF;
+  }
+
+  /* Main row cells */
+  .main-cell {
+    width: 50%;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .main-cell.last-main {
+    border-right: none;
+  }
+
+  /* Topic row cells */
+  .topic-filter {
+    width: 33.333%;
+    cursor: pointer;
+  }
+  
+  .topic-filter.last-topic {
+    border-right: none;
+  }
+  
+  .topic-filter:hover {
+    background-color: #FFF2EB;
+  }
+  
+  .topic-filter.active {
+    background-color: #FFF2EB;
+  }
+
+  /* Remove bottom border from last row */
+  .topics-row .cell {
+    border-bottom: none;
   }
 
   .item-title {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
   
   .item-desc {
@@ -143,9 +154,14 @@ const displayTopics = [
     
     .cell {
       width: 100% !important;
-      border-right: none;
+      border-right: none !important;
       padding: 1.25rem;
       margin-right: 0;
+    }
+    
+    /* Remove bottom border from last cell in mobile */
+    .topics-row .cell:last-child {
+      border-bottom: none;
     }
     
     .item-desc {
@@ -213,4 +229,4 @@ const displayTopics = [
       });
     }
   });
-
+</script>

@@ -7,6 +7,10 @@
   --font-body: 'Inter', sans-serif;
 }
 
+html, body {
+  background-color: #FFF8F4;
+}
+
 /* Apply to all headings with maximum specificity */
 html body h1, 
 html body h2, 

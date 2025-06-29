@@ -1,7 +1,4 @@
 :root {
-  /* Colors */
-  --color-bg: #ffffff;
-  --color-bg-alt: #f5f5f5;
   --color-text: #333333;
   --color-text-muted: #666666;
   --color-accent: #FE762D;
@@ -44,8 +41,7 @@
 html, body {
   font-family: var(--font-body);
   line-height: 1.5;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--color-text); 
 }
 
 img, video {
