@@ -46,12 +46,9 @@ import HomeButton from './HomeButton.astro';
       
       <!-- Right Column: Subscribe Section (40%) -->
       <div class="subsection subscribe-section">
-        <h2 class="section-title">Stay Updated</h2>
-        <p>Want to hear when I publish new content?</p>
-        <div class="subscribe-form">
-          <input type="email" placeholder="Your email, please" aria-label="Email address">
-          <button class="subscribe-button">Subscribe</button>
-        </div>
+        <h2 class="section-title-description">Stay Updated</h2>
+        <script async data-uid="b372a7efec" src="https://kttlsaa.kit.com/b372a7efec/index.js"></script>
+        <span class="section-p-description">Subscribe to stay updated when I publish new content.</span>
       </div>
     </div>
   </div>
@@ -97,8 +94,8 @@ import HomeButton from './HomeButton.astro';
   /* Content Grid */
   .content-grid {
     display: grid;
-    grid-template-columns: 60% 1fr;
-    gap: 5rem;
+    grid-template-columns: 65% 1fr;
+    gap: 2rem;
     margin-bottom: 3rem;
   }
   
@@ -111,6 +108,7 @@ import HomeButton from './HomeButton.astro';
     font-size: 2rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    color: var(--color-text-muted, #666);
     font-family: 'Averia Serif Libre', serif;
   }
   
@@ -173,15 +171,54 @@ import HomeButton from './HomeButton.astro';
   
   /* Subscribe Section */
   .subscribe-section {
-    margin-bottom: 2rem;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
-  .subscribe-section p{
-    font-size: 1rem;
-    line-height: 1.6;
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1.7rem;
+    line-height: 1.2;
+  }
+  .section-title-description{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: -2rem;
+  }
+  
+  .subscribe-section span{
+    font-size: 0.75rem;
     margin:0%;
-    margin-bottom: 0.7rem;
     padding:0%;
-    color: var(--color-text-muted, #666);
+    color: #666;
+    line-height: 1.5;
+  }
+  .subscribe-section * {
+    box-sizing: border-box;
+  }
+  /* Target ConvertKit form by data attribute */
+  .subscribe-section [data-uid="b372a7efec"],
+  .subscribe-section [data-uid="b372a7efec"] * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Specific ConvertKit classes */
+  .subscribe-section .formkit-form,
+  .subscribe-section .formkit-fields,
+  .subscribe-section .formkit-field {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Reset any wrapper divs */
+  .subscribe-section .formkit-form > div,
+  .subscribe-section .formkit-form div[style*="padding"] {
+    padding: 0 !important;
   }
   
   .subscribe-form {
@@ -207,7 +244,7 @@ import HomeButton from './HomeButton.astro';
     height: auto;
     box-sizing: border-box;
   }
-  
+
   .subscribe-form input::placeholder {
     color: #999;
     opacity: 1;
@@ -241,6 +278,10 @@ import HomeButton from './HomeButton.astro';
     
     .section-title {
       font-size: 1.75rem;
+    }
+
+    .section-title-description{
+      font-size: 1.6rem;
     }
   }
   
@@ -292,6 +333,10 @@ import HomeButton from './HomeButton.astro';
 
     .subscribe-section {
       padding-top: 2rem;
+    }
+    .section-title-description{
+      font-size: 2rem;
+      text-align: center;
     }
 
   }

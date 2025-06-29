@@ -87,7 +87,7 @@ a:hover {
 }
 
 /* Base Typography */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5 {
   font-family: 'Averia Serif Libre', serif !important;
   line-height: 1.2;
 }
@@ -97,8 +97,7 @@ html body h1,
 html body h2,
 html body h3,
 html body h4,
-html body h5,
-html body h6 {
+html body h5 {
   font-family: 'Averia Serif Libre', serif !important;
   font-weight: 400;
 }
