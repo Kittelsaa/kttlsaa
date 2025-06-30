@@ -8,41 +8,127 @@ export interface Props {
   title: string;
   description?: string;
   image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  type?: "website" | "article" | "blog";
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  author?: string;
+  section?: string;
+  linkedinProfile?: string;
 }
 
 const {
   title,
-  description = "kttlsaa",
-  image = "/images/default-og.jpg"
+  description = "kttlsaa - A digital garden of thoughts, ideas, and explorations",
+  image = "/f1.png",
+  canonical,
+  noindex = false,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  author = "kttlsaa",
+  section,
+  linkedinProfile = "https://www.linkedin.com/in/kittelsaa-nyampundu-467858253/" 
 } = Astro.props;
+
+// Construct full URLs
+const canonicalURL = canonical ? new URL(canonical, Astro.site) : Astro.url;
+const imageURL = new URL(image, Astro.site);
+const siteName = "kttlsaa Digital Garden";
+
+// Generate JSON-LD structured data with LinkedIn profile
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "Article" : "WebSite",
+  "name": title,
+  "description": description,
+  "url": canonicalURL.href,
+  "image": imageURL.href,
+  ...(type === "article" && {
+    "author": {
+      "@type": "Person",
+      "name": author,
+      "sameAs": [linkedinProfile]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": imageURL.href
+      }
+    },
+    ...(publishedTime && { "datePublished": publishedTime }),
+    ...(modifiedTime && { "dateModified": modifiedTime }),
+    ...(section && { "articleSection": section }),
+    ...(tags.length > 0 && { "keywords": tags.join(", ") })
+  }),
+  ...(type === "website" && {
+    "author": {
+      "@type": "Person",
+      "name": author,
+      "sameAs": [linkedinProfile]
+    }
+  })
+};
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/f1.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/f1.png" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- SEO -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Robots meta -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    {author && <meta name="author" content={author} />}
+    {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
     
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type === "article" ? "article" : "website"} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:alt" content={`${title} - ${siteName}`} />
+    <meta property="og:site_name" content={siteName} />
+    {type === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {type === "article" && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {type === "article" && author && <meta property="article:author" content={author} />}
+    {type === "article" && section && <meta property="article:section" content={section} />}
+    {type === "article" && tags.map(tag => (
+      <meta property="article:tag" content={tag} />
+    ))}
     
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <!-- LinkedIn (instead of Twitter since you don't have Twitter) -->
+    <meta property="og:see_also" content={linkedinProfile} />
     
-    <!-- Font preloading -->
+    <!-- Author social links -->
+    <link rel="me" href={linkedinProfile} />
+    
+    <!-- Additional professional meta tags -->
+    <meta name="linkedin:owner" content={linkedinProfile.split('/').pop()} />
+    
+    <!-- Additional SEO meta tags -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    
+    <!-- Font preloading (preserved from original) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -83,8 +169,8 @@ const {
     padding: 0;
   }
   
-  /* Force Averia font on all headings */
-  h1, h2, h3, h4, h5, h6 {
+  /* Force Averia font on all headings (preserved from original) */
+  h1, h2, h3, h4, h5 {
     font-family: 'Averia Serif Libre', serif !important;
   }
 </style>
