@@ -11,8 +11,8 @@ const { frontmatter, backlinks = [] } = Astro.props;
 const { title, description, updated, startDate, topics, growthStage, video, type = "note" } = frontmatter;
 
 // Format dates for display
-const plantedDate = startDate ? `Planted ${formatDate(startDate)}` : '';
-const tendedDate = updated ? `Last tended ${formatDate(updated)}` : '';
+const plantedDate = startDate ? `Planted: ${formatDate(startDate)}` : '';
+const tendedDate = updated ? `Last tended: ${formatDate(updated)}` : '';
 
 // Capitalize the first letter of the type
 const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note";
@@ -180,9 +180,9 @@ const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Note"
   
   /* Links styling */
   body .note-content a {
-    color: #2563eb;
+    color: #1f2937;
     text-decoration: none;
-    border-bottom: 1px solid #2563eb;
+    border-bottom: 1px solid #1f2937;
     transition: all 0.2s ease;
   }
   

@@ -80,7 +80,7 @@
   background-color: #f3f4f6;
   border: 1px solid #e5e7eb;
   color: #b91c1c;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-family: "Inter", sans-serif;
   cursor: default; /* Indicates it's not clickable */
   text-decoration: none;
@@ -136,15 +136,15 @@
 }
 
 .note-content a {
-  color: #2563eb;
+  color: #1f2937;
   text-decoration: none;
-  border-bottom: 1px solid #2563eb;
+  border-bottom: 1px solid #1f2937;
   transition: all 0.2s ease;
 }
 
 .note-content a:hover {
-  color: #ff8c00; /* Orange color on hover */
-  border-bottom: 1px solid #ff8c00;
+  color: #f48702; /* Orange color on hover */
+  border-bottom: 1px solid #f48702;
 }
 
 /* Wiki-style links */
