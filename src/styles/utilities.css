@@ -135,10 +135,10 @@
 
 /* Accessibility Utilities */
 .high-contrast {
-  --color-text: #000000;
+  --color-text: #1f2937;
   --color-background: #ffffff;
-  --color-primary: #000080;
-  --color-accent: #800000;
+  --color-primary: #1f2937080;
+  --color-accent: #81f293700;
 }
 
 .focus-visible:focus {

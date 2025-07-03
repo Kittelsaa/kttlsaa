@@ -151,9 +151,9 @@ html body .note-content a.wiki-link,
 html body .note-content a[href^="/notes/"],
 html body .note-content a[href*="bi-directional-links"],
 html body .note-content a[href*="non-linear-learning"] {
-  color: #000 !important; /* Black color */
+  color: #1f2937 !important; /* Black color */
   text-decoration: none;
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px dotted #1f2937;
   transition: all 0.2s ease;
 }
 

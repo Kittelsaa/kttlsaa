@@ -1,5 +1,5 @@
 .about-container {
-  max-width: 1200px; /* Increased from 1000px */
+  max-width: 1200px; /* Increased from 11f2937px */
   margin: 0 auto;
   padding: var(--space-l, 1.5rem) var(--space-m, 2rem);
   font-family: "Inter", sans-serif;
@@ -34,9 +34,9 @@
 }
 
 .social-list a {
-  color: #000;
+  color: #1f2937;
   text-decoration: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #1f2937;
   transition: all 0.2s ease;
   padding-right: var(--space-s);
 }
@@ -60,7 +60,7 @@
 .philosophy-paragraph {
   font-weight: 500;
   font-style: italic;
-  color: #000;
+  color: #1f2937;
 }
 
 .about-me {
@@ -78,9 +78,9 @@
 }
 
 .about-me a {
-  color: #000;
+  color: #1f2937;
   text-decoration: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #1f2937;
   transition: all 0.2s ease;
 }
 
