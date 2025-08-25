@@ -28,7 +28,7 @@
 }
 
 .back-link:hover {
-  color: #ff8c00; /* Orange color on hover */
+  color: #ff8c00;
   text-decoration: none;
 }
 
@@ -82,9 +82,9 @@
   color: #b91c1c;
   font-size: 0.75rem;
   font-family: "Inter", sans-serif;
-  cursor: default; /* Indicates it's not clickable */
+  cursor: default; 
   text-decoration: none;
-  border-radius: 0; /* No border radius */
+  border-radius: 0; 
 }
 
 .topic-tag:hover {
@@ -143,28 +143,26 @@
 }
 
 .note-content a:hover {
-  color: #f48702; /* Orange color on hover */
+  color: #f48702;
   border-bottom: 1px solid #f48702;
 }
 
-/* Wiki-style links */
 .note-content a.wiki-link {
-  color: #ff8c00; /* Orange color */
+  color: #ff8c00;
   text-decoration: none;
   border-bottom: 1px dotted #ff8c00;
   transition: all 0.2s ease;
 }
 
 .note-content a.wiki-link:hover {
-  color: #ff6b00; /* Darker orange on hover */
+  color: #ff6b00; 
   border-bottom: 1px solid #ff6b00;
 }
 
-/* Highlighted text */
 .note-content mark,
 .note-content .highlight {
   background-color: transparent;
-  color: #ff8c00; /* Orange color for highlighted text */
+  color: #ff8c00; 
   font-weight: 500;
 }
 
@@ -190,7 +188,6 @@
   border-top: 1px solid #e5e7eb;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .note-container {
     padding: 1.5rem 1rem;
@@ -227,9 +224,4 @@
     font-size: 2.5rem;
   }
 }
-
-
-
-
-
 

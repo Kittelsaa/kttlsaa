@@ -1,7 +1,3 @@
----
-import Button from './Button.astro';
----
-
 <div class="about-me"></div>
   <div class="social-section">
     <h3 class="section-title">SOCIAL</h3>
@@ -84,14 +80,14 @@ import Button from './Button.astro';
     font-weight: 500;
     font-style: italic;
     color: #ff8c00;
-    max-width: 100%; /* Use full width */
+    max-width: 100%; 
   }
   
   p {
     margin-bottom: var(--space-m);
-    line-height: 1.8; /* Increased for better readability */
+    line-height: 1.8; 
     font-size: 1.05rem;
-    max-width: 100%; /* Use full width */
+    max-width: 100%; 
   }
   
   .philosophy-section {
@@ -144,7 +140,6 @@ import Button from './Button.astro';
       margin-right: 0;
     }
   }
-  /* Add more spacing between sections */
   .contact-section, .philosophy-section {
     margin-bottom: var(--space-xl, 0rem);
   }
@@ -152,12 +147,10 @@ import Button from './Button.astro';
     margin-bottom: var(--space-xl, 0.8rem);
   }
   
-  /* Increase spacing between paragraphs */
   p {
     margin-bottom: var(--space-m, 1.5rem);
   }
   
-  /* Ensure section titles have enough space */
   .section-title {
     margin-bottom: var(--space-m, 1.5rem);
   }

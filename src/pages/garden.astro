@@ -4,15 +4,12 @@ import Layout from "../layouts/Layout.astro";
 import GardenNoteCard from "../components/cards/GardenNoteCard.astro";
 import GardenCollections from "../components/garden/GardenCollections.astro";
 
-// Fetch notes collection with error handling
-// Explicitly type allPosts as an array of objects with at least a 'data' property
 let allPosts: Array<{ data: any; [key: string]: any }> = [];
 try {
   allPosts = await getCollection('notes', ({ data }) => {
     return !data.draft;
   });
   
-  // Debug logging
   if (allPosts.length > 0) {
     console.log("First post:", {
       title: allPosts[0].data.title,
@@ -26,14 +23,12 @@ try {
   console.error("Error fetching notes collection:", error);
 }
 
-// Sort posts by updated date (newest first)
 const sortedPosts = allPosts.sort((a, b) => {
   const dateA = new Date(a.data.updated || a.data.startDate || 0).getTime();
   const dateB = new Date(b.data.updated || b.data.startDate || 0).getTime();
   return dateB - dateA;
 });
 
-// Extract unique topics and count them
 const allTopics = [...new Set(allPosts.flatMap(post => post.data.topics || []))].sort();
 
 const topicCounts: Record<string, number> = {};
@@ -43,16 +38,13 @@ allTopics.forEach(topic => {
   ).length;
 });
 
-// Extract unique growth stages
 const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))].filter(Boolean).sort();
 ---
 
 <Layout title="Digital Garden">
   <div class="container">
     <div class="garden-layout">
-      <!-- Collections Column -->
       <div class="collections-column">
-        <!-- Garden Introduction -->
         <div class="garden-intro">
           <h1 class="garden-title">My Digital Garden</h1>
           <p class="garden-description">
@@ -66,7 +58,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
         <GardenCollections topics={allTopics} counts={topicCounts} />
       </div>
       
-      <!-- Other Column -->
       <div class="notes-column">
         <div class="section-header">
           <h2 class="section-title">Entries</h2>
@@ -101,7 +92,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
 </Layout>
 
 <style>
-  /* Base Container */
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -110,7 +100,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     overflow-x: hidden;
   }
   
-  /* Garden Introduction */
   .garden-intro {
     margin-bottom: 2.5rem;
     border-bottom: 1px solid #e5e7eb;
@@ -146,7 +135,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     border-bottom: 1px solid #ff8c00;
   }
   
-  /* Main Layout Grid */
   .garden-layout {
     display: grid;
     grid-template-columns: minmax(0, 35%) minmax(0, 65%);
@@ -161,7 +149,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     min-width: 0;
   }
   
-  /* Section Headers */
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -181,7 +168,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-family: var(--font-sans, 'Inter', sans-serif);
   }
   
-  /* Filter Controls */
   .filter-controls {
     display: flex;
     gap: 1rem;
@@ -221,17 +207,15 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     font-size: 0.6rem;
   }
   
-  /* Notes Grid */
   .notes-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     width: 100%;
-    align-items: start; /* This prevents cards from stretching to match tallest card */
+    align-items: start; 
   }
   
   
-  /* Responsive Design */
   @media (max-width: 1024px) {
     .garden-layout {
       gap: 2rem;
@@ -337,31 +321,26 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     
     let currentTopicFilter = 'all';
     
-    // Date filter functionality
     if (dateFilter) {
       dateFilter.addEventListener('change', () => {
         sortNotes((dateFilter as HTMLSelectElement).value);
       });
     }
     
-    // Growth stage filter functionality
     if (growthFilter) {
       growthFilter.addEventListener('change', () => {
         filterByGrowthStage((growthFilter as HTMLSelectElement).value);
       });
     }
     
-    // Topic filter functionality
     topicFilters.forEach(filter => {
       filter.addEventListener('click', () => {
         const selectedTopic = filter.getAttribute('data-topic') || 'all';
         
         if (currentTopicFilter === selectedTopic) {
-          // Toggle off if clicking same filter
           currentTopicFilter = 'all';
           topicFilters.forEach(f => f.classList.remove('active'));
         } else {
-          // Activate new filter
           topicFilters.forEach(f => f.classList.remove('active'));
           filter.classList.add('active');
           currentTopicFilter = selectedTopic;
@@ -371,7 +350,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
       });
     });
     
-    // Sort notes by date
     function sortNotes(sortOrder: string) {
       const notesContainer = document.querySelector('.notes-list');
       if (!notesContainer) return;
@@ -385,13 +363,11 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
         return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
       });
       
-      // Re-append notes in sorted order
       notesArray.forEach(note => {
         notesContainer.appendChild(note);
       });
     }
     
-    // Filter notes by growth stage
     function filterByGrowthStage(growthStage: string) {
       noteCards.forEach(card => {
         const cardGrowthStage = (card as HTMLElement).dataset.growthStage?.toLowerCase();
@@ -404,7 +380,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
       });
     }
     
-    // Filter notes by topic
     function filterByTopic(topic: string) {
       noteCards.forEach(card => {
         const cardTopics = (card as HTMLElement).dataset.topics?.split(',') || [];
@@ -417,7 +392,6 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
       });
     }
     
-    // Initialize with default sorting
     if (dateFilter) {
       sortNotes((dateFilter as HTMLSelectElement).value);
     }

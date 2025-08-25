@@ -3,10 +3,8 @@ import { formatDate } from "../../utils/dates";
 
 const { note } = Astro.props;
 
-// Format the date
 const formattedDate = formatDate(note.data.updated || note.data.startDate);
 
-// Growth stage emojis
 const growthEmojis = {
   "seedling": "🌱",
   "budding": "🪴",
@@ -15,14 +13,11 @@ const growthEmojis = {
 
 type GrowthStage = keyof typeof growthEmojis;
 
-// Get the appropriate emoji
 const growthStageKey = (note.data.growthStage?.toLowerCase() ?? "seedling") as GrowthStage;
 const growthEmoji = growthEmojis[growthStageKey] || "🌱";
 
-// Determine note type - default to "Note" if not specified
 const noteType = note.data.type || "Note";
 
-// Ensure we have a valid slug
 const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
 ---
 
@@ -44,7 +39,7 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
   .garden-note-card {
     margin-bottom: 1rem;
     width: 100%;
-    overflow: hidden; /* Prevent content overflow */
+    overflow: hidden; 
     border: 1px solid #E8DBCF;
     padding: 1.25rem;
     box-sizing: border-box;
@@ -64,7 +59,7 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
     font-family: "Times New Roman", Times, serif;
     color: #1f2937;
     line-height: 1.3;
-    word-wrap: break-word; /* Allow long titles to wrap */
+    word-wrap: break-word; 
     overflow-wrap: break-word;
     hyphens: auto;
   }
@@ -79,7 +74,7 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
     align-items: center;
     color: #6b7280;
     padding-bottom: 0.8rem;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    flex-wrap: wrap; 
     gap: 0.5rem;
   }
   
@@ -144,5 +139,3 @@ const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, ''
     }
   }
 </style>
-
-

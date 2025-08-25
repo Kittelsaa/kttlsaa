@@ -1,4 +1,5 @@
 ---
+/*Outbound links - Notes*/
 interface Link {
   title: string;
   slug: string;
@@ -12,7 +13,6 @@ interface Props {
 import GrowthIcon from './GrowthIcon.astro';
 const { links } = Astro.props;
 
-// Ensure links is always an array, even if undefined
 const outboundLinks = links || [];
 ---
 

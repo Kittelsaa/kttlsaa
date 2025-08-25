@@ -1,7 +1,5 @@
-/* Import the fonts directly in CSS */
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* Define font variables */
 :root {
   --font-heading: 'Averia Serif Libre', serif;
   --font-body: 'Inter', sans-serif;
@@ -11,7 +9,6 @@ html, body {
   background-color: #FFF8F4;
 }
 
-/* Apply to all headings with maximum specificity */
 html body h1, 
 html body h2, 
 html body h3, 
@@ -24,7 +21,6 @@ html body [class*="heading"] {
   font-family: var(--font-heading) !important;
 }
 
-/* Apply Inter to all body text with high specificity */
 html body p,
 html body a,
 html body span,
@@ -41,7 +37,6 @@ html body code {
   cursor: default !important;
 }
 
-/* Target specific components */
 html body header h1, 
 html body header h2, 
 html body header h3,
@@ -60,13 +55,11 @@ html body div h3 {
   font-family: var(--font-heading) !important;
 }
 
-/* Custom selection highlight color - FIXED VERSION */
 ::selection {
   background-color: #ff8b4d;
   color: #ffffff;
 }
 
-/* For Firefox */
 ::-moz-selection {
   background-color: #ff8b4d;
   color: #ffffff;

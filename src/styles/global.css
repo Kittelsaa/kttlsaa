@@ -92,7 +92,6 @@ h1, h2, h3, h4, h5 {
   line-height: 1.2;
 }
 
-/* Reset all heading fonts with high specificity */
 html body h1,
 html body h2,
 html body h3,
@@ -101,8 +100,6 @@ html body h5 {
   font-family: 'Averia Serif Libre', serif !important;
   font-weight: 400;
 }
-
-/* Ensure the font is applied to specific components too */
 html body .title,
 html body .heading,
 html body [class*="title"],
@@ -115,12 +112,9 @@ html body main h2,
 html body main h3 {
   font-family: 'Averia Serif Libre', serif !important;
 }
-
-/* Paragraph and other text elements */
 p, li, a, span, blockquote, label, input, textarea {
   font-family: 'Inter', sans-serif !important;
 }
-
 p {
   margin-bottom: 1rem;
 }
@@ -174,7 +168,6 @@ a.button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Update text color for specific elements to orange */
 .accent-text,
 .button .accent-text {
   color: var(--color-accent);
@@ -235,7 +228,6 @@ button[type="submit"] .icon {
   justify-content: center;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;
@@ -255,7 +247,7 @@ a.wiki-link,
 a[href^="/notes/"],
 a[href*="bi-directional-links"],
 a[href*="non-linear-learning"] {
-  color: black !important; /* Orange color with !important to override any other styles */
+  color: black !important;
   text-decoration: none;
   border-bottom: 1px dotted black;
   transition: all 0.2s ease;
@@ -265,16 +257,14 @@ a.wiki-link:hover,
 a[href^="/notes/"]:hover,
 a[href*="bi-directional-links"]:hover,
 a[href*="non-linear-learning"]:hover {
-  color: #ff6b00 !important; /* Darker orange on hover */
+  color: #ff6b00 !important;
   border-bottom: 1px solid #ff6b00;
 }
 
-/* Global override for all elements that might have border-radius */
 * {
   border-radius: 0 !important;
 }
 
-/* Specific overrides for common elements */
 button,
 a.button,
 .button,
@@ -290,7 +280,6 @@ select,
   border-radius: 0 !important;
 }
 
-/* Ensure no drop cap on mobile devices */
 @media (max-width: 768px) {
   html body .note-content p:first-of-type::first-letter,
   html body article p:first-of-type::first-letter,
@@ -306,9 +295,7 @@ select,
   }
 }
 
-/* Responsive styles for hashtags and special content */
 @media (max-width: 768px) {
-  /* Hashtag styling for mobile */
   [class^="#"], 
   [id^="#"],
   .hashtag,
@@ -325,13 +312,11 @@ select,
     box-sizing: border-box;
   }
   
-  /* Ensure all content fits within viewport */
   .note-content * {
     max-width: 100%;
     box-sizing: border-box;
   }
   
-  /* Improve image display on mobile */
   .note-content img,
   .note-content video,
   .note-content iframe {
@@ -341,7 +326,6 @@ select,
     display: block;
   }
   
-  /* Handle embedded content */
   .note-content iframe,
   .note-content embed,
   .note-content object {
@@ -350,7 +334,6 @@ select,
   }
 }
 
-/* Fix for all images in notes content */
 @media (max-width: 768px) {
   .note-content img,
   .note-content .remote-image img,

@@ -1,10 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 
-// Get all topics and counts if not provided as props
 const { topics = [], counts = {} } = Astro.props;
 
-// If no topics provided, get them from the collection
 let allTopics = topics;
 let topicCounts = counts;
 
@@ -12,7 +10,6 @@ if (topics.length === 0) {
   const notes = await getCollection("notes");
   allTopics = [...new Set(notes.flatMap(note => note.data.topics || []))].sort();
   
-  // Count notes per topic
   allTopics.forEach((topic: string) => {
     topicCounts[topic] = notes.filter(note => 
       note.data.topics && note.data.topics.includes(topic)
@@ -20,7 +17,6 @@ if (topics.length === 0) {
   });
 }
 
-// Use the specific topics from the garden
 const displayTopics = [
   { name: "AI", count: topicCounts["AI"] || 1 },
   { name: "Digital Anthropology", count: topicCounts["Digital Anthropology"] || 3 },
@@ -30,7 +26,6 @@ const displayTopics = [
 
 <div class="garden-collections">
   <div class="collections-container">
-    <!-- First row: Main collections (2 columns) -->
     <div class="row main-row">
       <a href="/stream" class="cell main-cell">
         <h3 class="item-title">STREAM</h3>
@@ -43,7 +38,6 @@ const displayTopics = [
       </a>
     </div>
     
-    <!-- Second row: Topics (3 columns) -->
     <div class="row topics-row">
       {displayTopics.map((topic, index) => (
         <div class={`cell topic-filter ${index === displayTopics.length - 1 ? 'last-topic' : ''}`} data-topic={topic.name}>
@@ -90,7 +84,6 @@ const displayTopics = [
     border-right: 1px solid #E8DBCF;
   }
 
-  /* Main row cells */
   .main-cell {
     width: 50%;
     text-decoration: none;
@@ -101,7 +94,6 @@ const displayTopics = [
     border-right: none;
   }
 
-  /* Topic row cells */
   .topic-filter {
     width: 33.333%;
     cursor: pointer;
@@ -119,7 +111,6 @@ const displayTopics = [
     background-color: #FFF2EB;
   }
 
-  /* Remove bottom border from last row */
   .topics-row .cell {
     border-bottom: none;
   }
@@ -159,7 +150,6 @@ const displayTopics = [
       margin-right: 0;
     }
     
-    /* Remove bottom border from last cell in mobile */
     .topics-row .cell:last-child {
       border-bottom: none;
     }
@@ -184,41 +174,32 @@ const displayTopics = [
 </style>
 
 <script>
-  // Client-side filtering logic
   document.addEventListener('DOMContentLoaded', () => {
     const topicFilters = document.querySelectorAll('.topic-filter');
     const noteCards = document.querySelectorAll('.note-card');
     
-    // Add "All" filter state
     let currentFilter = 'all';
     
-    // Add click event to each topic filter
     topicFilters.forEach(filter => {
       filter.addEventListener('click', () => {
         const selectedTopic = filter.getAttribute('data-topic') || '';
         
-        // Toggle active state if clicking the same filter again
         if (currentFilter === selectedTopic) {
           currentFilter = 'all';
           topicFilters.forEach(f => f.classList.remove('active'));
         } else {
-          // Remove active class from all filters
           topicFilters.forEach(f => f.classList.remove('active'));
           
-          // Add active class to clicked filter
           filter.classList.add('active');
           currentFilter = selectedTopic;
         }
         
-        // Filter notes
         filterNotes(currentFilter);
       });
     });
     
-    // Function to filter notes by topic
     function filterNotes(topic: string) {
       noteCards.forEach(card => {
-        // Get topics from the card's data attribute
         const cardTopics = card.getAttribute('data-topics')?.split(',') || [];
         
         if (topic === 'all' || cardTopics.includes(topic)) {

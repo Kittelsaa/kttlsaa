@@ -1,19 +1,12 @@
-/**
- * Format a date string into a more readable format
- * @param {string} dateString - The date string to format
- * @returns {string} - The formatted date string
- */
 export function formatDate(dateString) {
   if (!dateString) return '';
   
   const date = new Date(dateString);
   
-  // Check if the date is valid
   if (isNaN(date.getTime())) {
     return dateString;
   }
   
-  // Format the date as Month Day, Year
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -21,17 +14,11 @@ export function formatDate(dateString) {
   });
 }
 
-/**
- * Get a relative time string (e.g., "2 days ago")
- * @param {string} dateString - The date string to format
- * @returns {string} - The relative time string
- */
 export function getRelativeTimeString(dateString) {
   if (!dateString) return '';
   
   const date = new Date(dateString);
   
-  // Check if the date is valid
   if (isNaN(date.getTime())) {
     return dateString;
   }

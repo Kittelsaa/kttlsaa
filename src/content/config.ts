@@ -9,7 +9,7 @@ const notes = defineCollection({
     updated: z.string(),
     type: z.string()
       .transform(val => val.toLowerCase())
-      .pipe(z.enum(['note', 'essay', 'concept', 'reference']))
+      .pipe(z.enum(['note', 'essay', 'knowledge base']))
       .optional()
       .default('note'),
     topics: z.array(z.string()).optional(),
@@ -21,10 +21,6 @@ const notes = defineCollection({
       url: z.string(),
       alt: z.string(),
       width: z.string().optional(),
-    }).optional(),
-    video: z.object({
-      url: z.string(),
-      title: z.string(),
     }).optional(),
     outboundLinks: z.array(z.object({
       title: z.string(),
@@ -39,7 +35,6 @@ const notes = defineCollection({
       description: z.string(),
     })).optional(),
   }),
-  // Add the loader configuration to specify where the notes are located
   loader: glob({
     pattern: 'notes/**/*.{md,mdx}',
     base: './src/content'
@@ -49,10 +44,4 @@ const notes = defineCollection({
 export const collections = {
   notes
 };
-
-
-
-
-
-
 

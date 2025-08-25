@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import PageWrapper from "../components/layouts/PageWrapper.astro";
 
-// Access the error prop that Astro automatically passes to this page
 const { error } = Astro.props;
 const errorType = Astro.url.searchParams.get('error') || 'unknown';
 ---

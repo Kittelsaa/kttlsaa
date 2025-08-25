@@ -1,6 +1,5 @@
 ---
 import { formatDate } from "../utils/dates";
-import GrowthIcon from "./GrowthIcon.astro";
 
 type Note = {
   slug: string;
@@ -109,7 +108,6 @@ const { notes, showDate = true } = Astro.props;
     }
   }
 
-  /* Add styles for note type */
   .note-type {
     font-size: 0.75rem;
     font-weight: 600;
@@ -125,4 +123,3 @@ const { notes, showDate = true } = Astro.props;
     margin-bottom: 0.5rem;
   }
 </style>
-

@@ -1,27 +1,22 @@
 import { getCollection } from 'astro:content';
 
-// Function to get a note by slug
 export async function getNote(slug) {
   const notes = await getCollection('notes');
   return notes.find(note => {
-    // Check if the note has a slug property or use the filename
     const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
     return noteSlug === slug;
   });
 }
 
-// Find backlinks to a specific note
 export async function findBacklinks(currentSlug, maxDepth = 1) {
   const allNotes = await getCollection('notes');
   const backlinks = [];
   
   for (const note of allNotes) {
-    // Get the note's slug or derive it from the filename
     const noteSlug = note.slug || note.id.split('/').pop().replace(/\.(md|mdx)$/, '');
     
-    if (noteSlug === currentSlug) continue; // Skip the current note
+    if (noteSlug === currentSlug) continue; 
     
-    // Check if this note links to the current note
     const content = note.body;
     const wikiLinkRegex = /\[\[(.*?)(?:\|(.*?))?\]\]/g;
     let match;
@@ -30,7 +25,6 @@ export async function findBacklinks(currentSlug, maxDepth = 1) {
     while ((match = wikiLinkRegex.exec(content)) !== null) {
       const linkedSlug = match[1].toLowerCase().replace(/ /g, '-');
       
-      // Also check aliases
       const isDirectLink = linkedSlug === currentSlug;
       const isAliasLink = note.data.aliases?.some(
         alias => alias.toLowerCase().replace(/ /g, '-') === currentSlug
@@ -38,7 +32,7 @@ export async function findBacklinks(currentSlug, maxDepth = 1) {
       
       if (isDirectLink || isAliasLink) {
         hasLink = true;
-        break; // Only add each note once
+        break; 
       }
     }
     
@@ -55,31 +49,26 @@ export async function findBacklinks(currentSlug, maxDepth = 1) {
   return backlinks;
 }
 
-// Export the getOutboundLinks function
 export async function getOutboundLinks(note, maxDepth = 1) {
-  if (maxDepth <= 0) return []; // Prevent infinite recursion
+  if (maxDepth <= 0) return []; 
   
-  // Check if outbound links are defined in frontmatter
   if (note.data.outboundLinks) {
     return note.data.outboundLinks;
   }
   
-  // Otherwise, extract links from content
   const outboundLinks = [];
   const content = note.body;
   const wikiLinkRegex = /\[\[(.*?)(?:\|(.*?))?\]\]/g;
   let match;
   
-  const processedSlugs = new Set(); // To avoid duplicates
+  const processedSlugs = new Set();
   
   while ((match = wikiLinkRegex.exec(content)) !== null) {
     const linkedSlug = match[1].toLowerCase().replace(/ /g, '-');
     
-    // Skip if already processed
     if (processedSlugs.has(linkedSlug)) continue;
     processedSlugs.add(linkedSlug);
     
-    // Find the linked note
     const linkedNote = await getNote(linkedSlug);
     if (linkedNote) {
       outboundLinks.push({
@@ -94,22 +83,18 @@ export async function getOutboundLinks(note, maxDepth = 1) {
   return outboundLinks;
 }
 
-// Detect circular references with async support
 export async function detectCircularReferences(startSlug, visited = new Set()) {
   if (visited.has(startSlug)) {
-    return true; // Circular reference detected
+    return true; 
   }
   
   visited.add(startSlug);
   
-  // Get outbound links for this note
   const note = await getNote(startSlug);
   if (!note) return false;
   
-  // Get outbound links from the note content
   const outboundSlugs = await getOutboundSlugsFromNote(note);
   
-  // Check each outbound link for circular references
   for (const slug of outboundSlugs) {
     if (await detectCircularReferences(slug, new Set([...visited]))) {
       return true;
@@ -119,7 +104,6 @@ export async function detectCircularReferences(startSlug, visited = new Set()) {
   return false;
 }
 
-// Helper function to extract outbound slugs from a note
 async function getOutboundSlugsFromNote(note) {
   const content = note.body;
   const wikiLinkRegex = /\[\[(.*?)(?:\|(.*?))?\]\]/g;
@@ -133,7 +117,3 @@ async function getOutboundSlugsFromNote(note) {
   
   return [...slugs];
 }
-
-
-
-

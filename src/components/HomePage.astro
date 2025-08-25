@@ -4,7 +4,6 @@ import HomeButton from './HomeButton.astro';
 
 <section class="home-section">
   <div class="container">
-    <!-- Intro Section -->
     <div class="intro-section">
       <h1 style="font-family: 'Averia Serif Libre', serif; font-weight: 400;" class="main-title">Hello, I'm Kittelsaa</h1>
       <p class="intro-text">
@@ -22,9 +21,7 @@ import HomeButton from './HomeButton.astro';
       </div>
     </div>
     
-    <!-- Resources and Subscribe Row -->
     <div class="content-grid">
-      <!-- Left Column: Resources & Guides (60%) -->
       <div class="subsection resources-section">
         <h2 class="section-title">Resources & Guides</h2>
         <div class="collections-table">
@@ -43,7 +40,6 @@ import HomeButton from './HomeButton.astro';
         </div>
       </div>
       
-      <!-- Right Column: Subscribe Section (40%) -->
       <div class="subsection subscribe-section">
         <h2 class="section-title-description">Stay Updated</h2>
         <script async data-uid="b372a7efec" src="https://kttlsaa.kit.com/b372a7efec/index.js"></script>
@@ -60,7 +56,6 @@ import HomeButton from './HomeButton.astro';
     padding: 3rem 0;
   }
 
-  /* Intro Section */
   .intro-section {
     text-align: center;
     margin-bottom: 4rem;
@@ -89,7 +84,6 @@ import HomeButton from './HomeButton.astro';
     margin-top: 2rem;
   }
   
-  /* Content Grid */
   .content-grid {
     display: grid;
     grid-template-columns: 70% 1fr;
@@ -97,7 +91,6 @@ import HomeButton from './HomeButton.astro';
     margin-bottom: 3rem;
   }
   
-  /* Resources Section */
   .resources-section {
     margin-bottom: 0rem;
   }
@@ -132,12 +125,10 @@ import HomeButton from './HomeButton.astro';
     position: relative;
   }
   
-  /* Remove right border from last column */
   .collection-item:nth-child(2n) {
     border-right: none;
   }
   
-  /* Remove bottom border from last row */
   .collection-item:nth-last-child(-n+2) {
     border-bottom: none;
   }
@@ -198,14 +189,12 @@ import HomeButton from './HomeButton.astro';
   .subscribe-section * {
     box-sizing: border-box;
   }
-  /* Target ConvertKit form by data attribute */
   .subscribe-section [data-uid="b372a7efec"],
   .subscribe-section [data-uid="b372a7efec"] * {
     padding: 0 !important;
     margin: 0 !important;
   }
 
-  /* Specific ConvertKit classes */
   .subscribe-section .formkit-form,
   .subscribe-section .formkit-fields,
   .subscribe-section .formkit-field {
@@ -213,7 +202,6 @@ import HomeButton from './HomeButton.astro';
     margin: 0 !important;
   }
 
-  /* Reset any wrapper divs */
   .subscribe-section .formkit-form > div,
   .subscribe-section .formkit-form div[style*="padding"] {
     padding: 0 !important;
@@ -264,7 +252,7 @@ import HomeButton from './HomeButton.astro';
     box-sizing: border-box;
   }
   
-  /* Responsive Styles */
+
   @media (max-width: 1024px) {
     .main-title {
       font-size: 2.5rem;
@@ -314,7 +302,7 @@ import HomeButton from './HomeButton.astro';
       grid-template-columns: 1fr;
     }
     
-    /* Mobile: Reset borders for single column layout */
+
     .collection-item {
       border-right: none !important;
       border-bottom: 1px solid #E8DBCF !important;
@@ -377,18 +365,15 @@ import HomeButton from './HomeButton.astro';
     }
   }
 
-  /* Add this to ensure Averia font is applied to all buttons */
   :global(.home-button),
   :global(.home-button .button-text) {
     font-family: 'Averia Serif Libre', serif !important;
   }
   
-  /* Ensure the font is loaded */
   @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 </style>
 
 <style is:global>
-  /* Direct override for button text */
   .home-button span,
   .button-text,
   .home-button .button-text {

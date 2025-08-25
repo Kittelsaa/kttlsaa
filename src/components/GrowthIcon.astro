@@ -1,7 +1,6 @@
 ---
 const { growthStage, showEmoji = false } = Astro.props;
 
-// Map growth stages to emojis
 const growthEmojis = {
   'seedling': '🌱',
   'budding': '🪴',
@@ -10,7 +9,6 @@ const growthEmojis = {
 
 type GrowthStage = keyof typeof growthEmojis;
 
-// Get the appropriate emoji
 const emoji = growthEmojis[(growthStage?.toLowerCase() as GrowthStage) ?? 'seedling'] || '🌱';
 ---
 
@@ -47,10 +45,6 @@ const emoji = growthEmojis[(growthStage?.toLowerCase() as GrowthStage) ?? 'seedl
     background-color: #059669;
   }
   
-  .growth-icon[data-stage="blooming"] {
-    background-color: #d946ef;
-  }
-  
   .sr-only {
     position: absolute;
     width: 1px;
@@ -63,6 +57,3 @@ const emoji = growthEmojis[(growthStage?.toLowerCase() as GrowthStage) ?? 'seedl
     border-width: 0;
   }
 </style>
-
-
-

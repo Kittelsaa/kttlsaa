@@ -1,5 +1,3 @@
-/* Utility classes for common patterns */
-
 /* Layout utilities */
 .container {
   width: 100%;
@@ -133,7 +131,7 @@
   }
 }
 
-/* Accessibility Utilities */
+
 .high-contrast {
   --color-text: #1f2937;
   --color-background: #ffffff;
@@ -145,8 +143,6 @@
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
-
-/* Button utilities */
 .btn,
 .button,
 button,
@@ -155,22 +151,14 @@ input[type="submit"],
 input[type="reset"] {
   border-radius: 0 !important;
 }
-
-/* Input utilities */
 input,
 textarea,
 select {
   border-radius: 0 !important;
 }
-
-/* Card and container utilities */
 .card,
 .container,
 .box,
 .panel {
   border-radius: 0 !important;
 }
-
-
-
-

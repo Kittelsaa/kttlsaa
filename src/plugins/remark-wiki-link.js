@@ -15,7 +15,6 @@ export function remarkWikiLink() {
         const startIndex = match.index;
         const endIndex = startIndex + fullMatch.length;
 
-        // Add text before the match
         if (startIndex > lastIndex) {
           children.push({
             type: "text",
@@ -23,19 +22,17 @@ export function remarkWikiLink() {
           });
         }
 
-        // Find the matching post in linkMaps
         const matchedPost = linkMaps.find((post) =>
           post.ids.some((id) => id.toLowerCase() === linkText.toLowerCase())
         );
 
         if (matchedPost) {
-          // Create a link node with the wiki-link class
           children.push({
             type: "link",
             url: `/${matchedPost.slug}`,
             data: {
               hProperties: {
-                className: ["wiki-link"], // Add the wiki-link class
+                className: ["wiki-link"], 
               },
             },
             children: [
@@ -46,7 +43,6 @@ export function remarkWikiLink() {
             ],
           });
         } else {
-          // No match found, just add as plain text
           children.push({
             type: "text",
             value: linkText,
@@ -56,7 +52,6 @@ export function remarkWikiLink() {
         lastIndex = endIndex;
       });
 
-      // Add any remaining text
       if (lastIndex < node.value.length) {
         children.push({
           type: "text",
@@ -64,7 +59,6 @@ export function remarkWikiLink() {
         });
       }
 
-      // Replace the current node with the new children
       parent.children.splice(index, 1, ...children);
     });
   };

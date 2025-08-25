@@ -8,7 +8,6 @@ export async function getStaticPaths() {
   const notes = await getCollection('notes');
   
   return notes.map(note => {
-    // Use the file path as the slug if not explicitly defined
     const slug = note.id ? note.id.split('/').pop()?.replace(/\.(md|mdx)$/, '') : undefined;
     
     if (!slug) {
@@ -30,10 +29,8 @@ if (!slug) {
 
 const { note } = Astro.props;
 
-// Use a try-catch block to handle potential MDX rendering errors
 let Content;
 try {
-  // Use the new render function from astro:content
   const rendered = await render(note);
   Content = rendered.Content;
 } catch (error) {
@@ -41,7 +38,6 @@ try {
   return Astro.redirect('/500?error=rendering-failed');
 }
 
-// Get backlinks only, remove outbound links
 const backlinks = await findBacklinks(note.id, 1) || [];
 ---
 
@@ -51,7 +47,6 @@ const backlinks = await findBacklinks(note.id, 1) || [];
   </div>
   
   <div class="note-connections">
-    <!-- OutboundLinks component removed -->
   </div>
 </NoteLayout>
 
@@ -66,7 +61,5 @@ const backlinks = await findBacklinks(note.id, 1) || [];
     border-top: 1px solid var(--color-border);
   }
 </style>
-
-
 
 

@@ -1,12 +1,9 @@
 ---
-// This component safely renders wiki-style links without causing infinite recursion
 const { content, processed = false } = Astro.props;
 
-// Only process wiki links if not already processed
 function processWikiLinks(text: string | undefined) {
   if (!text || processed) return text || '';
   
-  // Replace wiki links with standard markdown links
   return text.replace(
     /\[\[(.*?)(?:\|(.*?))?\]\]/g, 
     (_, target, label = target) => {

@@ -1,6 +1,3 @@
----
-// BackButton.astro - A component that provides a "go back" functionality
----
 
 <button id="back-button" class="back-button" aria-label="Go back">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -10,21 +7,17 @@
 </button>
 
 <script>
-  // Get the back button element
   const backButton = document.getElementById('back-button');
   
   if (backButton) {
     backButton.addEventListener('click', () => {
-      // Check if there's history to go back to
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        // Fallback to garden page if no history
         window.location.href = '/garden';
       }
     });
     
-    // Hide the back button on the garden page
     if (window.location.pathname === '/garden' || window.location.pathname === '/garden/') {
       backButton.style.display = 'none';
     }

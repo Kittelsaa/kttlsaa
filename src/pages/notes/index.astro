@@ -4,23 +4,18 @@ import NotesList from "../../components/NotesList.astro";
 import { getCollection } from "astro:content";
 import "../../styles/note-page.css";
 
-// Get all notes
 const allNotes = await getCollection("notes");
 
-// Sort by date (newest first by default)
 const sortedNotes = allNotes.sort((a, b) => {
   const dateA = new Date(a.data.startDate || a.data.updated || 0);
   const dateB = new Date(b.data.startDate || b.data.updated || 0);
   return dateB.getTime() - dateA.getTime();
 });
 
-// Get unique topics
 const allTopics = [...new Set(allNotes.flatMap(note => note.data.topics || []))].sort();
 
-// Get unique growth stages
 const allGrowthStages = [...new Set(allNotes.map(note => note.data.growthStage))].sort();
 
-// Get unique note types
 const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))].sort();
 ---
 
@@ -166,34 +161,28 @@ const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))
 </style>
 
 <script>
-  // Client-side filtering and sorting logic
   const sortFilter = document.getElementById('sort-filter');
   const growthFilter = document.getElementById('growth-filter');
   const topicFilter = document.getElementById('topic-filter');
   const typeFilter = document.getElementById('type-filter');
   const notesList = document.getElementById('notes-list');
   
-  // Add event listeners to filters
   sortFilter.addEventListener('change', updateNotes);
   growthFilter.addEventListener('change', updateNotes);
   topicFilter.addEventListener('change', updateNotes);
   typeFilter.addEventListener('change', updateNotes);
   
   function updateNotes() {
-    // Get current filter values
     const sortValue = sortFilter.value;
     const growthValue = growthFilter.value.toLowerCase();
     const topicValue = topicFilter.value.toLowerCase();
     const typeValue = typeFilter.value.toLowerCase();
     
-    // Get all note items
     const noteItems = document.querySelectorAll('.note-item');
     
-    // Loop through each note and check if it matches the filters
     noteItems.forEach(note => {
       let showNote = true;
       
-      // Check growth stage filter
       if (growthValue !== 'all') {
         const noteGrowthStage = note.querySelector('.note-status')?.textContent?.toLowerCase();
         if (noteGrowthStage !== growthValue) {
@@ -201,17 +190,13 @@ const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))
         }
       }
       
-      // Check topic filter
       if (topicValue !== 'all' && showNote) {
-        // We need to adapt this for the new layout
-        // This is a simplified version that might need adjustment
         const noteTitle = note.querySelector('.note-title')?.textContent?.toLowerCase() || '';
         if (!noteTitle.includes(topicValue)) {
           showNote = false;
         }
       }
       
-      // Check type filter
       if (typeValue !== 'all' && showNote) {
         const noteType = note.dataset.type?.toLowerCase() || 'note';
         if (noteType !== typeValue) {
@@ -219,11 +204,9 @@ const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))
         }
       }
       
-      // Show or hide the note
       note.style.display = showNote ? 'grid' : 'none';
     });
     
-    // Sort notes if needed
     if (sortValue !== 'newest') {
       const notesContainer = notesList.querySelector('.notes-list-container');
       const noteItemsArray = Array.from(noteItems).filter(note => note.style.display !== 'none');
@@ -242,16 +225,10 @@ const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))
         });
       }
       
-      // Reappend notes in the new order
       noteItemsArray.forEach(note => {
         notesContainer.appendChild(note);
       });
     }
   }
 </script>
-
-
-
-
-
 
