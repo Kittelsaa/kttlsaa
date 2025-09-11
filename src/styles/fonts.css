@@ -6,7 +6,9 @@
 }
 
 html, body {
-  background-color: #FFF8F4;
+  background-color: #FFF8F4; 
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 html body h1, 
@@ -53,14 +55,4 @@ html body div h1,
 html body div h2, 
 html body div h3 {
   font-family: var(--font-heading) !important;
-}
-
-::selection {
-  background-color: #ff8b4d;
-  color: #ffffff;
-}
-
-::-moz-selection {
-  background-color: #ff8b4d;
-  color: #ffffff;
 }
