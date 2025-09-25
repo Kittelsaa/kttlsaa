@@ -1,8 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import FontLoader from "../components/FontLoader.astro";
-import "../styles/fonts.css";
+import "../styles/global.css";
 
 export interface Props {
   title: string;
@@ -35,12 +34,7 @@ const canonicalURL = Astro.url;
     <meta name="description" content={description} />
     
     <meta name="theme-color" content="#1f2937" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    
-    <FontLoader />
+   
   </head>
   <body>
     <div class="layout-wrapper">
@@ -77,6 +71,6 @@ const canonicalURL = Astro.url;
   }
   
   h1, h2, h3, h4, h5 {
-    font-family: 'Averia Serif Libre', serif !important;
+    font-family: var(--font-title);
   }
 </style>

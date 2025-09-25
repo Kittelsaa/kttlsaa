@@ -29,6 +29,13 @@ if (!slug) {
 
 const { note } = Astro.props;
 
+type Props = {
+  note: {
+    id: string;
+    data: any;
+  };
+};
+
 let Content;
 try {
   const rendered = await render(note);
@@ -45,20 +52,12 @@ const backlinks = await findBacklinks(note.id, 1) || [];
   <div class="note-main-content">
     <Content />
   </div>
-  
-  <div class="note-connections">
-  </div>
 </NoteLayout>
 
 <style>
   .note-main-content {
     margin-bottom: var(--space-xl);
-  }
-  
-  .note-connections {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-m);
-    border-top: 1px solid var(--color-border);
+    border: none;
   }
 </style>
 

@@ -102,37 +102,37 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
   
   .garden-intro {
     margin-bottom: 2.5rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.6rem;
     width: 100%;
   }
   
   .garden-title {
-    font-family: "Times New Roman", Times, serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--color-text);
     margin: 0 0 1.25rem;
   }
   
   .garden-description {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: var(--color-grey);
     max-width: 800px;
     line-height: 1.6;
     margin: 0 0 1.5rem;
   }
   
   .garden-link {
-    color: #1f2937;
+    color: var(--color-text);
     text-decoration: none;
-    border-bottom: 1px dotted #1f2937;
+    border-bottom: 1px dotted var(--color-text);
     transition: all 0.2s ease;
   }
   
   .garden-link:hover {
-    color: #ff8c00;
-    border-bottom: 1px solid #ff8c00;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-accent);
   }
   
   .garden-layout {
@@ -161,9 +161,8 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
   .section-title {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #7B7B7A;
+    color: var(--color-text-muted);
     margin: 0;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
     font-family: var(--font-sans, 'Inter', sans-serif);
   }
@@ -181,20 +180,20 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
   .filter-dropdown select {
     appearance: none;
     background-color: transparent;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-border);
     padding: 0.4rem 2rem 0.4rem 0.75rem;
     font-size: 0.8rem;
-    color: #6b7280;
+    color: var(--color-grey);
     border-radius: 4px;
     cursor: pointer;
-    font-family: var(--font-sans, 'Inter', sans-serif);
+    font-family: var(--font-body);
     min-width: 120px;
     max-width: 100%;
   }
   
   .filter-dropdown select:focus {
     outline: none;
-    border-color: #6b7280;
+    border-color: var(--color-grey);
   }
   
   .dropdown-arrow {
@@ -203,7 +202,7 @@ const allGrowthStages = [...new Set(allPosts.map(post => post.data.growthStage))
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-    color: #6b7280;
+    color: var(--color-grey);
     font-size: 0.6rem;
   }
   

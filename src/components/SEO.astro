@@ -23,14 +23,14 @@ const {
   publishedTime,
   modifiedTime,
   tags = [],
-  author = "kttlsaa",
+  author = "Kittelsaa Nyampundu",
   section
 } = Astro.props;
 
 // Construct full URLs
 const canonicalURL = canonical ? new URL(canonical, Astro.site) : Astro.url;
 const imageURL = new URL(image, Astro.site);
-const siteName = "kttlsaa Digital Garden";
+const siteName = "kttlsaa - Digital Garden";
 
 // Generate JSON-LD structured data
 const jsonLd = {
@@ -42,11 +42,11 @@ const jsonLd = {
   "image": imageURL.href,
   ...(type === "article" && {
     "author": {
-      "@type": "Person",
+      "@type": "Kittelsaa Nyampundu",
       "name": author
     },
     "publisher": {
-      "@type": "Organization",
+      "@type": "Kittelsaa Nyampundu",
       "name": siteName,
       "logo": {
         "@type": "ImageObject",

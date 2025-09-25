@@ -113,12 +113,12 @@ const allNoteTypes = [...new Set(allNotes.map(note => note.data.type || 'note'))
     transform: translateY(-50%);
     pointer-events: none;
     font-size: 0.7rem;
-    color: #6b7280;
+    color: var(--color-grey);
   }
   
   .filter-select {
     padding: 0.5rem 2rem 0.5rem 0.75rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-border);
     border-radius: 0 !important;
     background-color: white;
     font-size: 0.875rem;

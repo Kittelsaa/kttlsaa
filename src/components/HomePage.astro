@@ -13,10 +13,10 @@ import HomeButton from './HomeButton.astro';
       </p>
       <div class="cta-buttons">
         <HomeButton href="/garden" variant="secondary" >
-          <span style="font-family: 'Averia Serif Libre', serif !important;">Browse The Garden ☘︎</span>
+          <span style="var(--font-body);">Browse The Garden</span>
         </HomeButton>
         <HomeButton href="/about" variant="primary" class="connect-button">
-          <span style="font-family: 'Averia Serif Libre', serif !important;">Let's Connect ✶</span>
+          <span style="var(--font-body);">Let's Connect</span>
         </HomeButton>
       </div>
     </div>
@@ -33,7 +33,7 @@ import HomeButton from './HomeButton.astro';
             </div>
             <div class="collection-item">
               <h3 class="item-title">Note-Taking Guide</h3>
-              <p class="item-desc">A flexible & practical guide to help transform your note-taking process, leading to more intuitive & creative discoveries.</p>
+              <p class="item-desc">A practical guide to help transform your note-taking process, leading to more intuitive & creative discoveries.</p>
               <a href="https://taking-notes-guide.kttlsaa.com/" class="view-link">View Guide</a>
             </div>
           </div>
@@ -58,7 +58,7 @@ import HomeButton from './HomeButton.astro';
 
   .intro-section {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -74,7 +74,7 @@ import HomeButton from './HomeButton.astro';
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    color: var(--color-text-muted, #666);
+    color: var(--color-text-muted);
   }
   
   .cta-buttons {
@@ -86,8 +86,8 @@ import HomeButton from './HomeButton.astro';
   
   .content-grid {
     display: grid;
-    grid-template-columns: 70% 1fr;
-    gap: 1rem;
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
+    gap: 0rem;
     margin-bottom: 3rem;
   }
   
@@ -99,13 +99,13 @@ import HomeButton from './HomeButton.astro';
     font-size: 2rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    color: var(--color-text-muted, #666);
-    font-family: 'Averia Serif Libre', serif;
+    color: var(--color-text-muted);
+    font-family: var(--font-heading);
   }
   
   .collections-table {
-    border: 1px solid #E8DBCF;
-    background-color: #FFF8F4;
+    border: 1px solid var(--color-border);
+    background-color: var(--background-color);
     overflow: hidden;
   }
   
@@ -117,11 +117,11 @@ import HomeButton from './HomeButton.astro';
   
   .collection-item {
     padding: 1.5rem;
-    background-color: #FFF8F4;
+    background-color: var(--background-color);
     transition: all 0.2s ease;
     border: 0;
-    border-right: 1px solid #E8DBCF;
-    border-bottom: 1px solid #E8DBCF;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
     position: relative;
   }
   
@@ -136,11 +136,11 @@ import HomeButton from './HomeButton.astro';
   .item-title {
     margin-bottom: 0.75rem;
     font-weight: normal;
-    font-family: 'Averia Serif Libre', serif;
+    font-family: var(--font-heading);
   }
   
   .item-desc {
-    color: var(--color-text-muted, #666);
+    color: var(--color-text-muted);
     margin-bottom: 1rem;
     font-size: 0.9rem;
     line-height: 1.5;
@@ -149,7 +149,7 @@ import HomeButton from './HomeButton.astro';
   .view-link {
     display: inline-flex;
     align-items: center;
-    color: var(--color-accent, #FF9B5A);
+    color: var(--color-accent-2);
     text-decoration: none;
     font-weight: 500;
   }
@@ -169,21 +169,24 @@ import HomeButton from './HomeButton.astro';
   .section-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #2d3748;
+    color: var(--color-text);
     margin-bottom: 1.7rem;
     line-height: 1.2;
   }
   .section-title-description{
     font-size: 2rem;
-    text-align: center;
     margin-bottom: -2rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    font-weight: 600;
   }
   
   .subscribe-section span{
     font-size: 0.75rem;
     margin:0%;
     padding:0%;
-    color: #666;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
     line-height: 1.5;
   }
   .subscribe-section * {
@@ -237,7 +240,7 @@ import HomeButton from './HomeButton.astro';
   }
   
   .subscribe-button {
-    background-color: #FF9B5A;
+    background-color: var(--color-accent-2);
     color: black;
     border: none;
     border-radius: 0;
@@ -305,7 +308,7 @@ import HomeButton from './HomeButton.astro';
 
     .collection-item {
       border-right: none !important;
-      border-bottom: 1px solid #E8DBCF !important;
+      border-bottom: 1px solid var(--color-border) !important;
     }
     
     .collection-item:last-child {
@@ -332,51 +335,30 @@ import HomeButton from './HomeButton.astro';
       width: 80%;
       padding: 0rem 0;
     }
-
     .intro-section {
       margin-top: 4rem;
     }
-
     .content-grid {
       margin-bottom: 5rem;
       gap: 0rem;
     }
-    
     .main-title {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
-    
     .intro-text {
       font-size: 0.95rem;
       margin-bottom: 1.5rem;
     }
-    
     .collection-item {
       padding: 1.25rem;
     }
-    
     .item-title {
       font-size: 1.1rem;
     }
-    
     .item-desc {
       font-size: 0.9rem;
     }
   }
 
-  :global(.home-button),
-  :global(.home-button .button-text) {
-    font-family: 'Averia Serif Libre', serif !important;
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-</style>
-
-<style is:global>
-  .home-button span,
-  .button-text,
-  .home-button .button-text {
-    font-family: 'Averia Serif Libre', serif !important;
-  }
 </style>

@@ -1,4 +1,4 @@
-<div class="about-me"></div>
+<div class="about-me">
   <div class="social-section">
     <h3 class="section-title">SOCIAL</h3>
     <ul class="social-list">
@@ -38,10 +38,8 @@
   .about-me {
     display: flex;
     flex-direction: column;
-    gap: var(--space-l);
     max-width: 100%; 
     margin: 0;
-    padding-bottom: var(--space-4xl);
   }
   
   .section-title {
@@ -49,40 +47,9 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-s);
-    color: #6b7280;
+    color: var(--color-grey);
     font-weight: 600;
     text-align: left;
-  }
-  
-  .social-list {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-m);
-  }
-  
-  .social-list li {
-    margin-right: var(--space-m);
-  }
-  
-  .social-list a {
-    color: #1f2937;
-    text-decoration: none;
-    border-bottom: 1px dotted #1f2937;
-    transition: all 0.2s ease;
-  }
-  
-  .social-list a:hover {
-    color: #ff8c00;
-    border-bottom: 1px solid #ff8c00;
-  }
-  
-  .philosophy-paragraph {
-    font-weight: 500;
-    font-style: italic;
-    color: #ff8c00;
-    max-width: 100%; 
   }
   
   p {
@@ -143,10 +110,10 @@
     }
   }
   .contact-section, .philosophy-section {
-    margin-bottom: var(--space-xl, 0rem);
+    margin-bottom: var(--space-m, 0rem);
   }
   .social-section {
-    margin-bottom: var(--space-xl, 0.8rem);
+    margin-bottom: var(--space-m, 0.8rem);
   }
   
   p {

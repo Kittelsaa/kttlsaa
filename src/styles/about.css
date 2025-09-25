@@ -25,7 +25,7 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-m);
+  gap: var(--space-l);
 }
 
 .social-list li {
@@ -33,40 +33,38 @@
 }
 
 .social-list a {
-  color: #1f2937;
+  color: var(--color-text);
   text-decoration: none;
-  border-bottom: 1px solid #1f2937;
+  border-bottom: 1px dotted var(--color-text);
   transition: all 0.2s ease;
-  padding-right: var(--space-s);
 }
 
 .social-list a:hover {
-  color: #ff8c00;
-  border-bottom-color: #ff8c00;
+  color: var(--color-accent);
+  border-bottom-color:1px dotted var(--color-accent);
 }
 
 .section-title {
   font-size: 1.1rem;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-s);
-  color: #6b7280;
+  color: var(--color-grey);
   font-weight: 600;
 }
 
 .philosophy-paragraph {
   font-weight: 500;
   font-style: italic;
-  color: #1f2937;
+  color: var(--color-text);
+  max-width: 100%; 
 }
 
 .about-me {
   display: flex;
   flex-direction: column;
-  gap: var(--space-m);
+  gap: 0;
   max-width: 100%; 
   margin: 0;
-  padding-bottom: var(--space-2xl);
 }
 
 .philosophy-section p {
@@ -88,7 +86,7 @@
 
 .about-subtitle {
   font-size: 1.25rem;
-  color: #6b7280;
+  color: var(--color-grey);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.5;
@@ -110,7 +108,7 @@
   font-size: 1.8rem;
   margin-bottom: var(--space-m, 1.5rem);
   padding-bottom: var(--space-xs, 0.75rem);
-  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  border-bottom: 1px solid var(--color-border, var(--color-border));
   font-family: "Averia Serif Libre", serif;
   font-weight: 600;
   color: #1f2937;
@@ -151,7 +149,7 @@
   background-color: var(--color-bg-alt, #f5f5f5);
   border-radius: 0 !important;
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--color-border));
 }
 
 .about-card:hover {

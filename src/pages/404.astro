@@ -31,7 +31,7 @@ import PageWrapper from "../components/layouts/PageWrapper.astro";
   h1 {
     font-size: 6rem;
     margin: 0;
-    color: var(--color-primary, #333);
+    color: var(--color-text);
     line-height: 1;
   }
 
@@ -59,24 +59,23 @@ import PageWrapper from "../components/layouts/PageWrapper.astro";
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
   }
 
   .primary {
-    background-color: var(--color-primary, #333);
+    background-color: var(--color-text);
     color: white;
   }
 
   .primary:hover {
-    background-color: var(--color-primary-dark, #222);
+    background-color: #222;
   }
 
   .secondary {
-    border: 2px solid var(--color-primary, #333);
-    color: var(--color-primary, #333);
+    border: 2px solid var(--color-text);
+    color: #333;
   }
 
   .secondary:hover {
-    background-color: var(--color-primary-light, #eee);
+    background-color: var(--background-color);
   }
 </style>

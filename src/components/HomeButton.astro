@@ -72,7 +72,7 @@ const Element = as;
     padding: 0.75rem 1.7rem;
     border-radius: 0px;
     text-decoration: none;
-    font-family: 'Averia Serif Libre', serif !important;
+    font-family: var(--font-body);
     font-size: 0.95rem;
     transition: all 0.3s ease;
     min-width: 200px;
@@ -86,7 +86,7 @@ const Element = as;
   
   .button-text {
     line-height: 1.2;
-    font-family: 'Averia Serif Libre', serif !important;
+    font-family: var(--font-body);
     font-weight: 600;
   }
 
@@ -109,23 +109,15 @@ const Element = as;
   }
 
   .primary {
-    background-color: #FFF8F4;
-    color: black;
-    border: 1px solid black;
+    background-color: var(--background-color);
+    color: var(--color-text);
+    border: 1px solid var(--color-text);
   }
 
   .secondary {
-    background-color: #FF9B5A;
-    color: black;
+    background-color: var(--color-accent-2);
+    color: var(--color-text);
     border: none;
   }
 
-</style>
-
-<style is:global>
-  .home-button,
-  .home-button span,
-  .home-button .button-text {
-    font-family: 'Averia Serif Libre', serif !important;
-  }
 </style>

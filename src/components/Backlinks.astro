@@ -50,8 +50,8 @@ const growthEmojis = {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    font-family: "Times New Roman", Times, serif;
-    color: #1f2937;
+    font-family: var(--font-body);
+    color: var(--color-text);
   }
   
   .connected-list {
@@ -72,7 +72,7 @@ const growthEmojis = {
     left: 0;
     right: 0;
     height: 1px;
-    background-color: #e5e7eb;
+    background-color: var(--color-border);
   }
   
   .connected-link {
@@ -80,12 +80,12 @@ const growthEmojis = {
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    color: #1f2937;
+    color: var(--color-text);
     transition: color 0.2s ease;
   }
   
   .connected-link:hover {
-    color: #ff8c00;
+    color: var(--color-accent);
   }
   
   .growth-icon {
@@ -99,7 +99,7 @@ const growthEmojis = {
   }
   
   .no-links {
-    color: #6b7280;
+    color: var(--color-grey);
     font-style: italic;
     font-size: 0.875rem;
   }
