@@ -89,10 +89,6 @@ html body .topic-tag {
   border-radius: 0 !important;
 }
 
-html body .topic-tag:hover {
-  background-color: #f9fafb;
-}
-
 html body .note-dates {
   text-align: right;
   color: var(--color-grey);

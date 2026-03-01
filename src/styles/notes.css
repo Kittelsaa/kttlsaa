@@ -87,10 +87,6 @@
   border-radius: 0; 
 }
 
-.topic-tag:hover {
-  background-color: #f9fafb;
-}
-
 .note-dates {
   text-align: right;
   color: var(--color-grey);
