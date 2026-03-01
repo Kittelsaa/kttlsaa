@@ -24,11 +24,11 @@ import HomeButton from './HomeButton.astro';
         <h2 class="section-title">Resources & Guides</h2>
         <div class="collections-table">
           <div class="resources-grid">
-            <div class="collection-item">
-              <h3 class="item-title">TechBaseRw</h3>
-              <p class="item-desc">Tech/Digital Literacy for Everyone.</p>
-              <a href="https://techbaserw.kttlsaa.com/" class="view-link">View Website</a>
-            </div>
+            <!-- <div class="collection-item">
+              <h3 class="item-title">Ikitabo Base</h3>
+              <p class="item-desc">...</p>
+              <a href="https://base.ikitabo.com/" class="view-link">View Website</a>
+            </div> -->
             <div class="collection-item">
               <h3 class="item-title">Note-Taking Guide</h3>
               <p class="item-desc">A practical guide to help transform your note-taking process, leading to more intuitive & creative discoveries.</p>
@@ -39,8 +39,16 @@ import HomeButton from './HomeButton.astro';
       </div>
       
       <div class="subsection subscribe-section">
-        <h2 class="section-title-description">Stay Updated</h2>
-        <script async data-uid="b372a7efec" src="https://kttlsaa.kit.com/b372a7efec/index.js"></script>
+        <h2 class="section-title-description">Want to stay up to date? </h2>
+        <!-- <p class="rss-description">
+          Want to stay up to date? 
+        </p> -->
+        <!-- <div class="rss-url-box">
+          <span class="rss-url-text">https://www.kttlsaa.com/rss.xml</span>
+        </div> -->
+        <a href="/rss.xml" class="rss-button">
+          Subscribe via RSS
+        </a>
       </div>
     </div>
   </div>
@@ -84,8 +92,8 @@ import HomeButton from './HomeButton.astro';
   
   .content-grid {
     display: grid;
-    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
-    gap: 0rem;
+    grid-template-columns: minmax(0, 70%) minmax(0, 30%);
+    gap: 1rem;
     margin-bottom: 3rem;
   }
   
@@ -97,7 +105,7 @@ import HomeButton from './HomeButton.astro';
     font-size: 2rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     font-family: var(--font-heading);
   }
   
@@ -158,101 +166,53 @@ import HomeButton from './HomeButton.astro';
   
   /* Subscribe Section */
   .subscribe-section {
-    margin: 0 auto;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-left: 2.5rem;
   }
 
-  .section-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 1.7rem;
-    line-height: 1.2;
-  }
-  .section-title-description{
-    font-size: 2rem;
-    margin-bottom: -2rem;
+  .section-title-description {
+    font-size: 1.1rem;
+    margin-bottom: 0;
     letter-spacing: 0.05em;
     color: var(--color-text);
     font-weight: 600;
   }
-  
-  .subscribe-section span{
-    font-size: 0.75rem;
-    margin:0%;
-    padding:0%;
+
+  .rss-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
-    font-family: var(--font-body);
-    line-height: 1.5;
-  }
-  .subscribe-section * {
-    box-sizing: border-box;
-  }
-  .subscribe-section [data-uid="b372a7efec"],
-  .subscribe-section [data-uid="b372a7efec"] * {
-    padding: 0 !important;
-    margin: 0 !important;
+    margin: 0;
   }
 
-  .subscribe-section .formkit-form,
-  .subscribe-section .formkit-fields,
-  .subscribe-section .formkit-field {
-    padding: 0 !important;
-    margin: 0 !important;
+  .rss-url-box {
+    border: 1px solid var(--color-border);
+    padding: 0.65rem 1rem;
+    background-color: var(--background-color);
   }
 
-  .subscribe-section .formkit-form > div,
-  .subscribe-section .formkit-form div[style*="padding"] {
-    padding: 0 !important;
-  }
-  
-  .subscribe-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0.5rem 0rem 0rem 0rem;
-    border-radius: 0;
-  }
-  
-  .subscribe-form input {
-    font-size: 0.95rem;
-    width: 100%;
-    flex: 1;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0;
-    background: #f8f8f8;
-    text-align: left;
-    color: #333;
-    outline: none;
-    transition: all 0.3s ease;
-    height: auto;
-    box-sizing: border-box;
+  .rss-url-text {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: monospace;
+    word-break: break-all;
   }
 
-  .subscribe-form input::placeholder {
-    color: #999;
-    opacity: 1;
-  }
-  
-  .subscribe-button {
+  .rss-button {
+    display: inline-block;
     background-color: var(--color-accent-2);
     color: black;
-    border: none;
-    border-radius: 0;
+    text-decoration: none;
     padding: 0.75rem 1.5rem;
     font-size: 0.95rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
     font-family: 'Averia Serif Libre', serif;
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
+    text-align: center;
+    transition: opacity 0.2s ease;
+    max-width: 200px;
   }
-  
 
   @media (max-width: 1024px) {
     .main-title {
@@ -267,7 +227,7 @@ import HomeButton from './HomeButton.astro';
       font-size: 1.75rem;
     }
 
-    .section-title-description{
+    .section-title-description {
       font-size: 1.6rem;
     }
   }
@@ -302,7 +262,6 @@ import HomeButton from './HomeButton.astro';
     .resources-grid {
       grid-template-columns: 1fr;
     }
-    
 
     .collection-item {
       border-right: none !important;
@@ -319,13 +278,13 @@ import HomeButton from './HomeButton.astro';
     }
 
     .subscribe-section {
-      padding-top: 2rem;
-    }
-    .section-title-description{
-      font-size: 2rem;
-      text-align: center;
+      padding-left: 0;
+      padding-top: 0;
     }
 
+    .section-title-description {
+      font-size: 2rem;
+    }
   }
   
   @media (max-width: 480px) {
@@ -358,5 +317,4 @@ import HomeButton from './HomeButton.astro';
       font-size: 0.9rem;
     }
   }
-
 </style>
