@@ -34,7 +34,14 @@ const canonicalURL = Astro.url;
     <meta name="description" content={description} />
     
     <meta name="theme-color" content="#1f2937" />
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="bf77521d-b568-4b5b-bece-af22bf6123f0"></script>
+    
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="/stats.js"
+      data-website-id="bf77521d-b568-4b5b-bece-af22bf6123f0"
+      data-host-url="/api/send"
+    ></script>
     
   </head>
   <body>
