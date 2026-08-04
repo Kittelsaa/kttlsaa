@@ -1,1 +1,0 @@
-const n=document.getElementById("back-button");n&&(n.addEventListener("click",()=>{window.history.length>1?window.history.back():window.location.href="/garden"}),(window.location.pathname==="/garden"||window.location.pathname==="/garden/")&&(n.style.display="none"));
