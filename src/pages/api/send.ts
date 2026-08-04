@@ -1,4 +1,4 @@
-// src/pages/api/collect.ts
+// src/pages/api/send.ts
 export const prerender = false;
 
 export async function POST({ request }: { request: Request }) {
@@ -17,7 +17,7 @@ export async function POST({ request }: { request: Request }) {
       body,
     });
     return new Response(await res.text(), { status: res.status });
-  } catch (err) {
+  } catch {
     return new Response(JSON.stringify({ error: 'proxy failed' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
